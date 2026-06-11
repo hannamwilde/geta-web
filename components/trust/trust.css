@@ -1,0 +1,51 @@
+/* ===========================================================
+   CUSTOMER MARQUEE — logo wall scrolling right→left
+   =========================================================== */
+.marquee {
+  background: #102D2B;
+  border-top: 1px solid var(--line-on-dark);
+  border-bottom: 1px solid var(--line-on-dark);
+  padding: clamp(28px, 3.4vw, 44px) 0;
+  overflow: hidden;
+}
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(72px, 8vw, 130px);
+  width: max-content;
+  animation: marquee-scroll 42s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+.marquee-logo, .marquee-logo a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 34px;
+  width: auto;
+  opacity: 0.78;
+  transition: opacity 0.3s ease;
+}
+.marquee-logo a:hover { opacity: 1; }
+.marquee-logo img, .marquee-logo a img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 860px) {
+  .hide-mobile { display: none !important; }
+}
+@media (min-width: 861px) {
+  .show-mobile { display: none !important; }
+}

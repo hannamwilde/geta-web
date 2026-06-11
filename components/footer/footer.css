@@ -1,0 +1,138 @@
+/* ===========================================================
+   FOOTER
+   =========================================================== */
+.footer {
+    --footer-bg: #2E2E2E;
+    background: var(--footer-bg);
+    color: var(--cream);
+    padding-top: clamp(56px, 6vw, 88px);
+    padding-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(244, 239, 229, 0.22);
+}
+
+/* ---- Top: wordmark + tagline (left), buttons + contact (right) ---- */
+.footer-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+  padding-bottom: clamp(36px, 4vw, 52px);
+}
+@media (max-width: 860px) { .footer-top { grid-template-columns: 1fr; gap: 36px; } }
+
+.footer-wordmark-lg {
+  display: inline-block;
+  width: auto;
+  height: 50px;
+}
+.footer-wordmark-lg svg { width: auto; height: 100%; display: block; }
+.footer-tagline {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(18px, 2vw, 26px);
+  letter-spacing: -0.01em;
+  color: var(--cream);
+  margin: 22px 0 0;
+}
+
+.footer-top-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 30px;
+}
+@media (max-width: 860px) { .footer-top-right { align-items: flex-start; } }
+
+.footer-pills { display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-end; }
+.footer-pill {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 15px 26px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(15px, 1.4vw, 18px);
+  letter-spacing: -0.01em;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.footer-pill svg { flex: none; }
+.footer-pill-light { background: var(--cream); color: var(--ink); }
+.footer-pill-light:hover { background: #fff; transform: translateY(-2px); }
+.footer-pill-dark { background: var(--ink); color: var(--cream); }
+.footer-pill-dark:hover { background: #000; transform: translateY(-2px); }
+
+.footer-contact {
+  display: flex; flex-wrap: wrap; gap: 16px 40px;
+  justify-content: flex-end;
+}
+@media (max-width: 860px) { .footer-contact { justify-content: flex-start; } }
+.footer-contact-link {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: clamp(15px, 1.4vw, 19px);
+  color: var(--cream);
+}
+.footer-contact-link span { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.footer-contact-link svg { flex: none; opacity: 0.85; }
+.footer-contact-link:hover span { text-decoration-thickness: 2px; }
+
+.footer-social { display: flex; gap: 12px; }
+.footer-social-link {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: var(--cream);
+  color: var(--ink);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.footer-social-link:hover { background: #fff; transform: translateY(-2px); }
+@media (max-width: 860px) { .footer-social { justify-content: flex-start; } }
+
+/* ---- Link columns ---- */
+.footer-rule { border: 0; border-top: 1px solid rgba(244,239,229,0.22); margin: 0; }
+
+.footer-cols {
+  display: grid;
+  gap: 32px 24px;
+  padding: clamp(40px, 5vw, 64px) 0;
+}
+@media (max-width: 860px) { .footer-cols { grid-template-columns: repeat(2, 1fr) !important; } }
+@media (max-width: 480px) { .footer-cols { grid-template-columns: 1fr !important; } }
+
+.footer-colgroup-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(18px, 1.6vw, 22px);
+  letter-spacing: -0.01em;
+  color: var(--cream);
+  margin: 0 0 26px;
+}
+.footer-colgroup ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
+.footer-colgroup a {
+  font-size: clamp(15px, 1.3vw, 18px);
+  color: rgba(244,239,229,0.82);
+  transition: color 0.15s ease;
+}
+.footer-colgroup a:hover { color: var(--cream); }
+
+/* ---- Foot: org line + back-to-top ---- */
+.footer-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(244,239,229,0.22);
+}
+.footer-org {
+  font-size: clamp(14px, 1.3vw, 18px);
+  color: rgba(244,239,229,0.55);
+}
+.footer-totop {
+  flex: none;
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--ink);
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.footer-totop:hover { background: #fff; transform: translateY(-3px); }
