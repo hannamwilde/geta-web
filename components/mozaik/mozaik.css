@@ -50,16 +50,22 @@
 .mz-header .mz-eyebrow { justify-content: center; }
 .mz-header-title {
   margin: 14px auto 0;
-  max-width: 15ch;
+  max-width: 22ch;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(32px, 4.6vw, 66px);
   letter-spacing: -0.04em;
-  line-height: 0.98;
+  line-height: 1.02;
   color: #fff;
-  text-wrap: balance;
 }
 .mz-header-title em { font-style: normal; color: #fff; }
+.mz-word {
+  display: inline-block;
+  vertical-align: -0.06em;
+  height: 0.8em;
+  width: auto;
+  filter: drop-shadow(0 0 9px rgba(167, 139, 250, 0.42));
+}
 .mz-header-text {
   margin: 18px auto 0;
   max-width: 460px;
@@ -221,14 +227,12 @@
   align-items: center; justify-content: center;
   gap: 2px;
 }
-.mz-mark { margin-bottom: 6px; filter: drop-shadow(0 6px 16px rgba(0,0,0,0.5)); }
+.mz-mark { width: clamp(38px, 4.4vw, 52px); height: auto; margin-bottom: 7px; filter: drop-shadow(0 6px 16px rgba(0,0,0,0.5)); }
 .mz-hub-name {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(20px, 2.6vw, 34px);
-  letter-spacing: -0.03em;
-  color: #fff;
-  line-height: 1;
+  display: block;
+  width: clamp(64px, 7.6vw, 92px);
+  height: auto;
+  filter: drop-shadow(0 3px 10px rgba(0,0,0,0.45));
 }
 .mz-hub-sub {
   font-size: clamp(8px, 0.9vw, 11px);
@@ -282,6 +286,7 @@
   color: var(--mz-accent);
   border: 1px solid rgba(139,125,247,0.25);
 }
+.mz-card-icon img { width: 22px; height: 22px; object-fit: contain; border-radius: 4px; }
 .mz-card-title {
   font-family: var(--font-display);
   font-weight: 700;

@@ -159,7 +159,7 @@ Pages are identified by their slug (e.g. `losningar/mozaik` → `#/losningar/moz
 | `mozaikFeaturesBlock` | Feature card grid (Mozaik page) |
 | `mozaikArchBlock` | Architecture card grid with bullet points |
 | `mozaikServicesBlock` | 12-service tile grid |
-| `mozaikAppsBlock` | Numbered application list |
+| `gridList` | Grid list |
 | `mozaikGetaBandBlock` | "Geta & Mozaik" text band |
 | `mozaikCtaBandBlock` | Dark CTA section (Mozaik page) |
 

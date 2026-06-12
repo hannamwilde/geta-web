@@ -41,7 +41,7 @@ const BannerBlock = ({block, onOpenContact, onOpenBook}) => {
   const showVisual = block.visualType !== 'none' && (photoUrl || block.icon);
 
   return (
-    <section className="sp-hero banner-block" style={s} data-align={block.alignment || 'left'} data-layout={block.contentLayout || 'stacked'}>
+    <section className="sp-hero banner-block" style={s} data-align={block.alignment || 'left'} data-text-align={block.textAlignment || block.alignment || 'left'} data-layout={block.contentLayout || 'stacked'}>
       <div className="container">
         <div className={showVisual ? 'sp-hero-detail-grid' : ''}>
           <div className="bb-content">

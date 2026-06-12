@@ -1,7 +1,28 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:api.anthropic.com)"
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(env)",
+      "Bash(curl -s --max-time 10 -H \"Accept: text/html\" \"https://api.anthropic.com/v1/design/h/n5RRYck1VedydCvIsr1nYA?open_file=index.html\")",
+      "Bash(curl -s --max-time 30 -H \"Accept-Encoding: identity\" \"https://api.anthropic.com/v1/design/h/n5RRYck1VedydCvIsr1nYA?open_file=index.html\")",
+      "Bash(curl -s --max-time 60 \"https://api.anthropic.com/v1/design/h/GuFBJP8pok64GxulWkbMYg?open_file=index.html\" -o /tmp/design_new_raw)",
+      "Read(//tmp/**)",
+      "Bash(gunzip -c /tmp/design_new_raw)",
+      "Bash(tar -tf /tmp/design_new.tar)",
+      "Bash(python3 *)",
+      "Bash(gtimeout 8 ./node_modules/.bin/sanity dev)",
+      "Bash(echo \"exit:$?\")",
+      "Bash(node *)",
+      "Bash(npm --version)",
+      "Bash(timeout 15 npm run dev)",
+      "Bash(gtimeout 15 npm run dev)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(sanity --version)",
+      "Bash(rm /Users/hannawilde/Documents/geta-web/studio-geta-web/tsconfig.tsbuildinfo)",
+      "Bash(rm -rf /Users/hannawilde/Documents/geta-web/studio-geta-web/.sanity)",
+      "Bash(node_modules/.bin/tsx *)",
+      "Bash(cp /Users/hannawilde/Documents/geta-web/studio-geta-web/sanity.cli.ts /Users/hannawilde/Documents/geta-web/studio-geta-web/sanity.cli.js)",
+      "Bash(rm /Users/hannawilde/Documents/geta-web/studio-geta-web/sanity.cli.ts)"
     ]
   }
 }

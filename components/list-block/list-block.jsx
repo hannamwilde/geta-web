@@ -13,10 +13,16 @@ const ListBlock = ({block}) => {
   if (block.subheadlineFontSize) subheadlineStyle.fontSize = block.subheadlineFontSize + 'px';
 
   return (
-    <section className="page-section list-block" style={sectionStyle}>
+    <section className="page-section list-block" data-item-style={block.itemStyle || 'large'} style={sectionStyle}>
       <div className="container">
-        {(block.headline || block.subheadline) && (
+        {(block.eyebrow || block.headline || block.subheadline) && (
           <div className="list-block-header">
+            {block.eyebrow && (
+              <p className="eyebrow" style={{
+                ...(block.eyebrowColor ? {color: block.eyebrowColor} : {}),
+                ...(block.eyebrowFontSize ? {fontSize: block.eyebrowFontSize + 'px'} : {}),
+              }}>{block.eyebrow}</p>
+            )}
             {block.headline && <h2 className="list-block-headline" style={headlineStyle}>{block.headline}</h2>}
             {block.subheadline && (
               <p className={`list-block-subheadline${block.subheadlineDivider ? ' list-block-subheadline--divider' : ''}`} style={subheadlineStyle}>
@@ -32,6 +38,7 @@ const ListBlock = ({block}) => {
               gridColumn: `span ${item.width || '4'}`,
               '--item-bg': item.backgroundColor || '#ffffff',
               ...(item.hoverBackgroundColor && item.href ? {'--item-hover-bg': item.hoverBackgroundColor} : {}),
+              ...(item.iconBackgroundColor ? {'--item-icon-bg': item.iconBackgroundColor} : {}),
             };
             const itemImageUrl = item.visualType === 'image' && item.image && item.image.asset && window.sanity
               ? item.imageSize === 'small'
@@ -50,14 +57,16 @@ const ListBlock = ({block}) => {
                     <Icon name={item.icon} size={24} stroke={1.7} />
                   </span>
                 ) : null}
-                {item.title && <h3 className="list-block-item-title" style={item.titleFontSize ? {fontSize: item.titleFontSize + 'px'} : {}}>{item.title}</h3>}
-                {item.body && <p className="list-block-item-body">{item.body}</p>}
-                {item.href && (
-                  <span className="list-block-item-link">
-                    {item.linkLabel || 'Läs mer'}
-                    {window.Icon && <Icon name="arrow-up-right" size={14} stroke={2} />}
-                  </span>
-                )}
+                <span className="list-block-item-text">
+                  {item.title && <h3 className="list-block-item-title" style={item.titleFontSize ? {fontSize: item.titleFontSize + 'px'} : {}}>{item.title}</h3>}
+                  {item.body && <p className="list-block-item-body">{item.body}</p>}
+                  {item.href && (
+                    <span className="list-block-item-link">
+                      {item.linkLabel || 'Läs mer'}
+                      {window.Icon && <Icon name="arrow-up-right" size={14} stroke={2} />}
+                    </span>
+                  )}
+                </span>
               </React.Fragment>
             );
             return item.href

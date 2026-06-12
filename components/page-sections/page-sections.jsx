@@ -1,4 +1,4 @@
-/* global React, Hero, TrustBar, Mozaik, Services, Kundcase, ContactBanner, TextBlock, ListBlock, BannerBlock, LinkBlock, QuoteBlock */
+/* global React, Hero, TrustBar, Mozaik, Services, Kundcase, ContactBanner, TextBlock, ListBlock, BannerBlock, LinkBlock, QuoteBlock, MozaikHeroBlock, BulletListBlock, GridList */
 
 const sectionsQuery = (id) => `*[_id == "${id}"][0].sections[]{
   _type,
@@ -13,11 +13,13 @@ const sectionsQuery = (id) => `*[_id == "${id}"][0].sections[]{
   intro,
   body,
   alignment,
+  textAlignment,
   contentLayout,
   backgroundColor,
   subheadlineDivider,
   textColor,
   eyebrowFontSize,
+  eyebrowColor,
   headlineColor,
   headlineFontSize,
   taglineFontSize,
@@ -27,7 +29,8 @@ const sectionsQuery = (id) => `*[_id == "${id}"][0].sections[]{
   logos[]->{ _id, name, logo { asset, alt, hotspot, crop }, website },
   backgroundImage { asset, alt, hotspot, crop },
   itemTextColor,
-  items[]{ _key, title, titleFontSize, body, visualType, icon, image { asset, alt, hotspot, crop }, imageSize, width, href, linkLabel, textColor, backgroundColor, hoverBackgroundColor },
+  itemStyle,
+  items[]{ _key, title, titleFontSize, body, visualType, icon, iconBackgroundColor, image { asset, alt, hotspot, crop }, imageSize, width, href, linkLabel, textColor, backgroundColor, hoverBackgroundColor },
   links[]{ _key, label, href, style, icon, image { asset, alt, hotspot, crop } },
   linksLayout,
   buttonBackgroundColor,
@@ -53,7 +56,11 @@ const sectionsQuery = (id) => `*[_id == "${id}"][0].sections[]{
   ctaSecondaryHoverBackground,
   ctaSecondaryHoverColor,
   paddingTop,
-  paddingBottom
+  paddingBottom,
+  markImage { asset },
+  archItems[]{ _key, icon, iconBackgroundColor, title, body, backgroundColor, textColor, points[] },
+  services[]{ _key, icon, label, blurb },
+  apps[]{ _key, name, body }
 }`;
 
 const PageSections = ({onOpenContact, onOpenBook, documentId}) => {
@@ -98,7 +105,15 @@ const PageSections = ({onOpenContact, onOpenBook, documentId}) => {
         return window.LinkBlock ? <LinkBlock key={key} block={block} /> : null;
       case 'quoteBlock':
         return window.QuoteBlock ? <QuoteBlock key={key} block={block} /> : null;
-      default:
+      case 'mozaikHeroBlock':
+        return window.MozaikHeroBlock
+          ? <MozaikHeroBlock key={key} block={block} onOpenContact={onOpenContact} onOpenBook={onOpenBook} />
+          : null;
+      case 'bulletListBlock':
+        return window.BulletListBlock ? <BulletListBlock key={key} block={block} /> : null;
+      case 'GridList':
+        return window.GridList ? <GridList key={key} block={block} /> : null;
+default:
         return null;
     }
   });

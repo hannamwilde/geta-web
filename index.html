@@ -66,6 +66,9 @@
       'components/link-block/link-block.css',
       'components/quote-block/quote-block.css',
       'components/page-sections/page-sections.css',
+      'components/mozaik-hero/mozaik-hero.css',
+      'components/bullet-list-block/bullet-list-block.css',
+      'components/grid-list/grid-list.css',
     ];
     const cssParts = await Promise.all(cssFiles.map(async f => {
       try { const r = await fetch(f + tokenQ); return r.ok ? await r.text() : ''; }
@@ -115,6 +118,9 @@
       'components/banner-block/banner-block.jsx',
       'components/link-block/link-block.jsx',
       'components/quote-block/quote-block.jsx',
+      'components/mozaik-hero/mozaik-hero.jsx',
+      'components/bullet-list-block/bullet-list-block.jsx',
+      'components/grid-list/grid-list.jsx',
       'components/page-sections/page-sections.jsx',
       'app.jsx',
     ];

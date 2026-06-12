@@ -68,8 +68,12 @@ a.list-block-item:hover {
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  background: rgba(0, 0, 0, 0.06);
+  background: var(--item-icon-bg, rgba(0, 0, 0, 0.06));
   flex-shrink: 0;
+}
+
+.list-block-item-text {
+  display: contents;
 }
 
 .list-block-item-image {
@@ -128,4 +132,35 @@ a.list-block-item:hover {
 
 a.list-block-item:hover .list-block-item-link {
   opacity: 1;
+}
+
+/* Narrow item style — horizontal tile (icon left, text right) */
+.list-block[data-item-style="narrow"] .list-block-item {
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+}
+
+.list-block[data-item-style="narrow"] .list-block-item-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+}
+
+.list-block[data-item-style="narrow"] .list-block-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.list-block[data-item-style="narrow"] .list-block-item-title {
+  font-size: 0.9375rem;
+}
+
+.list-block[data-item-style="narrow"] .list-block-item-body {
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  flex: unset;
 }

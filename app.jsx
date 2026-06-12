@@ -41,7 +41,7 @@ function applySeo(data) {
   }
 }
 
-const PAGES_QUERY = `*[_type == "page"]{ _id, "slug": slug.current }`;
+const PAGES_QUERY = `*[_type == "page"]{ _id, "slug": slug.current, navTheme }`;
 
 // Resolves the current hash against hardcoded routes first, then Sanity pages.
 // pages=null means the page list hasn't loaded yet.
@@ -53,7 +53,7 @@ function resolveRoute(hash, pages) {
   if (pages === null) return { name: 'loading' };
   const slug = parts.join('/');
   const match = pages.find(p => p.slug === slug);
-  if (match) return { name: 'page', id: match._id, slug };
+  if (match) return { name: 'page', id: match._id, slug, navTheme: match.navTheme };
 
   return { name: 'home' };
 }
@@ -141,7 +141,7 @@ const App = () => {
 
   return (
     <React.Fragment>
-      <Nav onOpenContact={openContact} onOpenBook={openBook} />
+      <Nav onOpenContact={openContact} onOpenBook={openBook} navTheme={route.navTheme} />
 
       <main>
         {route.name === 'home' && (

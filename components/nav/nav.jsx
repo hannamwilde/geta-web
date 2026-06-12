@@ -19,7 +19,7 @@ function mapItems(menuItems) {
 }
 
 // =================== NAV ===================
-const Nav = ({ onOpenContact, onOpenBook }) => {
+const Nav = ({ onOpenContact, onOpenBook, navTheme }) => {
   const [scrolled, setScrolled] = React.useState(false);
   const [overMozaik, setOverMozaik] = React.useState(false);
   const [openMenu, setOpenMenu] = React.useState(null);
@@ -36,19 +36,29 @@ const Nav = ({ onOpenContact, onOpenBook }) => {
   }, []);
 
   React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  React.useEffect(() => {
+    if (navTheme === 'purple') {
+      setOverMozaik(true);
+      return;
+    }
+    setOverMozaik(false);
     const onScroll = () => {
-      setScrolled(window.scrollY > 8);
-      // Turn the bar purple only while it is FULLY enveloped by the Mozaik
-      // section — i.e. the section spans above the bar's top and below its bottom.
-      const mz = document.getElementById('mozaik');
       const bar = barRef.current;
-      if (mz && bar) {
-        const m = mz.getBoundingClientRect();
-        const b = bar.getBoundingClientRect();
-        setOverMozaik(m.top <= b.top && m.bottom >= b.bottom);
-      } else {
-        setOverMozaik(false);
-      }
+      if (!bar) { setOverMozaik(false); return; }
+      const b = bar.getBoundingClientRect();
+      const darkSections = document.querySelectorAll('#mozaik, .mzs-hero, .mzs-section');
+      let over = false;
+      darkSections.forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top <= b.top && r.bottom >= b.bottom) over = true;
+      });
+      setOverMozaik(over);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
@@ -57,7 +67,7 @@ const Nav = ({ onOpenContact, onOpenBook }) => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, []);
+  }, [navTheme]);
 
   // Close on outside click
   React.useEffect(() => {

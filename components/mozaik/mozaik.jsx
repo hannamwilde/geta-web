@@ -8,17 +8,21 @@
 const MOZAIK_QUERY = `*[_id == "homePage"][0].sections[_type == "mozaikSection"][0]{
   headline,
   subheadline,
-  components[]{ _key, label, description, icon }
+  wordImage { asset },
+  markImage { asset },
+  hubNameImage { asset },
+  components[]{ _key, label, description, icon, logo { asset, alt } }
 }`;
 
 function resolveNodes(sanityComponents) {
   if (!sanityComponents || sanityComponents.length === 0) return null;
-  return sanityComponents.map(function (comp, i) {
+  return sanityComponents.map(function (comp) {
     return {
       key: comp._key,
       title: comp.label,
       icon: comp.icon,
-      blurb: comp.description
+      blurb: comp.description,
+      logo: comp.logo || null,
     };
   });
 }
@@ -42,8 +46,11 @@ const Mozaik = ({ onOpenContact }) => {
       .then(function (data) {
         if (!data) return;
         setContent({
-          headline: data.headline ,
-          subheadline: data.subheadline ,
+          headline: data.headline,
+          subheadline: data.subheadline,
+          wordSrc: data.wordImage && window.sanity ? window.sanity.imageUrl(data.wordImage, {height: 80}) : null,
+          markSrc: data.markImage && window.sanity ? window.sanity.imageUrl(data.markImage, {height: 104}) : null,
+          hubNameSrc: data.hubNameImage && window.sanity ? window.sanity.imageUrl(data.hubNameImage, {height: 60}) : null,
         });
         setNodes(resolveNodes(data.components));
       })
@@ -124,7 +131,9 @@ const Mozaik = ({ onOpenContact }) => {
           </div>
 
           <div className="mz-header" style={{ transform: `translateY(${-clampM(p * 4, 0, 1) * 10}px)`, padding: '86px 33px 0px' }}>
-            <h2 className="mz-header-title">{content.headline}</h2>
+            <h2 className="mz-header-title">
+              <em><img className="mz-word" src={content.wordSrc || 'assets/mozaik-wordmark-white.png'} alt="Mozaik" /> är här,</em><br />AI-driven digital handel
+            </h2>
             <p className="mz-header-text">{content.subheadline}</p>
           </div>
 
@@ -133,7 +142,7 @@ const Mozaik = ({ onOpenContact }) => {
               <div className="mz-mobile-grid" aria-hidden>
                 {nodes.map(n => (
                   <div className="mz-card mz-card--static is-on" key={n.key}>
-                    <div className="mz-card-icon"><Icon name={n.icon} size={20} stroke={1.7} /></div>
+                    <div className="mz-card-icon">{n.logo && window.sanity ? <img src={window.sanity.imageUrl(n.logo, {width: 40, height: 40})} alt={n.logo.alt || n.title} /> : <Icon name={n.icon} size={20} stroke={1.7} />}</div>
                     <div className="mz-card-body">
                       <div className="mz-card-title">{n.title}</div>
                       <div className="mz-card-blurb">{n.blurb}</div>
@@ -185,8 +194,8 @@ const Mozaik = ({ onOpenContact }) => {
                 <div className="mz-hub" style={{ transform: `translate(-50%, -50%) scale(${hubScale * hubShrink})`, opacity: hubCoreOpacity }}>
                   <div className="mz-hub-glow" />
                   <div className="mz-hub-disc">
-                    <MozaikMark />
-                    <div className="mz-hub-name">Mozaik</div>
+                    <img className="mz-mark" src={content.markSrc || 'assets/mozaik-mark.png'} alt="" />
+                    <img className="mz-hub-name" src={content.hubNameSrc || 'assets/mozaik-wordmark-white.png'} alt="Mozaik" />
                   </div>
                 </div>
 
@@ -222,7 +231,7 @@ const Mozaik = ({ onOpenContact }) => {
 
               <a
                 className="mz-cta"
-                href="losningar/mozaik.html"
+                href="#/losningar/mozaik"
                 style={{
                   opacity: ctaProg,
                   pointerEvents: ctaProg > 0.6 ? 'auto' : 'none',
@@ -240,23 +249,5 @@ const Mozaik = ({ onOpenContact }) => {
     </section>
   );
 };
-
-const MozaikMark = () => (
-  <svg className="mz-mark" viewBox="0 0 64 64" width="56" height="56" aria-hidden>
-    <defs>
-      <linearGradient id="mz-m1" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="#8B7DF7" />
-        <stop offset="100%" stopColor="#2A2270" />
-      </linearGradient>
-      <linearGradient id="mz-m2" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stopColor="#C4BCFB" />
-        <stop offset="100%" stopColor="#5848C9" />
-      </linearGradient>
-    </defs>
-    <path d="M8 54V14l16 16 8-8v32H20V36l-4 4v14z" fill="url(#mz-m1)" />
-    <path d="M40 22l8-8v40h-8z" fill="url(#mz-m2)" />
-    <path d="M24 30 14 20h12z" fill="#D8D2FB" opacity="0.9" />
-  </svg>
-);
 
 window.Mozaik = Mozaik;

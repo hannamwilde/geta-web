@@ -146,16 +146,19 @@
 .banner-block[data-layout="inline"] .bb-content-text { flex: 1; min-width: 200px; }
 .banner-block[data-layout="inline"] .sp-hero-ctas    { margin-top: 0; flex-shrink: 0; }
 
-/* Center alignment (stacked only) */
-.banner-block[data-layout="stacked"][data-align="center"] .sp-eyebrow   { display: flex; justify-content: center; }
-.banner-block[data-layout="stacked"][data-align="center"] .sp-hero-title,
-.banner-block[data-layout="stacked"][data-align="center"] .sp-hero-tagline,
-.banner-block[data-layout="stacked"][data-align="center"] .sp-hero-intro { text-align: center; margin-left: auto; margin-right: auto; }
-.banner-block[data-layout="stacked"][data-align="center"] .sp-hero-ctas  { justify-content: center; }
+/* Content block positioning */
+.banner-block[data-align="center"] .bb-content { max-width: 640px; margin-left: auto; margin-right: auto; }
+.banner-block[data-align="right"]  .bb-content { max-width: 640px; margin-left: auto; margin-right: 0; }
 
-/* Right alignment (stacked only) */
-.banner-block[data-layout="stacked"][data-align="right"] .sp-eyebrow   { display: flex; justify-content: flex-end; }
-.banner-block[data-layout="stacked"][data-align="right"] .sp-hero-title,
-.banner-block[data-layout="stacked"][data-align="right"] .sp-hero-tagline,
-.banner-block[data-layout="stacked"][data-align="right"] .sp-hero-intro { text-align: right; margin-left: auto; margin-right: 0; }
-.banner-block[data-layout="stacked"][data-align="right"] .sp-hero-ctas  { justify-content: flex-end; }
+/* Text alignment (stacked only) */
+.banner-block[data-layout="stacked"][data-text-align="center"] .sp-eyebrow   { display: flex; justify-content: center; }
+.banner-block[data-layout="stacked"][data-text-align="center"] .sp-hero-title,
+.banner-block[data-layout="stacked"][data-text-align="center"] .sp-hero-tagline,
+.banner-block[data-layout="stacked"][data-text-align="center"] .sp-hero-intro { text-align: center; margin-left: auto; margin-right: auto; }
+.banner-block[data-layout="stacked"][data-text-align="center"] .sp-hero-ctas  { justify-content: center; }
+
+.banner-block[data-layout="stacked"][data-text-align="right"] .sp-eyebrow   { display: flex; justify-content: flex-end; }
+.banner-block[data-layout="stacked"][data-text-align="right"] .sp-hero-title,
+.banner-block[data-layout="stacked"][data-text-align="right"] .sp-hero-tagline,
+.banner-block[data-layout="stacked"][data-text-align="right"] .sp-hero-intro { text-align: right; margin-left: auto; margin-right: 0; }
+.banner-block[data-layout="stacked"][data-text-align="right"] .sp-hero-ctas  { justify-content: flex-end; }
