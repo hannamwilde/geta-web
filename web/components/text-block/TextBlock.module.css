@@ -1,0 +1,27 @@
+.section {
+  padding: 80px 0;
+}
+
+.section[data-align="center"] { text-align: center; }
+.section[data-align="right"] { text-align: right; }
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px);
+}
+
+.headline {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.body {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  max-width: 680px;
+}
+
+.section[data-align="center"] .body { margin-inline: auto; }
+.section[data-align="right"] .body { margin-inline-start: auto; }

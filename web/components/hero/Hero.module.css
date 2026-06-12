@@ -1,0 +1,67 @@
+.hero {
+  position: relative;
+  padding-top: clamp(116px, 13vw, 168px);
+  padding-bottom: clamp(56px, 7vw, 96px);
+  background: var(--forest);
+  color: var(--paper);
+  overflow: hidden;
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px);
+  position: relative;
+  z-index: 1;
+}
+
+.copy {
+  position: relative;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 32px;
+  white-space: nowrap;
+}
+
+.headline {
+  font-weight: 700;
+  font-size: clamp(44px, 6.6vw, 96px);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  color: var(--paper, #fff);
+  margin: 0;
+}
+
+.sub {
+  margin-top: 28px;
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 600px;
+  font-weight: 400;
+}
+
+/* CTAs are rendered by HeroCTAs (client component) but styled globally */
+:global(.hero-ctas) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+/* Invert button colours for dark forest background */
+:global(.hero-ctas .btn-primary) { background: var(--paper); color: var(--forest); }
+:global(.hero-ctas .btn-primary:hover) { background: var(--cream); color: var(--forest); }
+:global(.hero-ctas .btn-outline) { color: var(--paper); border-color: rgba(255,255,255,0.4); }
+:global(.hero-ctas .btn-outline:hover) { background: var(--paper); color: var(--forest); border-color: var(--paper); }

@@ -1,0 +1,33 @@
+.marquee {
+  background: #102D2B;
+  border-top: 1px solid rgba(255,255,255,0.14);
+  border-bottom: 1px solid rgba(255,255,255,0.14);
+  padding: clamp(28px, 3.4vw, 44px) 0;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: clamp(72px, 8vw, 130px);
+  width: max-content;
+  animation: marquee-scroll 42s linear infinite;
+}
+
+.marquee:hover .track { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) { .track { animation: none; } }
+
+.logo,
+.logo a {
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; height: 34px; width: auto;
+  opacity: 0.78; transition: opacity 0.3s ease;
+}
+.logo a:hover { opacity: 1; }
+
+.logo img,
+.logo a img {
+  height: 100%; width: auto; object-fit: contain;
+  user-select: none;
+}

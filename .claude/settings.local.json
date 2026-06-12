@@ -22,7 +22,8 @@
       "Bash(rm -rf /Users/hannawilde/Documents/geta-web/studio-geta-web/.sanity)",
       "Bash(node_modules/.bin/tsx *)",
       "Bash(cp /Users/hannawilde/Documents/geta-web/studio-geta-web/sanity.cli.ts /Users/hannawilde/Documents/geta-web/studio-geta-web/sanity.cli.js)",
-      "Bash(rm /Users/hannawilde/Documents/geta-web/studio-geta-web/sanity.cli.ts)"
+      "Bash(rm /Users/hannawilde/Documents/geta-web/studio-geta-web/sanity.cli.ts)",
+      "Bash(npx tsc *)"
     ]
   }
 }
