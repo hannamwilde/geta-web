@@ -68,7 +68,7 @@ export const allPageSlugsQuery = groq`
 
 export const navQuery = groq`
   *[_id == "nav"][0]{
-    menuItems[]{ _key, label, href, megaColumns[]{ _key, links[]{ _key, label, href } } },
+    menuItems[]{ _key, label, href, megaColumns[]{ _key, links[]{ _key, label, href, external, highlight } } },
     rightLinks[]{ _key, label, style, action, href, external }
   }
 `

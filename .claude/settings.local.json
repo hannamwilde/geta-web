@@ -1,4 +1,5 @@
 {
+  "editor.formatOnSave": true,
   "permissions": {
     "allow": [
       "WebFetch(domain:api.anthropic.com)",
