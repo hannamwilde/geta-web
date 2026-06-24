@@ -3,6 +3,7 @@ import { Montserrat } from 'next/font/google'
 import './globals.css'
 import { client } from '@/sanity/client'
 import { navQuery, footerQuery } from '@/sanity/queries'
+import { fetchTranslations } from '@/lib/translations/server'
 import Nav from '@/components/nav/Nav'
 import Footer, { type FooterData } from '@/components/footer/Footer'
 import type { NavData } from '@/components/nav/Nav'
@@ -25,6 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const [navData, footerData] = await Promise.all([
     client.fetch<NavData>(navQuery),
     client.fetch<FooterData>(footerQuery),
+    fetchTranslations(),
   ])
 
   return (

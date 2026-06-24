@@ -1,0 +1,21 @@
+import { cache } from 'react'
+import { client } from '@/sanity/client'
+import { translationsQuery } from '@/sanity/queries'
+import { getT, type Translations } from './index'
+
+type DeepPartial<T> = { [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K] }
+
+function merge(base: Translations, override: DeepPartial<Translations> | null): Translations {
+  if (!override) return base
+  return {
+    events:  { ...base.events,  ...override.events  },
+    hero:    { ...base.hero,    ...override.hero    },
+    general: { ...base.general, ...override.general },
+    mozaik:  { ...base.mozaik,  ...override.mozaik  },
+  }
+}
+
+export const fetchTranslations = cache(async (): Promise<Translations> => {
+  const data = await client.fetch<DeepPartial<Translations> | null>(translationsQuery)
+  return merge(getT(), data)
+})

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { client } from '@/sanity/client'
-import { pageBySlugQuery, allPageSlugsQuery, kundcasesQuery } from '@/sanity/queries'
+import { pageBySlugQuery, allPageSlugsQuery, kundcasesQuery, upcomingEventsQuery, pastEventsQuery } from '@/sanity/queries'
 import PageSections from '@/components/page-sections/PageSections'
 import NavThemeSetter from '@/components/nav/NavThemeSetter'
 
@@ -25,17 +25,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const { slug } = await params
   const slugPath = slug.join('/')
-  const [page, kundcases] = await Promise.all([
-    client.fetch(pageBySlugQuery, { slug: slugPath }),
-    client.fetch(kundcasesQuery),
-  ])
+  const page = await client.fetch(pageBySlugQuery, { slug: slugPath })
 
   if (!page) notFound()
+
+  const hasEvents = (page.sections ?? []).some((s: { _type: string }) => s._type === 'eventsSection')
+
+  const [kundcases, upcomingEvents, pastEvents] = await Promise.all([
+    client.fetch(kundcasesQuery),
+    hasEvents ? client.fetch(upcomingEventsQuery) : Promise.resolve([]),
+    hasEvents ? client.fetch(pastEventsQuery) : Promise.resolve([]),
+  ])
 
   return (
     <main>
       <NavThemeSetter theme={page.navTheme === 'purple' ? 'purple' : 'default'} />
-      <PageSections sections={page.sections ?? []} kundcases={kundcases ?? []} />
+      <PageSections
+        sections={page.sections ?? []}
+        kundcases={kundcases ?? []}
+        upcomingEvents={upcomingEvents ?? []}
+        pastEvents={pastEvents ?? []}
+      />
     </main>
   )
 }

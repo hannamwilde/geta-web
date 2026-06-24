@@ -1,4 +1,5 @@
 import { urlFor } from '@/sanity/client'
+import { fetchTranslations } from '@/lib/translations/server'
 import ContactBannerCTA from './ContactBannerCTA'
 import styles from './ContactBanner.module.css'
 
@@ -11,12 +12,13 @@ type Props = {
   }
 }
 
-export default function ContactBanner({ block }: Props) {
+export default async function ContactBanner({ block }: Props) {
   const bgUrl = block.backgroundImage?.asset
     ? urlFor(block.backgroundImage).width(1400).url()
     : null
 
-  const ctaLabel = block.cta?.label || 'Kontakta oss'
+  const t = await fetchTranslations()
+  const ctaLabel = block.cta?.label || t.general.contact
 
   return (
     <section className={styles.section} aria-labelledby="bcta-title">

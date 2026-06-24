@@ -17,10 +17,10 @@ export default function HeroCTAs({ primaryLabel, secondaryLabel }: Props) {
   return (
     <div className="hero-ctas">
       <button className="btn btn-primary" onClick={openBook}>
-        {primaryLabel || 'Boka möte'}
+        {primaryLabel}
       </button>
       <button className="btn btn-outline" onClick={openContact}>
-        {secondaryLabel || 'Utforska tjänster'}
+        {secondaryLabel}
       </button>
     </div>
   )

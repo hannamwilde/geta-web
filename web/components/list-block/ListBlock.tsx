@@ -1,5 +1,6 @@
 import { urlFor } from '@/sanity/client'
 import { normalizeHref } from '@/lib/href'
+import { fetchTranslations } from '@/lib/translations/server'
 import Icon from '@/components/icons/Icon'
 import styles from './ListBlock.module.css'
 
@@ -39,7 +40,8 @@ type Props = {
   }
 }
 
-export default function ListBlock({ block }: Props) {
+export default async function ListBlock({ block }: Props) {
+  const t = await fetchTranslations()
   const sectionStyle: React.CSSProperties = {}
   if (block.backgroundColor) sectionStyle.backgroundColor = block.backgroundColor
 
@@ -107,7 +109,7 @@ export default function ListBlock({ block }: Props) {
                   {item.body && <p className={styles.itemBody}>{item.body}</p>}
                   {item.href && (
                     <span className={styles.itemLink}>
-                      {item.linkLabel || 'Läs mer'}
+                      {item.linkLabel || t.general.readMore}
                       <Icon name="arrow-up-right" size={14} stroke={2} />
                     </span>
                   )}

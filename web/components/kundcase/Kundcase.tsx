@@ -1,4 +1,5 @@
 import { urlFor } from '@/sanity/client'
+import { fetchTranslations } from '@/lib/translations/server'
 import KundcaseCTA from './KundcaseCTA'
 import styles from './Kundcase.module.css'
 
@@ -64,7 +65,8 @@ function KundcaseCard({ item, index }: { item: KundcaseItem; index: number }) {
   )
 }
 
-export default function Kundcase({ block, cases }: Props) {
+export default async function Kundcase({ block, cases }: Props) {
+  const t = await fetchTranslations()
   if (!cases || cases.length === 0) return null
 
   return (
@@ -81,7 +83,7 @@ export default function Kundcase({ block, cases }: Props) {
         </div>
         <div className={styles.cta}>
           {block.ctaText && <p className={styles.ctaText}>{block.ctaText}</p>}
-          <KundcaseCTA label="Kontakta oss" />
+          <KundcaseCTA label={t.general.contact} />
         </div>
       </div>
     </section>

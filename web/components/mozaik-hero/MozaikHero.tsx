@@ -1,4 +1,5 @@
 import { urlFor } from '@/sanity/client'
+import { fetchTranslations } from '@/lib/translations/server'
 import MozaikHeroCTAs from './MozaikHeroCTAs'
 import styles from './MozaikHero.module.css'
 
@@ -16,17 +17,18 @@ type Props = {
   }
 }
 
-export default function MozaikHero({ block }: Props) {
+export default async function MozaikHero({ block }: Props) {
   const markSrc = block.markImage?.asset
     ? urlFor(block.markImage).height(92).url()
     : '/assets/mozaik-mark.png'
 
-  const headline = block.headline || 'Frigör din'
-  const gradientPart = block.tagline || 'potential.'
-  const kicker = block.eyebrow || 'AI-driven digital handel'
-  const lead = block.intro || 'Den flexibla e-handelsplattformen byggd för att lösa komplex affärslogik och integrera sömlöst med vilken motor som helst.'
-  const ctaPrimary = (typeof block.ctaPrimary === 'string' ? block.ctaPrimary : block.ctaPrimary?.label) || 'Kontakta oss'
-  const ctaSecondary = (typeof block.ctaSecondary === 'string' ? block.ctaSecondary : block.ctaSecondary?.label) || 'Boka en demo'
+  const t = await fetchTranslations()
+  const headline = block.headline || t.mozaik.headline
+  const gradientPart = block.tagline || t.mozaik.tagline
+  const kicker = block.eyebrow || t.mozaik.eyebrow
+  const lead = block.intro || t.mozaik.intro
+  const ctaPrimary = (typeof block.ctaPrimary === 'string' ? block.ctaPrimary : block.ctaPrimary?.label) || t.mozaik.primaryCta
+  const ctaSecondary = (typeof block.ctaSecondary === 'string' ? block.ctaSecondary : block.ctaSecondary?.label) || t.mozaik.secondaryCta
 
   return (
     <header className={`${styles.hero} mzs-hero`}>

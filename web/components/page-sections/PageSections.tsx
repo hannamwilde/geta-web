@@ -1,4 +1,5 @@
 import Hero from '@/components/hero/Hero'
+import Events from '@/components/events/Events'
 import GridList from '@/components/grid-list/GridList'
 import TextBlock from '@/components/text-block/TextBlock'
 import QuoteBlock from '@/components/quote-block/QuoteBlock'
@@ -18,10 +19,14 @@ type Props = {
   sections: any[]
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   kundcases?: any[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  upcomingEvents?: any[]
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  pastEvents?: any[]
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function renderBlock(block: any, kundcases: any[]) {
+function renderBlock(block: any, kundcases: any[], upcomingEvents: any[], pastEvents: any[]) {
   switch (block._type) {
     case 'heroSection':
       return <Hero key={block._key} block={block} />
@@ -52,11 +57,13 @@ function renderBlock(block: any, kundcases: any[]) {
       return <Kundcase key={block._key} block={block} cases={kundcases} />
     case 'mozaikSection':
       return <Mozaik key={block._key} block={block} />
+    case 'eventsSection':
+      return <Events key={block._key} block={block} upcoming={upcomingEvents} past={pastEvents} />
     default:
       return null
   }
 }
 
-export default function PageSections({ sections, kundcases = [] }: Props) {
-  return <>{sections.map(block => renderBlock(block, kundcases))}</>
+export default function PageSections({ sections, kundcases = [], upcomingEvents = [], pastEvents = [] }: Props) {
+  return <>{sections.map(block => renderBlock(block, kundcases, upcomingEvents, pastEvents))}</>
 }

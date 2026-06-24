@@ -1,0 +1,12 @@
+{
+  "name": "geta-web-root",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix studio-geta-web\" \"npm run dev --prefix web\"",
+    "dev:studio": "npm run dev --prefix studio-geta-web",
+    "dev:web": "npm run dev --prefix web"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

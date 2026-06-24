@@ -1,0 +1,308 @@
+/* ================================================
+   Events — dark theme (charcoal base, forest cards)
+   Mirrors design: components/event-page.jsx
+   ================================================ */
+
+.evPage {
+  background: #2E2E2E;
+}
+
+/* ---------- Sections ---------- */
+.evSection {
+  padding: clamp(56px, 7vw, 100px) 0;
+}
+
+.evSection + .evSection {
+  padding-top: 0;
+}
+
+/* ---------- Section heads ---------- */
+.secHead {
+  max-width: 62ch;
+  margin-bottom: clamp(30px, 3.4vw, 48px);
+}
+
+.secTitle {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 3.6vw, 46px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  margin: 0;
+  text-transform: none;
+}
+
+.secSub {
+  margin: 14px 0 0;
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* ---------- Upcoming cards ---------- */
+.upcomingList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.upcomingCard {
+  display: flex;
+  flex-direction: column;
+  background: var(--forest);
+  border-radius: var(--r-lg);
+  padding: clamp(24px, 3vw, 40px);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.upcomingCardWithImage {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(24px, 4vw, 56px);
+  align-items: stretch;
+  padding: clamp(20px, 2.5vw, 32px);
+}
+
+.upcomingCard:hover {
+  background: var(--forest-soft);
+  box-shadow: 0 26px 50px -26px rgba(0, 0, 0, 0.65);
+}
+
+.cardImageWrap {
+  border-radius: calc(var(--r-lg) - 6px);
+  overflow: hidden;
+  min-height: 260px;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 860px) {
+  .upcomingCardWithImage {
+    grid-template-columns: 1fr;
+  }
+  .cardImageWrap {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+}
+
+.cardMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+  margin-bottom: 18px;
+}
+
+.metaDate {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  color: var(--forest);
+  background: var(--blue);
+  padding: 7px 14px;
+  border-radius: var(--r-pill);
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.metaItem svg {
+  color: var(--blue);
+  opacity: 0.85;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(24px, 2.8vw, 38px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  margin: 0 0 16px;
+  text-wrap: balance;
+}
+
+.cardExcerpt {
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 26px;
+}
+
+.registerBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  background: var(--paper);
+  color: var(--forest);
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--r-pill);
+  letter-spacing: 0;
+  text-transform: none;
+  transition: background 0.15s ease;
+  align-self: flex-start;
+}
+
+.registerBtn:hover {
+  background: var(--cream);
+}
+
+
+/* ---------- Past events grid ---------- */
+.pastGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 880px) {
+  .pastGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .pastGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pastCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 14px;
+  background: var(--forest);
+  border-radius: var(--r-lg);
+  padding: clamp(16px, 1.8vw, 22px);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pastCard:hover {
+  transform: translateY(-5px);
+  background: var(--forest-soft);
+  box-shadow: 0 26px 50px -26px rgba(0, 0, 0, 0.65);
+}
+
+.pastImageWrap {
+  border-radius: calc(var(--r-lg) - 6px);
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  margin-bottom: auto;
+}
+
+.pastImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Webinar thumbnail with play overlay */
+.webinarThumb {
+  position: relative;
+  border-radius: calc(var(--r-lg) - 6px);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  margin-bottom: auto;
+}
+
+.webinarThumb .pastImage {
+  aspect-ratio: 16 / 9;
+}
+
+.playBtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--forest);
+  padding-left: 3px;
+  box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.45);
+  transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1), background 0.25s ease;
+  pointer-events: none;
+}
+
+.pastCard:hover .playBtn {
+  transform: translate(-50%, -50%) scale(1.08);
+  background: #ffffff;
+}
+
+.pastPill {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: transparent;
+  border: 1px solid rgba(168, 218, 219, 0.4);
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+}
+
+.pastCardTitle {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(18px, 1.7vw, 23px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.pastCardText {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+.pastCardDate {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .upcomingCard {
+    padding: 20px;
+  }
+}

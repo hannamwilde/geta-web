@@ -43,6 +43,7 @@ const SECTIONS = `
     lede, ctaText,
     cta { label, href },
     components[]{ _key, label, description, icon, logo { asset, alt } },
+    upcomingLabel, upcomingWebinarLabel, pastLabel, pastWebinarLabel, registerLabel,
   }
 `
 
@@ -79,6 +80,29 @@ export const footerQuery = groq`
     socialLinks[]{ _key, platform, url },
     columns[]{ _key, title, links[]{ _key, label, href, external } },
     orgLine
+  }
+`
+
+export const upcomingEventsQuery = groq`
+  *[_type == "event" && date >= now()] | order(date asc) {
+    _id, title, date, endDate, location, excerpt, registrationUrl, eventType,
+    image { asset, alt }
+  }
+`
+
+export const pastEventsQuery = groq`
+  *[_type == "event" && date < now()] | order(date desc) [0...50] {
+    _id, title, date, location, excerpt, eventType,
+    image { asset, alt }
+  }
+`
+
+export const translationsQuery = groq`
+  *[_type == "translations"][0] {
+    events { upcomingEvents, upcomingWebinars, pastEvents, pastWebinars, register },
+    hero { primaryCta, secondaryCta },
+    general { readMore, contact, bookDemo, bookMeeting },
+    mozaik { headline, tagline, eyebrow, intro, primaryCta, secondaryCta },
   }
 `
 

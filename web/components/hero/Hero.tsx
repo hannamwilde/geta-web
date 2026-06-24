@@ -1,3 +1,4 @@
+import { fetchTranslations } from '@/lib/translations/server'
 import HeroCTAs from './HeroCTAs'
 import styles from './Hero.module.css'
 
@@ -11,7 +12,8 @@ type Props = {
   }
 }
 
-export default function Hero({ block }: Props) {
+export default async function Hero({ block }: Props) {
+  const t = await fetchTranslations()
   return (
     <section className={styles.hero} id="top">
       <div className={styles.container}>
@@ -28,8 +30,8 @@ export default function Hero({ block }: Props) {
             <p className={styles.sub}>{block.subheadline}</p>
           )}
           <HeroCTAs
-            primaryLabel={block.ctaPrimary?.label}
-            secondaryLabel={block.ctaSecondary?.label}
+            primaryLabel={block.ctaPrimary?.label || t.hero.primaryCta}
+            secondaryLabel={block.ctaSecondary?.label || t.hero.secondaryCta}
           />
         </div>
       </div>
