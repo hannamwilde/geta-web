@@ -1,14 +1,15 @@
+import { urlFor } from '@/sanity/client'
 import { resolveBackground } from '@/lib/background'
 import styles from './Services.module.css'
 
-type Pillar = { _key: string; title: string; body?: string }
+type Pillar = { _key: string; title: string; body?: string; image?: { asset: unknown; alt?: string } }
 
 type Props = {
   block: {
     eyebrow?: string
     headline?: string
+    tagline?: string
     pillars?: Pillar[]
-    stripText?: string
     backgroundColor?: string
     backgroundGradient?: { type?: string; from?: string; to?: string; angle?: number; position?: string } | null
     eyebrowColor?: string
@@ -16,36 +17,26 @@ type Props = {
     headlineColor?: string
     headlineFontSize?: number
     textColor?: string
-    iconColor?: string
+    alignment?: string
+    taglineGradientFrom?: string
+    taglineGradientTo?: string
+    taglineGradientAngle?: number
     paddingTop?: number
     paddingBottom?: number
   }
 }
 
-const ICONS = [
-  <svg key={0} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-    <circle cx="24" cy="24" r="13" /><circle cx="24" cy="24" r="7.5" />
-    <circle cx="24" cy="24" r="2" fill="currentColor" stroke="none" />
-    <path d="M24 11V5M24 43v-6M11 24H5M43 24h-6" opacity="0.55" /><path d="M24 24l9-9" />
-  </svg>,
-  <svg key={1} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-    <path d="M19 17l-7 7 7 7" /><path d="M29 17l7 7-7 7" />
-  </svg>,
-  <svg key={2} viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-    <path d="M13 21v6a2 2 0 0 0 2 2h2l2.5 5a1.5 1.5 0 0 0 2.8-.8V29" />
-    <path d="M13 21l16-7v20l-16-7z" />
-    <path d="M13 21H11a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2" />
-    <path d="M33 19a5 5 0 0 1 0 10" opacity="0.7" />
-  </svg>,
-]
-
 export default function Services({ block }: Props) {
+  const hasGradient = block.tagline && (block.taglineGradientFrom || block.taglineGradientTo)
+
   const sectionStyle = {
     ...resolveBackground(block.backgroundColor, block.backgroundGradient),
     ...(block.paddingTop != null ? { paddingTop: block.paddingTop + 'px' } : {}),
     ...(block.paddingBottom != null ? { paddingBottom: block.paddingBottom + 'px' } : {}),
     ...(block.textColor ? { '--svc-text': block.textColor } : {}),
-    ...(block.iconColor ? { '--svc-icon': block.iconColor } : {}),
+    ...(hasGradient ? { '--svc-grad-from': block.taglineGradientFrom ?? '#79B6A6' } : {}),
+    ...(hasGradient ? { '--svc-grad-to': block.taglineGradientTo ?? '#C4BCFB' } : {}),
+    ...(hasGradient ? { '--svc-grad-angle': (block.taglineGradientAngle ?? 105) + 'deg' } : {}),
   } as React.CSSProperties
 
   const eyebrowStyle: React.CSSProperties = {
@@ -56,6 +47,7 @@ export default function Services({ block }: Props) {
   const headlineStyle: React.CSSProperties = {
     ...(block.headlineColor ? { color: block.headlineColor } : {}),
     ...(block.headlineFontSize ? { fontSize: block.headlineFontSize + 'px' } : {}),
+    ...(block.alignment ? { textAlign: block.alignment as React.CSSProperties['textAlign'] } : {}),
   }
 
   return (
@@ -65,30 +57,35 @@ export default function Services({ block }: Props) {
           <p className={styles.eyebrow} style={eyebrowStyle}>{block.eyebrow}</p>
         )}
         {block.headline && (
-          <h2 className={styles.title} style={headlineStyle}>{block.headline}</h2>
+          <h2 className={styles.title} style={headlineStyle}>
+            {block.headline}
+            {block.tagline && (
+              <> <span className={hasGradient ? styles.grad : undefined}>{block.tagline}</span></>
+            )}
+          </h2>
         )}
         {block.pillars && block.pillars.length > 0 && (
           <div className={styles.grid}>
-            {block.pillars.map((pillar, i) => (
-              <article className={styles.card} key={pillar._key}>
-                <div className={styles.cardIcon}>{ICONS[i] || ICONS[0]}</div>
-                <h3 className={styles.cardTitle}>{pillar.title}</h3>
-                {pillar.body && <p className={styles.cardBody}>{pillar.body}</p>}
-              </article>
-            ))}
-          </div>
-        )}
-        {block.stripText && (
-          <div className={styles.strip}>
-            <div className={styles.stripIcon}>
-              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                <circle cx="9" cy="8" r="3.2" />
-                <path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5" />
-                <path d="M16 5.4a3 3 0 0 1 0 5.4" />
-                <path d="M17.5 14.7c2.1.7 3.5 2.5 3.5 5.3" />
-              </svg>
-            </div>
-            <p className={styles.stripText}>{block.stripText}</p>
+            {block.pillars.map((pillar) => {
+              const imgUrl = pillar.image?.asset
+                ? urlFor(pillar.image).width(600).height(500).url()
+                : null
+              return (
+                <article className={styles.card} key={pillar._key}>
+                  {imgUrl && (
+                    <div className={styles.cardMedia}>
+                      <img src={imgUrl} alt={pillar.image?.alt || pillar.title} />
+                    </div>
+                  )}
+                  <div className={styles.cardContent}>
+                    <div className={styles.cardText}>
+                      <h3 className={styles.cardTitle}>{pillar.title}</h3>
+                      {pillar.body && <p className={styles.cardBody}>{pillar.body}</p>}
+                    </div>
+                  </div>
+                </article>
+              )
+            })}
           </div>
         )}
       </div>
