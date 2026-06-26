@@ -1,10 +1,15 @@
+import Icon from '@/components/icons/Icon'
+import { resolveBackground } from '@/lib/background'
 import styles from './GridList.module.css'
 
 type Item = {
   _key: string
   name: string
   body?: string
+  icon?: string
 }
+
+type Gradient = { type?: string; from?: string; to?: string; angle?: number; position?: string } | null
 
 type Props = {
   block: {
@@ -12,6 +17,7 @@ type Props = {
     headline?: string
     apps?: Item[]
     backgroundColor?: string
+    backgroundGradient?: Gradient
     paddingTop?: number
     paddingBottom?: number
     eyebrowColor?: string
@@ -28,7 +34,7 @@ export default function GridList({ block }: Props) {
   if (items.length === 0) return null
 
   const sectionStyle: React.CSSProperties = {
-    ...(block.backgroundColor ? { backgroundColor: block.backgroundColor } : {}),
+    ...resolveBackground(block.backgroundColor, block.backgroundGradient),
     ...(block.paddingTop != null ? { paddingTop: block.paddingTop + 'px' } : {}),
     ...(block.paddingBottom != null ? { paddingBottom: block.paddingBottom + 'px' } : {}),
   }
@@ -56,7 +62,14 @@ export default function GridList({ block }: Props) {
         <div className={styles.list}>
           {items.map((item) => (
             <article key={item._key} className={styles.row}>
-              <h3 className={styles.name} style={nameStyle}>{item.name}</h3>
+              <div className={styles.nameCell}>
+                {item.icon && (
+                  <span className={styles.iconWrap}>
+                    <Icon name={item.icon} size={24} stroke={1.7} />
+                  </span>
+                )}
+                <h3 className={styles.name} style={nameStyle}>{item.name}</h3>
+              </div>
               {item.body && <p className={styles.body}>{item.body}</p>}
             </article>
           ))}

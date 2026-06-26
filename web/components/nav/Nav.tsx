@@ -6,10 +6,14 @@ import { normalizeHref } from "@/lib/href";
 import { useNavTheme } from "@/context/NavThemeContext";
 import styles from "./Nav.module.css";
 
+type PageRef = { slug?: { current?: string } } | null;
+
 type NavLink = {
   _key: string;
   label: string;
-  href: string;
+  href?: string;
+  linkType?: string;
+  pageRef?: PageRef;
   external?: boolean;
   highlight?: boolean;
 };
@@ -18,6 +22,8 @@ type MenuItem = {
   _key: string;
   label: string;
   href?: string;
+  linkType?: string;
+  pageRef?: PageRef;
   megaColumns?: MegaColumn[];
 };
 type RightLink = {
@@ -26,8 +32,15 @@ type RightLink = {
   style?: string;
   action?: string;
   href?: string;
+  linkType?: string;
+  pageRef?: PageRef;
   external?: boolean;
 };
+
+function resolveHref(linkType?: string, href?: string, pageRef?: PageRef): string {
+  if (linkType === "internal" && pageRef?.slug?.current) return `/${pageRef.slug.current}`;
+  return href || "";
+}
 
 export type NavData = {
   menuItems?: MenuItem[];
@@ -122,12 +135,13 @@ export default function Nav({ data }: Props) {
           <nav className={styles.links}>
             {items.map((item) => {
               const hasMega = item.megaColumns && item.megaColumns.length > 0;
+              const itemHref = resolveHref(item.linkType, item.href, item.pageRef);
               return (
                 <div key={item._key} className={styles.linkWrap}>
-                  {item.href && !hasMega ? (
+                  {itemHref && !hasMega ? (
                     <a
                       className={`${styles.link}${openMenu === item._key ? " " + styles.linkOpen : ""}`}
-                      href={normalizeHref(item.href)}
+                      href={normalizeHref(itemHref)}
                     >
                       {item.label}
                     </a>
@@ -160,7 +174,7 @@ export default function Nav({ data }: Props) {
                               <a
                                 key={link._key}
                                 className={`${styles.megaItem}${link.highlight ? " " + styles.megaItemHighlight : ""}`}
-                                href={normalizeHref(link.href)}
+                                href={normalizeHref(resolveHref(link.linkType, link.href, link.pageRef))}
                                 onClick={() => setOpenMenu(null)}
                                 {...(link.external
                                   ? { target: "_blank", rel: "noreferrer" }
@@ -213,14 +227,19 @@ export default function Nav({ data }: Props) {
               return (
                 <a
                   key={link._key || i}
-                  href={normalizeHref(link.href)}
+                  href={normalizeHref(resolveHref(link.linkType, link.href, link.pageRef))}
                   className={link.style === "cta" ? styles.cta : styles.shop}
                   {...(link.external
                     ? { target: "_blank", rel: "noreferrer" }
                     : {})}
                 >
                   {link.style !== "cta" && (
-                    <Icon name="shop" size={15} stroke={1.8} />
+                    <img
+                      src="/assets/shopify-icon.png"
+                      alt=""
+                      className={styles.shopIcon}
+                      aria-hidden
+                    />
                   )}
                   <span>{link.label}</span>
                   {link.style === "cta" && (
@@ -258,7 +277,7 @@ export default function Nav({ data }: Props) {
           {items.map((it) => (
             <a
               key={it._key}
-              href={normalizeHref(it.href)}
+              href={normalizeHref(resolveHref(it.linkType, it.href, it.pageRef))}
               className={styles.mobileLink}
               onClick={() => setMobileOpen(false)}
             >
@@ -295,7 +314,7 @@ export default function Nav({ data }: Props) {
             return (
               <a
                 key={link._key || i}
-                href={normalizeHref(link.href)}
+                href={normalizeHref(resolveHref(link.linkType, link.href, link.pageRef))}
                 className={styles.mobileLink}
                 {...(link.external
                   ? { target: "_blank", rel: "noreferrer" }

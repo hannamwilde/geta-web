@@ -45,14 +45,6 @@
   position: relative;
   overflow: hidden;
 }
-.card::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #8B7DF7, #C77DF0);
-  opacity: 0.85;
-}
 
 .cardIcon {
   width: 54px; height: 54px;
@@ -93,5 +85,5 @@
   color: rgba(234,234,251,0.74);
 }
 
-.points li svg { flex-shrink: 0; color: #8B7DF7; margin-top: 2px; }
+.points li svg { flex-shrink: 0; color: var(--points-icon-color, #8B7DF7); margin-top: 2px; }
 .points li strong { color: #fff; font-weight: 600; }

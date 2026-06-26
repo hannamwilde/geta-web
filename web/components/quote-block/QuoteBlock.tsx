@@ -1,3 +1,4 @@
+import { resolveBackground } from '@/lib/background'
 import styles from './QuoteBlock.module.css'
 
 type Props = {
@@ -7,6 +8,7 @@ type Props = {
     companyRole?: string
     alignment?: string
     backgroundColor?: string
+    backgroundGradient?: { type?: string; from?: string; to?: string; angle?: number; position?: string } | null
     textColor?: string
     paddingTop?: number
     paddingBottom?: number
@@ -14,8 +16,7 @@ type Props = {
 }
 
 export default function QuoteBlock({ block }: Props) {
-  const style: React.CSSProperties = {}
-  if (block.backgroundColor) style.backgroundColor = block.backgroundColor
+  const style: React.CSSProperties = { ...resolveBackground(block.backgroundColor, block.backgroundGradient) }
   if (block.textColor) style.color = block.textColor
   if (block.paddingTop != null) style.paddingTop = block.paddingTop + 'px'
   if (block.paddingBottom != null) style.paddingBottom = block.paddingBottom + 'px'

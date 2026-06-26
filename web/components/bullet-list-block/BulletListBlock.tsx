@@ -1,4 +1,5 @@
 import Icon from '@/components/icons/Icon'
+import { resolveBackground } from '@/lib/background'
 import styles from './BulletListBlock.module.css'
 
 type ArchItem = {
@@ -9,6 +10,7 @@ type ArchItem = {
   body?: string
   backgroundColor?: string
   textColor?: string
+  iconColor?: string
   points?: string[]
 }
 
@@ -21,6 +23,7 @@ type Props = {
     headlineColor?: string
     headlineFontSize?: number
     backgroundColor?: string
+    backgroundGradient?: { type?: string; from?: string; to?: string; angle?: number; position?: string } | null
     archItems?: ArchItem[]
   }
 }
@@ -29,7 +32,7 @@ export default function BulletListBlock({ block }: Props) {
   const items = block.archItems || []
   if (items.length === 0) return null
 
-  const sectionStyle: React.CSSProperties = block.backgroundColor ? { backgroundColor: block.backgroundColor } : {}
+  const sectionStyle: React.CSSProperties = resolveBackground(block.backgroundColor, block.backgroundGradient)
   const eyebrowStyle: React.CSSProperties = {
     ...(block.eyebrowColor ? { color: block.eyebrowColor } : {}),
     ...(block.eyebrowFontSize ? { fontSize: block.eyebrowFontSize + 'px' } : {}),
@@ -53,6 +56,7 @@ export default function BulletListBlock({ block }: Props) {
             const cardStyle: React.CSSProperties = {
               ...(a.backgroundColor ? { '--card-bg': a.backgroundColor } as React.CSSProperties : {}),
               ...(a.iconBackgroundColor ? { '--icon-bg': a.iconBackgroundColor } as React.CSSProperties : {}),
+              ...(a.iconColor ? { '--points-icon-color': a.iconColor } as React.CSSProperties : {}),
               ...(a.textColor ? { color: a.textColor } : {}),
             }
             return (

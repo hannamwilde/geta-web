@@ -1,106 +1,161 @@
-import { urlFor } from '@/sanity/client'
-import Icon from '@/components/icons/Icon'
-import BannerBlockCTAs from './BannerBlockCTAs'
-import styles from './BannerBlock.module.css'
+import { urlFor } from "@/sanity/client";
+import Icon from "@/components/icons/Icon";
+import BannerBlockCTAs from "./BannerBlockCTAs";
+import styles from "./BannerBlock.module.css";
 
-type CTA = { label?: string; action?: string; href?: string }
+type CTA = { label?: string; action?: string; href?: string };
 
 type Props = {
   block: {
-    eyebrow?: string
-    headline?: string
-    tagline?: string
-    intro?: string
-    eyebrowFontSize?: number
-    headlineFontSize?: number
-    taglineFontSize?: number
-    introFontSize?: number
-    ctaPrimary?: CTA
-    ctaSecondary?: CTA
-    backgroundColor?: string
-    paddingTop?: number
-    paddingBottom?: number
-    headlineColor?: string
-    taglineColor?: string
-    textColor?: string
-    ctaPrimaryBackground?: string
-    ctaPrimaryTextColor?: string
-    ctaPrimaryHoverBackground?: string
-    ctaPrimaryHoverTextColor?: string
-    ctaSecondaryColor?: string
-    ctaSecondaryHoverBackground?: string
-    ctaSecondaryHoverColor?: string
-    backgroundImage?: { asset: unknown; alt?: string }
-    visualType?: string
-    photo?: { asset: unknown; alt?: string }
-    icon?: string
-    statValue?: string
-    statLabel?: string
-    alignment?: string
-    textAlignment?: string
-    contentLayout?: string
-  }
-}
+    eyebrow?: string;
+    headline?: string;
+    tagline?: string;
+    intro?: string;
+    eyebrowFontSize?: number;
+    headlineFontSize?: number;
+    taglineFontSize?: number;
+    introFontSize?: number;
+    ctaPrimary?: CTA;
+    ctaSecondary?: CTA;
+    backgroundColor?: string;
+    backgroundGradient?: {
+      type?: string;
+      from?: string;
+      to?: string;
+      angle?: number;
+      position?: string;
+    } | null;
+    paddingTop?: number;
+    paddingBottom?: number;
+    headlineColor?: string;
+    taglineColor?: string;
+    textColor?: string;
+    ctaPrimaryBackground?: string;
+    ctaPrimaryTextColor?: string;
+    ctaPrimaryHoverBackground?: string;
+    ctaPrimaryHoverTextColor?: string;
+    ctaSecondaryColor?: string;
+    ctaSecondaryHoverBackground?: string;
+    ctaSecondaryHoverColor?: string;
+    backgroundImage?: { asset: unknown; alt?: string };
+    visualType?: string;
+    photo?: { asset: unknown; alt?: string };
+    icon?: string;
+    statValue?: string;
+    statLabel?: string;
+    alignment?: string;
+    textAlignment?: string;
+    contentLayout?: string;
+  };
+};
 
 export default function BannerBlock({ block }: Props) {
-  const s: Record<string, string> = {}
-  if (block.backgroundColor) s.backgroundColor = block.backgroundColor
-  if (block.paddingTop != null) s.paddingTop = block.paddingTop + 'px'
-  if (block.paddingBottom != null) s.paddingBottom = block.paddingBottom + 'px'
-  if (block.headlineColor) s['--bb-headline'] = block.headlineColor
-  if (block.taglineColor) s['--bb-tagline'] = block.taglineColor
-  if (block.textColor) s['--bb-text'] = block.textColor
-  if (block.ctaPrimaryBackground) s['--bb-p-bg'] = block.ctaPrimaryBackground
-  if (block.ctaPrimaryTextColor) s['--bb-p-color'] = block.ctaPrimaryTextColor
-  if (block.ctaPrimaryHoverBackground) s['--bb-p-hover-bg'] = block.ctaPrimaryHoverBackground
-  if (block.ctaPrimaryHoverTextColor) s['--bb-p-hover-color'] = block.ctaPrimaryHoverTextColor
-  if (block.ctaSecondaryColor) s['--bb-s-color'] = block.ctaSecondaryColor
-  if (block.ctaSecondaryHoverBackground) s['--bb-s-hover-bg'] = block.ctaSecondaryHoverBackground
-  if (block.ctaSecondaryHoverColor) s['--bb-s-hover-color'] = block.ctaSecondaryHoverColor
+  const s: Record<string, string> = {};
+  if (block.backgroundGradient?.from && block.backgroundGradient?.to) {
+    const g = block.backgroundGradient;
+    s.background =
+      g.type === "radial"
+        ? `radial-gradient(circle at ${g.position ?? "center"}, ${g.from}, ${g.to})`
+        : `linear-gradient(${g.angle ?? 135}deg, ${g.from}, ${g.to})`;
+  } else if (block.backgroundColor) {
+    s.backgroundColor = block.backgroundColor;
+  }
+  if (block.paddingTop != null) s.paddingTop = block.paddingTop + "px";
+  if (block.paddingBottom != null) s.paddingBottom = block.paddingBottom + "px";
+  if (block.headlineColor) s["--bb-headline"] = block.headlineColor;
+  if (block.taglineColor) s["--bb-tagline"] = block.taglineColor;
+  if (block.textColor) s["--bb-text"] = block.textColor;
+  if (block.ctaPrimaryBackground) s["--bb-p-bg"] = block.ctaPrimaryBackground;
+  if (block.ctaPrimaryTextColor) s["--bb-p-color"] = block.ctaPrimaryTextColor;
+  if (block.ctaPrimaryHoverBackground)
+    s["--bb-p-hover-bg"] = block.ctaPrimaryHoverBackground;
+  if (block.ctaPrimaryHoverTextColor)
+    s["--bb-p-hover-color"] = block.ctaPrimaryHoverTextColor;
+  if (block.ctaSecondaryColor) s["--bb-s-color"] = block.ctaSecondaryColor;
+  if (block.ctaSecondaryHoverBackground)
+    s["--bb-s-hover-bg"] = block.ctaSecondaryHoverBackground;
+  if (block.ctaSecondaryHoverColor)
+    s["--bb-s-hover-color"] = block.ctaSecondaryHoverColor;
 
   if (block.backgroundImage?.asset) {
-    s.backgroundImage = `url(${urlFor(block.backgroundImage).width(1600).url()})`
-    s.backgroundSize = 'cover'
-    s.backgroundPosition = 'center'
+    s.backgroundImage = `url(${urlFor(block.backgroundImage).width(1600).url()})`;
+    s.backgroundSize = "cover";
+    s.backgroundPosition = "center";
   }
 
-  const photoUrl = block.photo?.asset ? urlFor(block.photo).width(800).url() : null
-  const showVisual = block.visualType !== 'none' && (photoUrl || block.icon)
+  const photoUrl = block.photo?.asset
+    ? urlFor(block.photo).width(800).url()
+    : null;
+  const showVisual = block.visualType !== "none" && (photoUrl || block.icon);
 
-  // ctaPrimary may be string (mozaikHeroBlock) or object — handle both
-  const primary = typeof block.ctaPrimary === 'string' ? { label: block.ctaPrimary } : block.ctaPrimary
-  const secondary = typeof block.ctaSecondary === 'string' ? { label: block.ctaSecondary } : block.ctaSecondary
+  // ctaPrimary may be string or object — handle both
+  const primary =
+    typeof block.ctaPrimary === "string"
+      ? { label: block.ctaPrimary }
+      : block.ctaPrimary;
+  const secondary =
+    typeof block.ctaSecondary === "string"
+      ? { label: block.ctaSecondary }
+      : block.ctaSecondary;
 
   return (
     <section
       className={`${styles.hero} banner-block`}
       style={s as React.CSSProperties}
-      data-align={block.alignment || 'left'}
-      data-text-align={block.textAlignment || block.alignment || 'left'}
-      data-layout={block.contentLayout || 'stacked'}
+      data-align={block.alignment || "left"}
+      data-text-align={block.textAlignment || block.alignment || "left"}
+      data-layout={block.contentLayout || "stacked"}
     >
       <div className="container">
-        <div className={showVisual ? styles.detailGrid : ''}>
+        <div className={showVisual ? styles.detailGrid : ""}>
           <div className={`${styles.content} bb-content`}>
             <div className={`${styles.contentText} bb-content-text`}>
               {block.eyebrow && (
-                <div className={styles.eyebrow} style={block.eyebrowFontSize ? { fontSize: block.eyebrowFontSize + 'px' } : {}}>
+                <div
+                  className={styles.eyebrow}
+                  style={
+                    block.eyebrowFontSize
+                      ? { fontSize: block.eyebrowFontSize + "px" }
+                      : {}
+                  }
+                >
                   <span className={styles.eyebrowDot} />
                   {block.eyebrow}
                 </div>
               )}
               {block.headline && (
-                <h1 className={styles.title} style={block.headlineFontSize ? { fontSize: block.headlineFontSize + 'px' } : {}}>
+                <h1
+                  className={styles.title}
+                  style={
+                    block.headlineFontSize
+                      ? { fontSize: block.headlineFontSize + "px" }
+                      : {}
+                  }
+                >
                   {block.headline}
                 </h1>
               )}
               {block.tagline && (
-                <p className={styles.tagline} style={block.taglineFontSize ? { fontSize: block.taglineFontSize + 'px' } : {}}>
+                <p
+                  className={styles.tagline}
+                  style={
+                    block.taglineFontSize
+                      ? { fontSize: block.taglineFontSize + "px" }
+                      : {}
+                  }
+                >
                   {block.tagline}
                 </p>
               )}
               {block.intro && (
-                <p className={styles.intro} style={block.introFontSize ? { fontSize: block.introFontSize + 'px' } : {}}>
+                <p
+                  className={styles.intro}
+                  style={
+                    block.introFontSize
+                      ? { fontSize: block.introFontSize + "px" }
+                      : {}
+                  }
+                >
                   {block.intro}
                 </p>
               )}
@@ -108,16 +163,32 @@ export default function BannerBlock({ block }: Props) {
             <BannerBlockCTAs primary={primary} secondary={secondary} />
           </div>
           {showVisual && (
-            <div className={`${styles.mark}${photoUrl ? ' ' + styles.markPhoto : ''}`}>
+            <div
+              className={`${styles.mark}${photoUrl ? " " + styles.markPhoto : ""}`}
+            >
               {photoUrl ? (
-                <img className={styles.photo} src={photoUrl} alt={block.photo?.alt || ''} />
+                <img
+                  className={styles.photo}
+                  src={photoUrl}
+                  alt={block.photo?.alt || ""}
+                />
               ) : (
                 <>
-                  {block.icon && <Icon name={block.icon} size={64} stroke={1.2} />}
+                  {block.icon && (
+                    <Icon name={block.icon} size={64} stroke={1.2} />
+                  )}
                   {(block.statValue || block.statLabel) && (
                     <div className={styles.stat}>
-                      {block.statValue && <div className={styles.statValue}>{block.statValue}</div>}
-                      {block.statLabel && <div className={styles.statLabel}>{block.statLabel}</div>}
+                      {block.statValue && (
+                        <div className={styles.statValue}>
+                          {block.statValue}
+                        </div>
+                      )}
+                      {block.statLabel && (
+                        <div className={styles.statLabel}>
+                          {block.statLabel}
+                        </div>
+                      )}
                     </div>
                   )}
                 </>
@@ -127,5 +198,5 @@ export default function BannerBlock({ block }: Props) {
         </div>
       </div>
     </section>
-  )
+  );
 }

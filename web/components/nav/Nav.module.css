@@ -147,20 +147,29 @@
 .shop {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  gap: 7px;
   padding: 9px 14px;
   border-radius: 13px;
   font-size: 13px;
   font-weight: 600;
   background: transparent;
-  color: #9fcb6e;
+  color: #fff;
+  white-space: nowrap;
   transition:
-    background 0.15s,
-    color 0.15s;
+    background 0.15s ease,
+    color 0.15s ease;
 }
 .shop:hover {
   background: rgba(255, 255, 255, 0.1);
-  color: #b6d98c;
+  color: #fff;
+}
+
+.shopIcon {
+  width: 17px;
+  height: 17px;
+  object-fit: contain;
+  display: block;
 }
 
 .cta {

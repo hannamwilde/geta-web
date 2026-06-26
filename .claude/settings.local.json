@@ -1,5 +1,4 @@
 {
-  "editor.formatOnSave": true,
   "permissions": {
     "allow": [
       "WebFetch(domain:api.anthropic.com)",
@@ -24,7 +23,9 @@
       "Bash(node_modules/.bin/tsx *)",
       "Bash(cp /Users/hannawilde/Documents/geta-web/studio-geta-web/sanity.cli.ts /Users/hannawilde/Documents/geta-web/studio-geta-web/sanity.cli.js)",
       "Bash(rm /Users/hannawilde/Documents/geta-web/studio-geta-web/sanity.cli.ts)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "mcp__Sanity__query_documents"
     ]
-  }
+  },
+  "editor.formatOnSave": true
 }

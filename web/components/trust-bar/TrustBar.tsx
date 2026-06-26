@@ -1,4 +1,5 @@
 import { urlFor } from '@/sanity/client'
+import { resolveBackground } from '@/lib/background'
 import styles from './TrustBar.module.css'
 
 type Logo = {
@@ -10,7 +11,11 @@ type Logo = {
 }
 
 type Props = {
-  block?: { logos?: Logo[] }
+  block?: {
+    logos?: Logo[]
+    backgroundColor?: string
+    backgroundGradient?: { type?: string; from?: string; to?: string; angle?: number; position?: string } | null
+  }
 }
 
 const FALLBACK: Logo[] = [
@@ -35,9 +40,10 @@ function getLogoSrc(item: Logo) {
 export default function TrustBar({ block }: Props) {
   const logos = (block?.logos && block.logos.length > 0) ? block.logos : FALLBACK
   const row = [...logos, ...logos]
+  const bg = resolveBackground(block?.backgroundColor, block?.backgroundGradient)
 
   return (
-    <section className={styles.marquee} aria-label="Kunder som litar på Geta">
+    <section className={styles.marquee} style={Object.keys(bg).length ? bg : undefined} aria-label="Kunder som litar på Geta">
       <div className={styles.track}>
         {row.map((logo, i) => (
           <div className={styles.logo} key={logo._id + '-' + i} aria-hidden={i >= logos.length}>

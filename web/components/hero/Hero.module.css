@@ -23,15 +23,33 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  font-size: var(--hero-eyebrow-size, 12px);
+  font-weight: 500;
+  color: var(--hero-eyebrow-color, rgba(255, 255, 255, 0.8));
+  margin-bottom: 32px;
+  white-space: nowrap;
+}
+
+.eyebrowBadge {
   padding: 8px 16px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 999px;
-  font-size: 12px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 32px;
-  white-space: nowrap;
+}
+
+.eyebrowTag {
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.eyebrowDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--hero-eyebrow-color, var(--blue));
+  box-shadow: 0 0 12px rgba(168, 218, 219, 0.9);
+  flex-shrink: 0;
 }
 
 .headline {
@@ -39,18 +57,45 @@
   font-size: clamp(44px, 6.6vw, 96px);
   line-height: 0.98;
   letter-spacing: -0.04em;
-  color: var(--paper, #fff);
+  color: var(--hero-headline, var(--paper, #fff));
   margin: 0;
+}
+
+.mark {
+  width: clamp(52px, 7vw, 80px);
+  height: auto;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.grad {
+  background: linear-gradient(
+    var(--hero-grad-angle, 105deg),
+    var(--hero-grad-from, #C4BCFB) 0%,
+    var(--hero-grad-to, #C77DF0) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .sub {
   margin-top: 28px;
   font-size: clamp(16px, 1.25vw, 19px);
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--hero-text, rgba(255, 255, 255, 0.78));
   max-width: 600px;
   font-weight: 400;
 }
+
+/* Alignment */
+:global(.hero-section[data-align="center"] .hero-copy) { max-width: 700px; margin-inline: auto; }
+:global(.hero-section[data-align="right"] .hero-copy)  { max-width: 700px; margin-left: auto; }
+:global(.hero-section[data-text-align="center"] .hero-copy) { text-align: center; }
+:global(.hero-section[data-text-align="right"] .hero-copy)  { text-align: right; }
+:global(.hero-section[data-text-align="center"] .hero-copy) .mark { margin-inline: auto; }
+:global(.hero-section[data-text-align="center"] .hero-copy) .sub { margin-inline: auto; }
+:global(.hero-section[data-text-align="right"] .hero-copy) .sub  { margin-inline-start: auto; }
 
 /* CTAs are rendered by HeroCTAs (client component) but styled globally */
 :global(.hero-ctas) {
@@ -59,6 +104,9 @@
   gap: 12px;
   margin-top: 36px;
 }
+
+:global(.hero-section[data-text-align="center"] .hero-ctas) { justify-content: center; }
+:global(.hero-section[data-text-align="right"] .hero-ctas)  { justify-content: flex-end; }
 
 /* Invert button colours for dark forest background */
 :global(.hero-ctas .btn-primary) { background: var(--paper); color: var(--forest); }

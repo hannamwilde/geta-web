@@ -1,12 +1,24 @@
+import { resolveBackground } from '@/lib/background'
 import styles from './Services.module.css'
 
 type Pillar = { _key: string; title: string; body?: string }
 
 type Props = {
   block: {
+    eyebrow?: string
     headline?: string
     pillars?: Pillar[]
     stripText?: string
+    backgroundColor?: string
+    backgroundGradient?: { type?: string; from?: string; to?: string; angle?: number; position?: string } | null
+    eyebrowColor?: string
+    eyebrowFontSize?: number
+    headlineColor?: string
+    headlineFontSize?: number
+    textColor?: string
+    iconColor?: string
+    paddingTop?: number
+    paddingBottom?: number
   }
 }
 
@@ -28,10 +40,33 @@ const ICONS = [
 ]
 
 export default function Services({ block }: Props) {
+  const sectionStyle = {
+    ...resolveBackground(block.backgroundColor, block.backgroundGradient),
+    ...(block.paddingTop != null ? { paddingTop: block.paddingTop + 'px' } : {}),
+    ...(block.paddingBottom != null ? { paddingBottom: block.paddingBottom + 'px' } : {}),
+    ...(block.textColor ? { '--svc-text': block.textColor } : {}),
+    ...(block.iconColor ? { '--svc-icon': block.iconColor } : {}),
+  } as React.CSSProperties
+
+  const eyebrowStyle: React.CSSProperties = {
+    ...(block.eyebrowColor ? { color: block.eyebrowColor } : {}),
+    ...(block.eyebrowFontSize ? { fontSize: block.eyebrowFontSize + 'px' } : {}),
+  }
+
+  const headlineStyle: React.CSSProperties = {
+    ...(block.headlineColor ? { color: block.headlineColor } : {}),
+    ...(block.headlineFontSize ? { fontSize: block.headlineFontSize + 'px' } : {}),
+  }
+
   return (
-    <section className={styles.section} id="services">
+    <section className={styles.section} id="services" style={sectionStyle}>
       <div className={`container ${styles.inner}`}>
-        {block.headline && <h2 className={styles.title}>{block.headline}</h2>}
+        {block.eyebrow && (
+          <p className={styles.eyebrow} style={eyebrowStyle}>{block.eyebrow}</p>
+        )}
+        {block.headline && (
+          <h2 className={styles.title} style={headlineStyle}>{block.headline}</h2>
+        )}
         {block.pillars && block.pillars.length > 0 && (
           <div className={styles.grid}>
             {block.pillars.map((pillar, i) => (

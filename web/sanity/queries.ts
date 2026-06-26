@@ -6,26 +6,29 @@ const SECTIONS = `
     eyebrow, headline, subheadline, tagline, intro, body,
     quote, author, companyRole,
     alignment, textAlignment, contentLayout,
-    backgroundColor, textColor,
-    eyebrowColor, eyebrowFontSize,
+    backgroundColor, backgroundGradient { type, from, to, angle, position }, textColor, iconColor,
+    eyebrowStyle, eyebrowColor, eyebrowFontSize,
     headlineColor, headlineFontSize,
     paddingTop, paddingBottom, itemTextColor,
     visualType, icon, statValue, statLabel,
     backgroundImage { asset, alt },
+    sideImage { asset, alt },
+    sideImagePosition,
     photo { asset, alt },
     markImage { asset },
     wordImage { asset },
     hubNameImage { asset },
-    ctaPrimary,
-    ctaSecondary,
+    ctaPrimary { label, action, href, linkType, pageRef->{ slug } },
+    ctaSecondary { label, action, href, linkType, pageRef->{ slug } },
     taglineColor,
+    taglineGradientFrom, taglineGradientTo, taglineGradientAngle,
     ctaPrimaryBackground, ctaPrimaryTextColor,
     ctaPrimaryHoverBackground, ctaPrimaryHoverTextColor,
     ctaSecondaryColor, ctaSecondaryHoverBackground, ctaSecondaryHoverColor,
-    apps[]{ _key, name, body },
-    archItems[]{ _key, icon, iconBackgroundColor, title, body, backgroundColor, textColor, points[] },
+    apps[]{ _key, name, body, icon },
+    archItems[]{ _key, icon, iconBackgroundColor, title, body, backgroundColor, textColor, iconColor, points[] },
     items[]{
-      _key, title, body, href, linkLabel, icon,
+      _key, title, body, href, linkType, pageRef->{ slug }, linkLabel, icon,
       visualType, imageSize,
       image { asset, alt },
       width, titleFontSize,
@@ -34,9 +37,10 @@ const SECTIONS = `
     itemStyle,
     subheadlineColor, subheadlineFontSize, subheadlineDivider,
     title,
-    links[]{ _key, label, href, style, icon, image { asset, alt } },
+    links[]{ _key, label, href, linkType, pageRef->{ slug }, style, icon, image { asset, alt } },
     linksLayout, borderScope, borderTopColor, borderBottomColor,
     buttonBackgroundColor, buttonTextColor,
+    ctaTextColor, buttonHoverBackground, buttonHoverTextColor, domeBackgroundColor,
     logos[]->{ _id, name, logo { asset, alt }, website },
     pillars[]{ _key, title, body },
     stripText,
@@ -69,8 +73,11 @@ export const allPageSlugsQuery = groq`
 
 export const navQuery = groq`
   *[_id == "nav"][0]{
-    menuItems[]{ _key, label, href, megaColumns[]{ _key, links[]{ _key, label, href, external, highlight } } },
-    rightLinks[]{ _key, label, style, action, href, external }
+    menuItems[]{
+      _key, label, href, linkType, pageRef->{ slug },
+      megaColumns[]{ _key, links[]{ _key, label, href, linkType, pageRef->{ slug }, external, highlight } }
+    },
+    rightLinks[]{ _key, label, style, action, href, linkType, pageRef->{ slug }, external }
   }
 `
 
@@ -99,15 +106,12 @@ export const pastEventsQuery = groq`
 
 export const translationsQuery = groq`
   *[_type == "translations"][0] {
-    events { upcomingEvents, upcomingWebinars, pastEvents, pastWebinars, register },
-    hero { primaryCta, secondaryCta },
-    general { readMore, contact, bookDemo, bookMeeting },
-    mozaik { headline, tagline, eyebrow, intro, primaryCta, secondaryCta },
+    general { readMore, contact },
   }
 `
 
-export const kundcasesQuery = groq`
-  *[_type == "kundcase"] | order(publishedAt desc)[0...3]{
+export const casesQuery = groq`
+  *[_type == "case"] | order(publishedAt desc)[0...3]{
     _id, client,
     "tag": coalesce(array::join(tags, " · "), ""),
     excerpt, testimonial,

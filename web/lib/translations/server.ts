@@ -8,10 +8,7 @@ type DeepPartial<T> = { [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]>
 function merge(base: Translations, override: DeepPartial<Translations> | null): Translations {
   if (!override) return base
   return {
-    events:  { ...base.events,  ...override.events  },
-    hero:    { ...base.hero,    ...override.hero    },
     general: { ...base.general, ...override.general },
-    mozaik:  { ...base.mozaik,  ...override.mozaik  },
   }
 }
 

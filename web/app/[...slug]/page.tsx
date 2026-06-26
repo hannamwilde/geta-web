@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { client } from '@/sanity/client'
-import { pageBySlugQuery, allPageSlugsQuery, kundcasesQuery, upcomingEventsQuery, pastEventsQuery } from '@/sanity/queries'
+import { pageBySlugQuery, allPageSlugsQuery, casesQuery, upcomingEventsQuery, pastEventsQuery } from '@/sanity/queries'
 import PageSections from '@/components/page-sections/PageSections'
 import NavThemeSetter from '@/components/nav/NavThemeSetter'
 
@@ -31,8 +31,8 @@ export default async function Page({ params }: Props) {
 
   const hasEvents = (page.sections ?? []).some((s: { _type: string }) => s._type === 'eventsSection')
 
-  const [kundcases, upcomingEvents, pastEvents] = await Promise.all([
-    client.fetch(kundcasesQuery),
+  const [cases, upcomingEvents, pastEvents] = await Promise.all([
+    client.fetch(casesQuery),
     hasEvents ? client.fetch(upcomingEventsQuery) : Promise.resolve([]),
     hasEvents ? client.fetch(pastEventsQuery) : Promise.resolve([]),
   ])
@@ -42,7 +42,7 @@ export default async function Page({ params }: Props) {
       <NavThemeSetter theme={page.navTheme === 'purple' ? 'purple' : 'default'} />
       <PageSections
         sections={page.sections ?? []}
-        kundcases={kundcases ?? []}
+        cases={cases ?? []}
         upcomingEvents={upcomingEvents ?? []}
         pastEvents={pastEvents ?? []}
       />

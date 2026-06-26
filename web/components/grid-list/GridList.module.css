@@ -56,6 +56,24 @@
   }
 }
 
+.nameCell {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.iconWrap {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(139, 125, 247, 0.18);
+  color: #c4bcfb;
+}
+
 .name {
   font-weight: 700;
   font-size: clamp(20px, 2vw, 27px);

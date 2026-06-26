@@ -106,3 +106,7 @@
 :global(.banner-block[data-align="right"] .bb-content) { max-width: 640px; margin-left: auto; }
 :global(.banner-block[data-layout="stacked"][data-text-align="center"] .sp-hero-ctas) { justify-content: center; }
 :global(.banner-block[data-layout="stacked"][data-text-align="right"] .sp-hero-ctas) { justify-content: flex-end; }
+:global(.banner-block[data-text-align="center"] .bb-content-text) { text-align: center; }
+:global(.banner-block[data-text-align="right"] .bb-content-text) { text-align: right; }
+:global(.banner-block[data-text-align="center"] .bb-content-text) .intro { margin-inline: auto; }
+:global(.banner-block[data-text-align="right"] .bb-content-text) .intro { margin-inline-start: auto; }

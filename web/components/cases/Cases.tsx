@@ -1,10 +1,11 @@
 import { urlFor } from '@/sanity/client'
 import { fetchTranslations } from '@/lib/translations/server'
-import KundcaseCTA from './KundcaseCTA'
-import styles from './Kundcase.module.css'
+import { resolveBackground } from '@/lib/background'
+import CasesCTA from './CasesCTA'
+import styles from './Cases.module.css'
 
 type Testimonial = { quote?: string; person?: string; role?: string }
-type KundcaseItem = {
+type CaseItem = {
   _id: string
   client: string
   tag?: string
@@ -19,11 +20,20 @@ type Props = {
     title?: string
     lede?: string
     ctaText?: string
+    backgroundColor?: string
+    backgroundGradient?: { type?: string; from?: string; to?: string; angle?: number; position?: string } | null
+    headlineColor?: string
+    textColor?: string
+    ctaTextColor?: string
+    buttonBackgroundColor?: string
+    buttonTextColor?: string
+    buttonHoverBackground?: string
+    buttonHoverTextColor?: string
   }
-  cases: KundcaseItem[]
+  cases: CaseItem[]
 }
 
-function KundcaseCard({ item, index }: { item: KundcaseItem; index: number }) {
+function CaseCard({ item, index }: { item: CaseItem; index: number }) {
   const imgUrl = item.coverImage?.asset
     ? urlFor(item.coverImage).width(600).height(480).url()
     : null
@@ -54,8 +64,8 @@ function KundcaseCard({ item, index }: { item: KundcaseItem; index: number }) {
             {item.testimonial.role && <span className={styles.bylineRole}>{item.testimonial.role}</span>}
           </div>
         )}
-        <a href="#kundcase" className={styles.link}>
-          Läs kundcaset
+        <a href="#cases" className={styles.link}>
+          Läs caset
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
             <path d="M5 12h14M13 6l6 6-6 6" />
           </svg>
@@ -65,25 +75,39 @@ function KundcaseCard({ item, index }: { item: KundcaseItem; index: number }) {
   )
 }
 
-export default async function Kundcase({ block, cases }: Props) {
+export default async function Cases({ block, cases }: Props) {
   const t = await fetchTranslations()
   if (!cases || cases.length === 0) return null
 
+  const bg = resolveBackground(block.backgroundColor, block.backgroundGradient)
+  const sectionStyle: React.CSSProperties = {
+    ...(Object.keys(bg).length ? bg : {}),
+  }
+  const titleStyle: React.CSSProperties = block.headlineColor ? { color: block.headlineColor } : {}
+  const ledeStyle: React.CSSProperties = block.textColor ? { color: block.textColor } : {}
+  const ctaTextStyle: React.CSSProperties = block.ctaTextColor ? { color: block.ctaTextColor } : {}
+
   return (
-    <section className={styles.section} id="kundcase">
+    <section className={styles.section} id="cases" style={sectionStyle}>
       <div className="container">
         {(block.title || block.lede) && (
           <div className={styles.head}>
-            {block.title && <h2 className={styles.title}>{block.title}</h2>}
-            {block.lede && <p className={styles.lede}>{block.lede}</p>}
+            {block.title && <h2 className={styles.title} style={titleStyle}>{block.title}</h2>}
+            {block.lede && <p className={styles.lede} style={ledeStyle}>{block.lede}</p>}
           </div>
         )}
         <div className={styles.grid}>
-          {cases.map((c, i) => <KundcaseCard key={c._id} item={c} index={i} />)}
+          {cases.map((c, i) => <CaseCard key={c._id} item={c} index={i} />)}
         </div>
         <div className={styles.cta}>
-          {block.ctaText && <p className={styles.ctaText}>{block.ctaText}</p>}
-          <KundcaseCTA label={t.general.contact} />
+          {block.ctaText && <p className={styles.ctaText} style={ctaTextStyle}>{block.ctaText}</p>}
+          <CasesCTA
+            label={t.general.contact}
+            bgColor={block.buttonBackgroundColor}
+            textColor={block.buttonTextColor}
+            hoverBgColor={block.buttonHoverBackground}
+            hoverTextColor={block.buttonHoverTextColor}
+          />
         </div>
       </div>
     </section>

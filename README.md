@@ -4,10 +4,10 @@ The Geta Digital marketing website. Built with Next.js 16 (App Router) and conte
 
 ## Structure
 
-| Directory | Purpose |
-|---|---|
-| `web/` | Next.js front-end |
-| `studio-geta-web/` | Sanity Studio |
+| Directory          | Purpose           |
+| ------------------ | ----------------- |
+| `web/`             | Next.js front-end |
+| `studio-geta-web/` | Sanity Studio     |
 
 ---
 
@@ -113,10 +113,10 @@ Publishes to `https://geta-web.sanity.studio`.
 
 ### Project details
 
-| Setting | Value |
-|---|---|
-| Project ID | `a8gycbga` |
-| Dataset | `production` |
+| Setting    | Value                            |
+| ---------- | -------------------------------- |
+| Project ID | `a8gycbga`                       |
+| Dataset    | `production`                     |
 | Studio URL | `https://geta-web.sanity.studio` |
 
 ---
@@ -125,12 +125,12 @@ Publishes to `https://geta-web.sanity.studio`.
 
 ### Singleton documents
 
-| Document | Purpose |
-|---|---|
-| `homePage` | Home page sections |
-| `nav` | Navigation links and logo |
-| `footer` | Footer links and copy |
-| `modals` | Contact and booking modal copy |
+| Document   | Purpose                        |
+| ---------- | ------------------------------ |
+| `homePage` | Home page sections             |
+| `nav`      | Navigation links and logo      |
+| `footer`   | Footer links and copy          |
+| `modals`   | Contact and booking modal copy |
 
 ### Page documents (`page` type)
 
@@ -143,22 +143,21 @@ Pages are identified by their slug (e.g. `losningar/mozaik` → `/losningar/moza
 
 ### Available section types
 
-| Type | Description |
-|---|---|
-| `heroSection` | Full-height homepage hero |
-| `trustBarSection` | Logo trust bar |
-| `mozaikSection` | Mozaik parallax ecosystem |
-| `servicesSection` | Services grid |
-| `kundcaseSection` | Case studies carousel |
-| `contactBannerSection` | Contact CTA strip |
-| `bannerBlock` | Flexible CTA banner with full colour control |
-| `listBlock` | Grid of cards — icon, image or text items |
-| `bulletListBlock` | Bullet list section |
-| `textBlock` | Rich text / prose section |
-| `linkBlock` | Grid of links |
-| `quoteBlock` | Pull quote |
-| `mozaikHeroBlock` | Mozaik solution page hero |
-| `GridList` | Grid list |
+| Type                   | Description                                  |
+| ---------------------- | -------------------------------------------- |
+| `heroSection`          | Full-height homepage hero                    |
+| `trustBarSection`      | Logo trust bar                               |
+| `mozaikSection`        | Mozaik parallax ecosystem                    |
+| `servicesSection`      | Services grid                                |
+| `kundcaseSection`      | Case studies carousel                        |
+| `contactBannerSection` | Contact CTA strip                            |
+| `bannerBlock`          | Flexible CTA banner with full colour control |
+| `listBlock`            | Grid of cards — icon, image or text items    |
+| `bulletListBlock`      | Bullet list section                          |
+| `textBlock`            | Rich text / prose section                    |
+| `linkBlock`            | Grid of links                                |
+| `quoteBlock`           | Pull quote                                   |
+| `GridList`             | Grid list                                    |
 
 ### Nav mega menu links
 
@@ -170,9 +169,9 @@ Each mega menu link has:
 
 ### Other document types
 
-| Type | Description |
-|---|---|
-| `kundcase` | Individual case study |
+| Type         | Description                     |
+| ------------ | ------------------------------- |
+| `kundcase`   | Individual case study           |
 | `clientLogo` | Client logo (used in trust bar) |
 
 ---

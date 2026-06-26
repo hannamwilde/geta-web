@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { client } from '@/sanity/client'
-import { homePageQuery, kundcasesQuery } from '@/sanity/queries'
+import { homePageQuery, casesQuery } from '@/sanity/queries'
 import PageSections from '@/components/page-sections/PageSections'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -13,16 +13,16 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const [page, kundcases] = await Promise.all([
+  const [page, cases] = await Promise.all([
     client.fetch(homePageQuery),
-    client.fetch(kundcasesQuery),
+    client.fetch(casesQuery),
   ])
 
   if (!page) return null
 
   return (
     <main>
-      <PageSections sections={page.sections ?? []} kundcases={kundcases ?? []} />
+      <PageSections sections={page.sections ?? []} cases={cases ?? []} />
     </main>
   )
 }
