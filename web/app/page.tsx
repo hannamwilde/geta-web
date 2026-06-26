@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import { client, urlFor } from '@/sanity/client'
+
+export const revalidate = 30
 import { homePageQuery, casesQuery } from '@/sanity/queries'
 import PageSections from '@/components/page-sections/PageSections'
 

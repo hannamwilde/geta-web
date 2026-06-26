@@ -9,6 +9,13 @@
   z-index: 1;
 }
 
+.header {
+  max-width: 900px;
+  width: 100%;
+}
+.header[data-align="center"] { margin-inline: auto; }
+.header[data-align="right"]  { margin-inline-start: auto; }
+
 .eyebrow {
   display: block;
   font-size: 13px;
@@ -55,7 +62,6 @@
 .card {
   flex: 1 1 0;
   min-width: 0;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,18 +75,16 @@
   backdrop-filter: blur(7px);
   box-shadow: 0 18px 40px -28px rgba(0, 0, 0, 0.55);
   transition:
-    flex-grow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    min-height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.4s ease,
-    box-shadow 0.4s ease,
-    background 0.4s ease,
-    border-color 0.4s ease;
+    flex-grow 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.6s ease,
+    box-shadow 0.6s ease,
+    background 0.6s ease,
+    border-color 0.6s ease;
 }
 @media (hover: hover) and (min-width: 861px) {
   .grid:hover .card {
     flex-grow: 0.85;
     opacity: 0.78;
-    min-height: clamp(515px, 46vw, 600px);
   }
   .grid:hover .card:hover {
     flex-grow: 1.45;
@@ -98,12 +102,28 @@
   border-radius: calc(var(--r-lg) - 4px);
   overflow: hidden;
   flex-shrink: 0;
+  transition: height 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .cardMedia img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  will-change: transform;
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (hover: hover) and (min-width: 861px) {
+  .grid:hover .card:hover .cardMedia {
+    height: clamp(240px, 22vw, 320px);
+  }
+  .grid:hover .card:hover .cardMedia img {
+    transform: scale(1.08);
+  }
+}
+
+.cardLinked {
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .cardContent {
@@ -112,11 +132,28 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: clamp(16px, 1.6vw, 22px);
   width: 100%;
 }
 
+.cardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.55);
+  transition: color 0.3s ease, gap 0.3s ease;
+}
+@media (hover: hover) and (min-width: 861px) {
+  .grid:hover .card:hover .cardCta {
+    color: rgba(255, 255, 255, 0.9);
+    gap: 10px;
+  }
+}
+
 .cardText {
-  width: clamp(200px, 22vw, 300px);
   margin-inline: auto;
 }
 

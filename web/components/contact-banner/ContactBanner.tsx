@@ -25,6 +25,7 @@ type Props = {
     buttonHoverBackground?: string;
     buttonHoverTextColor?: string;
     domeBackgroundColor?: string;
+    borderRadius?: number;
   };
 };
 
@@ -57,7 +58,7 @@ export default async function ContactBanner({ block }: Props) {
       style={sectionStyle}
     >
       <div className="container">
-        <div className={styles.frame}>
+        <div className={styles.frame} style={block.borderRadius != null ? { '--r-xl': block.borderRadius + 'px' } as React.CSSProperties : undefined}>
           {bgUrl && (
             <img
               className={styles.bg}

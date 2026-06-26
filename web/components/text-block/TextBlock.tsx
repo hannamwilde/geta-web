@@ -16,6 +16,7 @@ type Props = {
     backgroundImage?: { asset: unknown; alt?: string }
     sideImage?: { asset: unknown; alt?: string }
     sideImagePosition?: string
+    borderRadius?: number
   }
 }
 
@@ -29,6 +30,7 @@ export default function TextBlock({ block }: Props) {
   }
   if (block.paddingTop != null) sectionStyle.paddingTop = block.paddingTop + 'px'
   if (block.paddingBottom != null) sectionStyle.paddingBottom = block.paddingBottom + 'px'
+  if (block.borderRadius != null) { (sectionStyle as Record<string, string>)['--r-lg'] = block.borderRadius + 'px' }
 
   const isFull = block.contentLayout === 'full'
   const hasSideImage = !!block.sideImage?.asset

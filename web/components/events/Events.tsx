@@ -22,6 +22,7 @@ type Props = {
     pastWebinarLabel?: string;
     pastSub?: string;
     registerLabel?: string;
+    borderRadius?: number;
   };
   upcoming: EventItem[];
   past: EventItem[];
@@ -292,8 +293,12 @@ export default function Events({ block, upcoming, past }: Props) {
 
   const registerLabel = block.registerLabel || "";
 
+  const evStyle = block.borderRadius != null
+    ? { '--r-lg': block.borderRadius + 'px', '--r-xl': block.borderRadius + 'px' } as React.CSSProperties
+    : undefined
+
   return (
-    <div className={styles.evPage}>
+    <div className={styles.evPage} style={evStyle}>
       <EventSection
         title={block.upcomingLabel || ""}
         sub={block.upcomingSub}

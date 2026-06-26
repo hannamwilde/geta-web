@@ -18,7 +18,8 @@
 
 /* ---------- Section heads ---------- */
 .secHead {
-  max-width: 62ch;
+  max-width: 900px;
+  margin-inline: auto;
   margin-bottom: clamp(30px, 3.4vw, 48px);
 }
 

@@ -9,6 +9,7 @@
 }
 
 .head {
+  max-width: 900px;
   margin-bottom: clamp(40px, 4vw, 64px);
 }
 

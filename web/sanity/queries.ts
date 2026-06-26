@@ -9,12 +9,12 @@ const SECTIONS = `
     backgroundColor, backgroundGradient { type, from, to, angle, position }, textColor, iconColor,
     eyebrowStyle, eyebrowColor, eyebrowFontSize,
     headlineColor, headlineFontSize,
-    paddingTop, paddingBottom, itemTextColor,
+    paddingTop, paddingBottom, borderRadius, itemTextColor,
     visualType, icon, statValue, statLabel,
-    backgroundImage { asset, alt },
-    sideImage { asset, alt },
+    backgroundImage { asset, alt, crop, hotspot },
+    sideImage { asset, alt, crop, hotspot },
     sideImagePosition,
-    photo { asset, alt },
+    photo { asset, alt, crop, hotspot },
     markImage { asset },
     wordImage { asset },
     hubNameImage { asset },
@@ -30,19 +30,19 @@ const SECTIONS = `
     items[]{
       _key, title, body, href, linkType, pageRef->{ slug }, linkLabel, icon,
       visualType, imageSize,
-      image { asset, alt },
+      image { asset, alt, crop, hotspot },
       width, titleFontSize,
       backgroundColor, hoverBackgroundColor, iconBackgroundColor, textColor
     },
     itemStyle,
     subheadlineColor, subheadlineFontSize, subheadlineDivider,
     title,
-    links[]{ _key, label, href, linkType, pageRef->{ slug }, style, icon, image { asset, alt } },
+    links[]{ _key, label, href, linkType, pageRef->{ slug }, style, icon, image { asset, alt, crop, hotspot } },
     linksLayout, borderScope, borderTopColor, borderBottomColor,
     buttonBackgroundColor, buttonTextColor,
     ctaTextColor, buttonHoverBackground, buttonHoverTextColor, domeBackgroundColor,
     logos[]->{ _id, name, logo { asset, alt }, website },
-    pillars[]{ _key, title, body, image { asset, alt } },
+    pillars[]{ _key, title, body, image { asset, alt, crop, hotspot }, linkLabel, linkType, href, pageRef->{ slug } },
     lede, ctaText,
     cta { label, href },
     components[]{ _key, label, description, icon, logo { asset, alt } },
@@ -53,7 +53,7 @@ const SECTIONS = `
 export const homePageQuery = groq`
   *[_id == "homePage"][0] {
     _id,
-    seo { title, description, noIndex, ogImage { asset, alt } },
+    seo { title, description, noIndex, ogImage { asset, alt, crop, hotspot } },
     ${SECTIONS}
   }
 `
@@ -61,7 +61,7 @@ export const homePageQuery = groq`
 export const pageBySlugQuery = groq`
   *[_type == "page" && slug.current == $slug][0] {
     _id, title, slug, navTheme,
-    seo { title, description, noIndex, ogImage { asset, alt } },
+    seo { title, description, noIndex, ogImage { asset, alt, crop, hotspot } },
     ${SECTIONS}
   }
 `
@@ -104,14 +104,14 @@ export const footerQuery = groq`
 export const upcomingEventsQuery = groq`
   *[_type == "event" && date >= now()] | order(date asc) {
     _id, title, date, endDate, location, excerpt, registrationUrl, eventType,
-    image { asset, alt }
+    image { asset, alt, crop, hotspot }
   }
 `
 
 export const pastEventsQuery = groq`
   *[_type == "event" && date < now()] | order(date desc) [0...50] {
     _id, title, date, location, excerpt, eventType,
-    image { asset, alt }
+    image { asset, alt, crop, hotspot }
   }
 `
 
@@ -126,7 +126,7 @@ export const casesQuery = groq`
     _id, client,
     "tag": coalesce(array::join(tags, " · "), ""),
     excerpt, testimonial,
-    coverImage { asset, alt },
+    coverImage { asset, alt, crop, hotspot },
     slug
   }
 `

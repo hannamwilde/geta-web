@@ -46,6 +46,7 @@ type Props = {
     alignment?: string;
     textAlignment?: string;
     contentLayout?: string;
+    borderRadius?: number;
   };
 };
 
@@ -62,6 +63,7 @@ export default function BannerBlock({ block }: Props) {
   }
   if (block.paddingTop != null) s.paddingTop = block.paddingTop + "px";
   if (block.paddingBottom != null) s.paddingBottom = block.paddingBottom + "px";
+  if (block.borderRadius != null) { s["--r-lg"] = block.borderRadius + "px"; s["--r-xl"] = block.borderRadius + "px"; }
   if (block.headlineColor) s["--bb-headline"] = block.headlineColor;
   if (block.taglineColor) s["--bb-tagline"] = block.taglineColor;
   if (block.textColor) s["--bb-text"] = block.textColor;

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { client, urlFor } from '@/sanity/client'
+
+export const revalidate = 30
 import { pageBySlugQuery, allPageSlugsQuery, casesQuery, upcomingEventsQuery, pastEventsQuery } from '@/sanity/queries'
 import PageSections from '@/components/page-sections/PageSections'
 import NavThemeSetter from '@/components/nav/NavThemeSetter'

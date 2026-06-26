@@ -41,6 +41,7 @@ type Props = {
     subheadlineDivider?: boolean;
     backgroundColor?: string;
     backgroundGradient?: { type?: string; from?: string; to?: string; angle?: number; position?: string } | null;
+    borderRadius?: number;
     itemStyle?: string;
     items?: Item[];
   };
@@ -48,7 +49,10 @@ type Props = {
 
 export default async function ListBlock({ block }: Props) {
   const t = await fetchTranslations();
-  const sectionStyle: React.CSSProperties = resolveBackground(block.backgroundColor, block.backgroundGradient);
+  const sectionStyle: React.CSSProperties = {
+    ...resolveBackground(block.backgroundColor, block.backgroundGradient),
+    ...(block.borderRadius != null ? { '--r-lg': block.borderRadius + 'px', '--r-xl': block.borderRadius + 'px' } as React.CSSProperties : {}),
+  };
 
   const headlineStyle: React.CSSProperties = {
     color: block.headlineColor || "#ffffff",

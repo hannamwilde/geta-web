@@ -9,6 +9,7 @@
 }
 
 .head {
+  max-width: 900px;
   margin-bottom: clamp(32px, 4vw, 52px);
 }
 
@@ -18,7 +19,7 @@
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(139,125,247,0.9);
+  color: rgba(139, 125, 247, 0.9);
   margin-bottom: 14px;
 }
 
@@ -35,11 +36,15 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
-@media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+@media (max-width: 820px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 .card {
-  background: var(--card-bg, #10143A);
-  border: 1px solid rgba(255,255,255,0.10);
+  background: var(--card-bg, #10143a);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--r-lg, 22px);
   padding: clamp(26px, 3vw, 40px);
   position: relative;
@@ -47,11 +52,14 @@
 }
 
 .cardIcon {
-  width: 54px; height: 54px;
+  width: 54px;
+  height: 54px;
   border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--icon-bg, rgba(139,125,247,0.18));
-  color: #C4BCFB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--icon-bg, rgba(139, 125, 247, 0.18));
+  color: #c4bcfb;
   margin-bottom: 18px;
 }
 
@@ -66,14 +74,17 @@
 .cardBody {
   font-size: 15px;
   line-height: 1.6;
-  color: rgba(234,234,251,0.76);
+  color: rgba(234, 234, 251, 0.76);
   margin: 0 0 18px;
 }
 
 .points {
   list-style: none;
-  margin: 0; padding: 0;
-  display: flex; flex-direction: column; gap: 10px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .points li {
@@ -82,8 +93,15 @@
   gap: 11px;
   font-size: 14px;
   line-height: 1.45;
-  color: rgba(234,234,251,0.74);
+  color: rgba(234, 234, 251, 0.74);
 }
 
-.points li svg { flex-shrink: 0; color: var(--points-icon-color, #8B7DF7); margin-top: 2px; }
-.points li strong { color: #fff; font-weight: 600; }
+.points li svg {
+  flex-shrink: 0;
+  color: var(--points-icon-color, #8b7df7);
+  margin-top: 2px;
+}
+.points li strong {
+  color: #fff;
+  font-weight: 600;
+}

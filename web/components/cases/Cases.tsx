@@ -29,6 +29,7 @@ type Props = {
     buttonTextColor?: string
     buttonHoverBackground?: string
     buttonHoverTextColor?: string
+    borderRadius?: number
   }
   cases: CaseItem[]
 }
@@ -82,6 +83,7 @@ export default async function Cases({ block, cases }: Props) {
   const bg = resolveBackground(block.backgroundColor, block.backgroundGradient)
   const sectionStyle: React.CSSProperties = {
     ...(Object.keys(bg).length ? bg : {}),
+    ...(block.borderRadius != null ? { '--r-lg': block.borderRadius + 'px', '--r-xl': block.borderRadius + 'px' } as React.CSSProperties : {}),
   }
   const titleStyle: React.CSSProperties = block.headlineColor ? { color: block.headlineColor } : {}
   const ledeStyle: React.CSSProperties = block.textColor ? { color: block.textColor } : {}

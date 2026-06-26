@@ -24,6 +24,7 @@ type Props = {
     headlineFontSize?: number
     backgroundColor?: string
     backgroundGradient?: { type?: string; from?: string; to?: string; angle?: number; position?: string } | null
+    borderRadius?: number
     archItems?: ArchItem[]
   }
 }
@@ -32,7 +33,10 @@ export default function BulletListBlock({ block }: Props) {
   const items = block.archItems || []
   if (items.length === 0) return null
 
-  const sectionStyle: React.CSSProperties = resolveBackground(block.backgroundColor, block.backgroundGradient)
+  const sectionStyle: React.CSSProperties = {
+    ...resolveBackground(block.backgroundColor, block.backgroundGradient),
+    ...(block.borderRadius != null ? { '--r-lg': block.borderRadius + 'px', '--r-xl': block.borderRadius + 'px' } as React.CSSProperties : {}),
+  }
   const eyebrowStyle: React.CSSProperties = {
     ...(block.eyebrowColor ? { color: block.eyebrowColor } : {}),
     ...(block.eyebrowFontSize ? { fontSize: block.eyebrowFontSize + 'px' } : {}),
