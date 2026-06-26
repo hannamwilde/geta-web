@@ -17,9 +17,21 @@ const montserrat = Montserrat({
   display: 'swap',
 })
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://getadigital.com'
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: { default: 'Geta Digital', template: '%s | Geta Digital' },
-  description: 'Geta Digital — e-commerce experts.',
+  description: 'Geta Digital är en nordisk e-handelskonsult specialiserad på strategi, design och teknisk utveckling för e-handel.',
+  openGraph: {
+    siteName: 'Geta Digital',
+    locale: 'sv_SE',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@getadigital',
+  },
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

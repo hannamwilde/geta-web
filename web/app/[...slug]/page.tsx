@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { client } from '@/sanity/client'
+import { client, urlFor } from '@/sanity/client'
 import { pageBySlugQuery, allPageSlugsQuery, casesQuery, upcomingEventsQuery, pastEventsQuery } from '@/sanity/queries'
 import PageSections from '@/components/page-sections/PageSections'
 import NavThemeSetter from '@/components/nav/NavThemeSetter'
@@ -14,11 +14,26 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const page = await client.fetch(pageBySlugQuery, { slug: slug.join('/') })
+  const slugPath = slug.join('/')
+  const page = await client.fetch(pageBySlugQuery, { slug: slugPath })
   const seo = page?.seo
+  const ogImageUrl = seo?.ogImage?.asset
+    ? urlFor(seo.ogImage).width(1200).height(630).url()
+    : undefined
+  const canonicalPath = `/${slugPath}`
+
   return {
     title: seo?.title ?? page?.title ?? undefined,
     description: seo?.description ?? undefined,
+    ...(seo?.noIndex && { robots: { index: false, follow: false } }),
+    alternates: { canonical: canonicalPath },
+    openGraph: {
+      url: canonicalPath,
+      ...(ogImageUrl && {
+        images: [{ url: ogImageUrl, width: 1200, height: 630, alt: seo?.ogImage?.alt ?? page?.title ?? 'Geta Digital' }],
+      }),
+    },
+    ...(ogImageUrl && { twitter: { images: [ogImageUrl] } }),
   }
 }
 

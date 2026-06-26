@@ -53,7 +53,7 @@ const SECTIONS = `
 export const homePageQuery = groq`
   *[_id == "homePage"][0] {
     _id,
-    seo { title, description, image { asset, alt } },
+    seo { title, description, noIndex, ogImage { asset, alt } },
     ${SECTIONS}
   }
 `
@@ -61,13 +61,25 @@ export const homePageQuery = groq`
 export const pageBySlugQuery = groq`
   *[_type == "page" && slug.current == $slug][0] {
     _id, title, slug, navTheme,
-    seo { title, description, image { asset, alt } },
+    seo { title, description, noIndex, ogImage { asset, alt } },
     ${SECTIONS}
   }
 `
 
 export const allPageSlugsQuery = groq`
   *[_type == "page" && defined(slug.current)].slug.current
+`
+
+export const sitemapPagesQuery = groq`
+  *[_type == "page" && defined(slug.current)] {
+    "slug": slug.current,
+    _updatedAt,
+    "noIndex": seo.noIndex
+  }
+`
+
+export const sitemapHomeQuery = groq`
+  *[_id == "homePage"][0] { _updatedAt, "noIndex": seo.noIndex }
 `
 
 export const navQuery = groq`
