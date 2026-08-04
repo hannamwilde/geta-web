@@ -1,9 +1,11 @@
+import Link from "next/link";
 import { urlFor } from "@/sanity/client";
 import styles from "./Events.module.css";
 
 type EventItem = {
   _id: string;
   title: string;
+  slug?: string;
   date: string;
   endDate?: string;
   location?: string;
@@ -172,17 +174,25 @@ function UpcomingCard({
         </div>
         <h3 className={styles.cardTitle}>{item.title}</h3>
         {item.excerpt && <p className={styles.cardExcerpt}>{item.excerpt}</p>}
-        {item.registrationUrl && (
-          <a
-            href={item.registrationUrl}
-            className={styles.registerBtn}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {registerLabel}
-            <IconArrowRight />
-          </a>
-        )}
+        <div className={styles.cardActions}>
+          {item.registrationUrl && (
+            <a
+              href={item.registrationUrl}
+              className={styles.registerBtn}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {registerLabel}
+              <IconArrowRight />
+            </a>
+          )}
+          {item.slug && (
+            <Link href={`/evenemang/${item.slug}`} className={styles.detailsBtn}>
+              Läs mer
+              <IconArrowRight />
+            </Link>
+          )}
+        </div>
       </div>
     </article>
   );
@@ -193,8 +203,8 @@ function PastCard({ item }: { item: EventItem }) {
     ? urlFor(item.image).width(600).height(400).url()
     : null;
 
-  return (
-    <article className={styles.pastCard}>
+  const inner = (
+    <>
       {imgUrl && (
         <div
           className={
@@ -221,8 +231,18 @@ function PastCard({ item }: { item: EventItem }) {
       <h3 className={styles.pastCardTitle}>{item.title}</h3>
       {item.excerpt && <p className={styles.pastCardText}>{item.excerpt}</p>}
       <span className={styles.pastCardDate}>{formatDate(item.date)}</span>
-    </article>
+    </>
   );
+
+  if (item.slug) {
+    return (
+      <Link href={`/evenemang/${item.slug}`} className={styles.pastCard}>
+        {inner}
+      </Link>
+    );
+  }
+
+  return <article className={styles.pastCard}>{inner}</article>;
 }
 
 function EventSection({

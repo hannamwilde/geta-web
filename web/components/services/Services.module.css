@@ -13,8 +13,12 @@
   max-width: 900px;
   width: 100%;
 }
-.header[data-align="center"] { margin-inline: auto; }
-.header[data-align="right"]  { margin-inline-start: auto; }
+.header[data-align="center"] {
+  margin-inline: auto;
+}
+.header[data-align="right"] {
+  margin-inline-start: auto;
+}
 
 .eyebrow {
   display: block;
@@ -133,7 +137,7 @@
   justify-content: center;
   align-items: center;
   gap: clamp(16px, 1.6vw, 22px);
-  width: 100%;
+  width: 350px;
 }
 
 .cardCta {
@@ -144,7 +148,9 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.55);
-  transition: color 0.3s ease, gap 0.3s ease;
+  transition:
+    color 0.3s ease,
+    gap 0.3s ease;
 }
 @media (hover: hover) and (min-width: 861px) {
   .grid:hover .card:hover .cardCta {

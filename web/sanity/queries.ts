@@ -103,15 +103,40 @@ export const footerQuery = groq`
 
 export const upcomingEventsQuery = groq`
   *[_type == "event" && date >= now()] | order(date asc) {
-    _id, title, date, endDate, location, excerpt, registrationUrl, eventType,
+    _id, title, "slug": slug.current, date, endDate, location, excerpt, registrationUrl, eventType,
     image { asset, alt, crop, hotspot }
   }
 `
 
 export const pastEventsQuery = groq`
   *[_type == "event" && date < now()] | order(date desc) [0...50] {
-    _id, title, date, location, excerpt, eventType,
+    _id, title, "slug": slug.current, date, location, excerpt, eventType,
     image { asset, alt, crop, hotspot }
+  }
+`
+
+export const allEventSlugsQuery = groq`
+  *[_type == "event" && defined(slug.current)].slug.current
+`
+
+export const eventBySlugQuery = groq`
+  *[_type == "event" && slug.current == $slug][0] {
+    _id, title, "slug": slug.current, eventType,
+    date, endDate, location, registrationUrl,
+    excerpt, image { asset, alt, crop, hotspot },
+    subtitle, lead,
+    heroImage { asset, alt, crop, hotspot },
+    takeawaysHeadline, takeawaysBody,
+    takeaways,
+    agendaTitle, agendaSub,
+    agenda[] { _key, title, sub },
+    speakersTitle,
+    speakers[] {
+      _key, name, role, bio,
+      photo { asset, alt, crop, hotspot }
+    },
+    heroCtaLabel, takeawaysEyebrow,
+    ctaTitle, ctaBody, ctaButtonLabel
   }
 `
 
