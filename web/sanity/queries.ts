@@ -12,6 +12,8 @@ const SECTIONS = `
     paddingTop, paddingBottom, borderRadius, itemTextColor,
     visualType, icon, statValue, statLabel,
     backgroundImage { asset, alt, crop, hotspot },
+    backgroundVideo { asset->{ url, mimeType } },
+    overlayColor, overlayOpacity,
     sideImage { asset, alt, crop, hotspot },
     sideImagePosition,
     photo { asset, alt, crop, hotspot },
@@ -140,9 +142,46 @@ export const eventBySlugQuery = groq`
   }
 `
 
+export const modalsQuery = groq`
+  *[_type == "modals"][0] {
+    bookTitle, bookSubtitle, bookFooterNote, bookSuccessTitle, bookSuccessMessage, bookTopics,
+    contactTitle, contactSubtitle, contactFooterNote, contactSuccessTitle, contactSuccessMessage, contactTopics
+  }
+`
+
 export const translationsQuery = groq`
   *[_type == "translations"][0] {
     general { readMore, contact },
+    modal {
+      close, errorMsg, sending, successFallback,
+      contactEyebrow, contactSubmit,
+      bookEyebrow, bookSubmit,
+      fieldName, fieldEmail, fieldCompany, fieldTopic, fieldTopicBook, fieldMessage,
+      topicPlaceholder, phName, phEmail, phCompany, phMessageContact, phMessageBook
+    }
+  }
+`
+
+export const allPostSlugsQuery = groq`
+  *[_type == "post" && defined(slug.current)].slug.current
+`
+
+export const blogCountQuery = groq`
+  count(*[_type == "post"])
+`
+
+export const blogListQuery = groq`
+  *[_type == "post"] | order(publishedAt desc) [$start...$end] {
+    _id, title, "slug": slug.current, publishedAt, author, excerpt, tags,
+    coverImage { asset, alt, crop, hotspot }
+  }
+`
+
+export const postBySlugQuery = groq`
+  *[_type == "post" && slug.current == $slug][0] {
+    _id, title, "slug": slug.current, publishedAt, author, excerpt, tags,
+    coverImage { asset, alt, crop, hotspot },
+    body
   }
 `
 

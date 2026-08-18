@@ -4,8 +4,8 @@ import { client, urlFor } from '@/sanity/client'
 
 export const revalidate = 30
 import { pageBySlugQuery, allPageSlugsQuery, casesQuery, upcomingEventsQuery, pastEventsQuery } from '@/sanity/queries'
-import PageSections from '@/components/page-sections/PageSections'
-import NavThemeSetter from '@/components/nav/NavThemeSetter'
+import PageSections from '@/components/pageSections'
+import NavThemeSetter from '@/components/navThemeSetter'
 
 type Props = { params: Promise<{ slug: string[] }> }
 

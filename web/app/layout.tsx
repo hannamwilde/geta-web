@@ -2,12 +2,14 @@ import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import './globals.css'
 import { client } from '@/sanity/client'
-import { navQuery, footerQuery } from '@/sanity/queries'
+import { navQuery, footerQuery, modalsQuery } from '@/sanity/queries'
 import { fetchTranslations } from '@/lib/translations/server'
-import Nav from '@/components/nav/Nav'
-import Footer, { type FooterData } from '@/components/footer/Footer'
-import type { NavData } from '@/components/nav/Nav'
+import Nav from '@/components/nav'
+import Footer, { type FooterData } from '@/components/footer'
+import type { NavData } from '@/components/nav'
 import { NavThemeProvider } from '@/context/NavThemeContext'
+import { ContactModalProvider } from '@/context/ContactModalContext'
+import ContactModal, { type ModalsData } from '@/components/contactModal'
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -35,9 +37,10 @@ export const metadata: Metadata = {
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [navData, footerData] = await Promise.all([
+  const [navData, footerData, modalsData, translations] = await Promise.all([
     client.fetch<NavData>(navQuery),
     client.fetch<FooterData>(footerQuery),
+    client.fetch<ModalsData>(modalsQuery),
     fetchTranslations(),
   ])
 
@@ -45,9 +48,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="sv" className={montserrat.variable}>
       <body>
         <NavThemeProvider>
-          <Nav data={navData} />
-          {children}
-          <Footer data={footerData} />
+          <ContactModalProvider>
+            <Nav data={navData} />
+            {children}
+            <Footer data={footerData} />
+            <ContactModal data={modalsData ?? {}} t={translations.modal} />
+          </ContactModalProvider>
         </NavThemeProvider>
       </body>
     </html>

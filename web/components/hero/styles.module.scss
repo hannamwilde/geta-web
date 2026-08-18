@@ -1,0 +1,135 @@
+.hero {
+  position: relative;
+  padding-top: clamp(116px, 13vw, 168px);
+  padding-bottom: clamp(56px, 7vw, 96px);
+  background: var(--forest);
+  color: var(--paper);
+  overflow: hidden;
+
+  /*
+   * With a background image or video, hold an aspect ratio so the media gets
+   * room to read instead of being cropped to a thin strip by short content.
+   * min-height (not aspect-ratio) keeps it a floor: a long headline or a second
+   * CTA still grows the section rather than clipping against overflow: hidden.
+   * Capped against the viewport height so the hero can't push the fold away.
+   */
+  &[data-has-media='true'] {
+    min-height: min(56.25vw, 82vh); /* 16:9 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    /* 16:9 is too letterboxed on a phone — go taller so the subject survives the crop. */
+    @media (max-width: 760px) {
+      min-height: min(110vw, 72vh);
+    }
+  }
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px);
+  position: relative;
+  z-index: 1;
+}
+
+.copy {
+  position: relative;
+  max-width: 900px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: var(--hero-eyebrow-size, 12px);
+  font-weight: 500;
+  color: var(--hero-eyebrow-color, rgba(255, 255, 255, 0.8));
+  margin-bottom: 32px;
+  white-space: nowrap;
+}
+
+.eyebrowBadge {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+}
+
+.eyebrowTag {
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.eyebrowDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--hero-eyebrow-color, var(--blue));
+  box-shadow: 0 0 12px rgba(168, 218, 219, 0.9);
+  flex-shrink: 0;
+}
+
+.headline {
+  font-weight: 700;
+  font-size: clamp(44px, 6.6vw, 96px);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  color: var(--hero-headline, var(--paper, #fff));
+  margin: 0;
+}
+
+.mark {
+  width: clamp(52px, 7vw, 80px);
+  height: auto;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.grad {
+  background: linear-gradient(
+    var(--hero-grad-angle, 105deg),
+    var(--hero-grad-from, #C4BCFB) 0%,
+    var(--hero-grad-to, #C77DF0) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sub {
+  margin-top: 28px;
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.6;
+  color: var(--hero-text, rgba(255, 255, 255, 0.78));
+  max-width: 600px;
+  font-weight: 400;
+}
+
+/* Alignment */
+:global(.hero-section[data-align="center"] .hero-copy) { max-width: 900px; margin-inline: auto; }
+:global(.hero-section[data-align="right"] .hero-copy)  { max-width: 900px; margin-left: auto; }
+:global(.hero-section[data-text-align="center"] .hero-copy) { text-align: center; }
+:global(.hero-section[data-text-align="right"] .hero-copy)  { text-align: right; }
+:global(.hero-section[data-text-align="center"] .hero-copy) .mark { margin-inline: auto; }
+:global(.hero-section[data-text-align="center"] .hero-copy) .sub { margin-inline: auto; }
+:global(.hero-section[data-text-align="right"] .hero-copy) .sub  { margin-inline-start: auto; }
+
+/* CTAs are rendered by HeroCTAs (client component) but styled globally */
+:global(.hero-ctas) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+:global(.hero-section[data-text-align="center"] .hero-ctas) { justify-content: center; }
+:global(.hero-section[data-text-align="right"] .hero-ctas)  { justify-content: flex-end; }
+
+/* Invert button colours for dark forest background */
+:global(.hero-ctas .btn-primary) { background: var(--paper); color: var(--forest); }
+:global(.hero-ctas .btn-primary:hover) { background: var(--cream); color: var(--forest); }
+:global(.hero-ctas .btn-outline) { color: var(--paper); border-color: rgba(255,255,255,0.4); }
+:global(.hero-ctas .btn-outline:hover) { background: var(--paper); color: var(--forest); border-color: var(--paper); }
