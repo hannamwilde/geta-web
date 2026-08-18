@@ -143,20 +143,28 @@ export const eventBySlugQuery = groq`
 `
 
 export const modalsQuery = groq`
-  *[_type == "modals"][0] {
-    bookTitle, bookSubtitle, bookFooterNote, bookSuccessTitle, bookSuccessMessage, bookTopics,
-    contactTitle, contactSubtitle, contactFooterNote, contactSuccessTitle, contactSuccessMessage, contactTopics
+  *[_id == "modals"][0] {
+    bookEyebrow, bookTitle, bookSubtitle, bookFooterNote, bookSuccessTitle, bookSuccessMessage,
+    bookCalendarUrl,
+    contactEyebrow, contactTitle, contactSubtitle, contactFooterNote, contactSuccessTitle, contactSuccessMessage, contactTopics
   }
 `
 
+/**
+ * Server-only. Deliberately not part of modalsQuery: that result is passed to a
+ * client component, and the recipient address must not reach the browser.
+ */
+export const contactRecipientQuery = groq`
+  *[_id == "modals"][0].contactRecipientEmail
+`
+
 export const translationsQuery = groq`
-  *[_type == "translations"][0] {
+  *[_id == "translations"][0] {
     general { readMore, contact },
     modal {
       close, errorMsg, sending, successFallback,
-      contactEyebrow, contactSubmit,
-      bookEyebrow, bookSubmit,
-      fieldName, fieldEmail, fieldCompany, fieldTopic, fieldTopicBook, fieldMessage,
+      submit,
+      fieldName, fieldEmail, fieldCompany, fieldTopic, fieldMessage,
       topicPlaceholder, phName, phEmail, phCompany, phMessageContact, phMessageBook
     }
   }
