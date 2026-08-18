@@ -1,7 +1,6 @@
 import { urlFor } from "@/sanity/client";
 import { normalizeHref } from "@/lib/href";
 import { resolveHref } from "@/lib/resolveHref";
-import { fetchTranslations } from "@/lib/translations/server";
 import Icon from "@/components/icon";
 import { resolveBackground } from "@/lib/background";
 import styles from "./styles.module.scss";
@@ -47,8 +46,7 @@ type Props = {
   };
 };
 
-export default async function ListBlock({ block }: Props) {
-  const t = await fetchTranslations();
+export default function ListBlock({ block }: Props) {
   const sectionStyle: React.CSSProperties = {
     ...resolveBackground(block.backgroundColor, block.backgroundGradient),
     ...(block.borderRadius != null ? { '--r-lg': block.borderRadius + 'px', '--r-xl': block.borderRadius + 'px' } as React.CSSProperties : {}),
@@ -117,19 +115,21 @@ export default async function ListBlock({ block }: Props) {
                   : urlFor(item.image).width(800).height(360).url()
                 : null;
 
+            const resolved = resolveHref(item.linkType, item.href, item.pageRef);
+            const itemHref = resolved ? normalizeHref(resolved) : "";
+            const hasLink = Boolean(itemHref && item.linkLabel);
+
             const cardStyle: React.CSSProperties = {
               ...(item.textColor ? { color: item.textColor } : {}),
               gridColumn: `span ${item.width || 4}`,
               "--item-bg": item.backgroundColor || "#ffffff",
-              ...(item.hoverBackgroundColor && (item.href || item.linkType === 'internal')
+              ...(item.hoverBackgroundColor && hasLink
                 ? { "--item-hover-bg": item.hoverBackgroundColor }
                 : {}),
               ...(item.iconBackgroundColor
                 ? { "--item-icon-bg": item.iconBackgroundColor }
                 : {}),
             } as React.CSSProperties;
-
-            const itemHref = normalizeHref(resolveHref(item.linkType, item.href, item.pageRef))
 
             const inner = (
               <>
@@ -159,9 +159,9 @@ export default async function ListBlock({ block }: Props) {
                     </ItemHeading>
                   )}
                   {item.body && <p className={styles.itemBody}>{item.body}</p>}
-                  {itemHref && (
+                  {hasLink && (
                     <span className={styles.itemLink}>
-                      {item.linkLabel || t.general.readMore}
+                      {item.linkLabel}
                       <Icon name="arrow-up-right" size={14} stroke={2} />
                     </span>
                   )}
@@ -169,7 +169,7 @@ export default async function ListBlock({ block }: Props) {
               </>
             );
 
-            return itemHref ? (
+            return hasLink ? (
               <a
                 key={item._key || i}
                 href={itemHref}
