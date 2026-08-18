@@ -67,6 +67,10 @@ export default async function ListBlock({ block }: Props) {
       : {}),
   };
 
+  // The section only renders its own <h2> when an editor filled in a headline, so
+  // items step down to <h3> only in that case — otherwise they'd skip a heading level.
+  const ItemHeading = block.headline ? "h3" : "h2";
+
   return (
     <section
       className={styles.section}
@@ -143,7 +147,7 @@ export default async function ListBlock({ block }: Props) {
                 ) : null}
                 <span className={styles.itemText}>
                   {item.title && (
-                    <h3
+                    <ItemHeading
                       className={styles.itemTitle}
                       style={
                         item.titleFontSize
@@ -152,7 +156,7 @@ export default async function ListBlock({ block }: Props) {
                       }
                     >
                       {item.title}
-                    </h3>
+                    </ItemHeading>
                   )}
                   {item.body && <p className={styles.itemBody}>{item.body}</p>}
                   {itemHref && (

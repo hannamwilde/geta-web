@@ -1,3 +1,4 @@
+import { preload } from 'react-dom'
 import { urlFor } from '@/sanity/client'
 import BackgroundMedia, { type BackgroundVideo } from '@/components/backgroundMedia'
 import HeroCTAs from './components/heroCtas'
@@ -64,6 +65,10 @@ export default function Hero({ block }: Props) {
     s.backgroundImage = `url(${backgroundUrl})`
     s.backgroundSize = 'cover'
     s.backgroundPosition = 'center'
+    // The hero background is the LCP element on most pages, but a CSS background-image
+    // isn't discoverable until the stylesheet has parsed. Preloading it lets the browser
+    // start the fetch straight from the document.
+    preload(backgroundUrl, { as: 'image', fetchPriority: 'high' })
   }
 
   if (block.eyebrowColor) s['--hero-eyebrow-color'] = block.eyebrowColor

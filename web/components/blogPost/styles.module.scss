@@ -15,13 +15,13 @@
 .breadcrumb {
   font-size: 13px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
   margin-bottom: clamp(20px, 2.5vw, 32px);
   display: block;
 }
 
 .breadcrumb a {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
   transition: color 0.15s;
 }
 

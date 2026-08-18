@@ -126,6 +126,8 @@ export default function Nav({ data }: Props) {
             <img
               src="/assets/geta-logo-white.png"
               alt="Geta"
+              width={512}
+              height={157}
               style={{ display: "block", height: 22, width: "auto" }}
             />
           </a>
@@ -258,6 +260,8 @@ export default function Nav({ data }: Props) {
           <img
             src="/assets/geta-logo-white.png"
             alt="Geta"
+            width={512}
+            height={157}
             style={{ display: "block", height: 22, width: "auto" }}
           />
         </a>

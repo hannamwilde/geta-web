@@ -1,5 +1,6 @@
 import { urlFor } from '@/sanity/client'
 import { resolveBackground } from '@/lib/background'
+import { assetDimensions } from '@/lib/imageDimensions'
 import styles from './styles.module.scss'
 
 type Logo = {
@@ -37,6 +38,11 @@ function getLogoSrc(item: Logo) {
   return item.src || ''
 }
 
+/** Intrinsic size, so the row reserves each logo's width before it loads. */
+function getLogoSize(item: Logo) {
+  return assetDimensions(item.logo?.asset) ?? undefined
+}
+
 export default function TrustBar({ block }: Props) {
   const logos = (block?.logos && block.logos.length > 0) ? block.logos : FALLBACK
   const row = [...logos, ...logos]
@@ -49,9 +55,9 @@ export default function TrustBar({ block }: Props) {
           <div className={styles.logo} key={logo._id + '-' + i} aria-hidden={i >= logos.length}>
             {logo.website
               ? <a href={logo.website} target="_blank" rel="noopener noreferrer" tabIndex={i >= logos.length ? -1 : 0}>
-                  <img src={getLogoSrc(logo)} alt={logo.name} loading="lazy" draggable={false} />
+                  <img src={getLogoSrc(logo)} alt={logo.name} loading="lazy" draggable={false} {...getLogoSize(logo)} />
                 </a>
-              : <img src={getLogoSrc(logo)} alt={logo.name} loading="lazy" draggable={false} />
+              : <img src={getLogoSrc(logo)} alt={logo.name} loading="lazy" draggable={false} {...getLogoSize(logo)} />
             }
           </div>
         ))}
