@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { urlFor } from "@/sanity/client";
 import Icon from "@/components/icon";
 import styles from "./styles.module.scss";
@@ -48,6 +48,15 @@ const colorOf = (i: number) => GLASS[i % GLASS.length];
 /** Lets us set the `--c` custom property without widening every style object. */
 type NodeStyle = React.CSSProperties & { "--c": string };
 
+/**
+ * Editors write the headline as plain text; every occurrence of "Mozaik" is swapped
+ * for the wordmark image. Splitting on a capture group keeps the surrounding text
+ * intact, and the alt carries the original casing so the line still reads correctly
+ * to screen readers.
+ */
+const MOZAIK_WORD = /(mozaik)/i;
+const HEADLINE_FALLBACK = "Mozaik är här, AI-driven digital handel";
+
 const CX = 500,
   CY = 500,
   RX = 405,
@@ -55,6 +64,8 @@ const CX = 500,
 
 export default function Mozaik({ block }: Props) {
   const trackRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [revealed, setRevealed] = useState<number[]>([]);
   const [mounted, setMounted] = useState(false);
   const [p, setP] = useState(0);
 
@@ -98,6 +109,39 @@ export default function Mozaik({ block }: Props) {
       window.removeEventListener("resize", compute);
     };
   }, []);
+
+  // Mobile cards slide up as they scroll into view. The desktop orbit has its own
+  // scroll-driven reveal, so this only ever drives the stacked grid.
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>("[data-card]"));
+    if (!cards.length) return;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setRevealed(cards.map((_, i) => i));
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        const hits: number[] = [];
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          io.unobserve(entry.target);
+          hits.push(Number((entry.target as HTMLElement).dataset.card));
+        }
+        if (hits.length) {
+          setRevealed((prev) =>
+            prev.concat(hits.filter((h) => !prev.includes(h))),
+          );
+        }
+      },
+      { threshold: 0.2, rootMargin: "0px 0px -8% 0px" },
+    );
+    cards.forEach((c) => io.observe(c));
+    return () => io.disconnect();
+  }, [nodes.length]);
 
   // geometry — ellipse in a 1000×1000 orbit square
   const angleOf = (i: number) =>
@@ -170,12 +214,21 @@ export default function Mozaik({ block }: Props) {
             }
           >
             <h2 className={styles.headerTitle}>
-              <em>
-                <img className={styles.word} src={wordSrc} alt="Mozaik" /> är
-                här,
-              </em>
-              <br />
-              {"AI-driven digital handel"}
+              {(block.headline || HEADLINE_FALLBACK)
+                .split(MOZAIK_WORD)
+                .filter(Boolean)
+                .map((part, i) =>
+                  part.toLowerCase() === "mozaik" ? (
+                    <img
+                      key={i}
+                      className={styles.word}
+                      src={wordSrc}
+                      alt={part}
+                    />
+                  ) : (
+                    <Fragment key={i}>{part}</Fragment>
+                  ),
+                )}
             </h2>
             {block.subheadline && (
               <p className={styles.headerText}>{block.subheadline}</p>
@@ -186,7 +239,10 @@ export default function Mozaik({ block }: Props) {
           <div className={styles.inner}>
             <div className={styles.orbitCol}>
               {/* Mobile static grid — hidden on desktop */}
-              <div className={styles.mobileGrid} aria-hidden>
+              <div
+                ref={gridRef}
+                className={`${styles.mobileGrid}${mounted ? " " + styles.gridArmed : ""}`}
+              >
                 {nodes.map((n, i) => {
                   const logoUrl = n.logo?.asset
                     ? urlFor(n.logo).width(40).height(40).url()
@@ -194,8 +250,14 @@ export default function Mozaik({ block }: Props) {
                   return (
                     <div
                       key={n._key}
-                      className={`${styles.card} ${styles.cardStatic} ${styles.cardOn}`}
-                      style={{ "--c": colorOf(i) } as NodeStyle}
+                      data-card={i}
+                      className={`${styles.card} ${styles.cardStatic} ${styles.cardOn}${revealed.includes(i) ? " " + styles.cardIn : ""}`}
+                      style={
+                        {
+                          "--c": colorOf(i),
+                          transitionDelay: `${(i % 2) * 90}ms`,
+                        } as NodeStyle
+                      }
                     >
                       <div className={styles.cardIcon}>
                         {logoUrl ? (

@@ -130,7 +130,15 @@
   background: radial-gradient(56% 50% at 50% 50%, rgba(6, 3, 12, 0.86) 0%, rgba(6, 3, 12, 0.66) 44%, rgba(6, 3, 12, 0.3) 70%, transparent 84%);
   filter: blur(8px);
 }
-@media (max-width: 980px) { .header { display: none; } }
+@media (max-width: 980px) {
+  .header {
+    padding: 0 var(--gutter);
+  }
+  /* The glass photo is desktop-only, so the readability scrim isn't needed here. */
+  .header::before { display: none; }
+  .headerTitle { font-size: clamp(30px, 8.4vw, 46px); }
+  .headerText { margin-top: 14px; font-size: 15px; }
+}
 
 .eyebrow {
   display: inline-flex; align-items: center; gap: 8px;
@@ -155,6 +163,9 @@
   letter-spacing: -0.04em;
   line-height: 1.02;
   color: #fff;
+  /* The headline is CMS text with no hard break, so let the browser pick an even
+     split rather than stranding the last word on its own line. */
+  text-wrap: balance;
   text-shadow: 0 2px 12px rgba(6, 3, 12, 0.75), 0 0 38px rgba(6, 3, 12, 0.6);
 }
 .headerTitle em { font-style: normal; color: #fff; }
@@ -328,8 +339,6 @@
   position: static;
   width: auto;
   margin: 0;
-  transform: none !important;
-  opacity: 1 !important;
 }
 
 .cardBody {}
@@ -419,6 +428,25 @@
     grid-template-columns: 1fr 1fr;
     gap: 12px;
   }
+
+  /* Cards sit low and faded, then slide up as each scrolls in. Gated on
+     .gridArmed so they are only ever hidden once JS is there to reveal them —
+     without it a failed hydration would leave the grid permanently blank. */
+  .gridArmed .cardStatic {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.5s ease,
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .gridArmed .cardIn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gridArmed .cardStatic { transition: none; }
 }
 @media (min-width: 981px) {
   .mobileGrid { display: none; }
