@@ -17,7 +17,7 @@ const SECTIONS = `
     sideImage { asset, alt, crop, hotspot },
     sideImagePosition,
     photo { asset, alt, crop, hotspot },
-    markImage { asset },
+    markImage { asset }, markWidth,
     wordImage { asset },
     hubNameImage { asset },
     ctaPrimary { label, action, href, linkType, pageRef->{ slug } },

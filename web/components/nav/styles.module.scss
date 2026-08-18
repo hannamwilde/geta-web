@@ -16,7 +16,8 @@
   padding-bottom: 12px;
 }
 
-.bar {
+.bar,
+.mobileBar {
   flex: 1 1 auto;
   display: flex;
   position: relative;
@@ -34,7 +35,17 @@
     border-color 0.4s ease;
 }
 
-.overMozaik .bar {
+/* Mobile bar: logo left, burger hard right — no CTA to make room for. */
+.mobileBar {
+  justify-content: space-between;
+  padding: 7px 10px 7px 16px;
+}
+.mobileBar .logo {
+  margin-right: 0;
+}
+
+.overMozaik .bar,
+.overMozaik .mobileBar {
   background: #171a3b;
   border-color: rgba(255, 255, 255, 0.18);
 }
@@ -196,13 +207,18 @@
   color: var(--paper);
 }
 
+/* Floating panel: dark like the bar above it, but borrowing the mega menu's
+   geometry — inset to the same gutter, rounded and lifted off the page. */
 .mobile {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 16px 24px 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin: 0 var(--gutter);
+  padding: 6px 16px 16px;
   background: var(--forest-deep);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-float);
 }
 
 .mobileLink {
@@ -211,4 +227,72 @@
   font-weight: 700;
   color: var(--paper);
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* An expandable item and its sub-list count as one entry, so the rule sits on
+   the group and the parent button drops its own. */
+.mobileGroup {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+.mobileGroup .mobileLink {
+  border-bottom: none;
+}
+
+/* Parent row: label left, chevron hard right, flipping when expanded. */
+.mobileParent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+}
+.mobileParent svg {
+  flex-shrink: 0;
+  opacity: 0.65;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+.mobileParentOpen svg {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* Sub-items, indented under their parent. */
+.mobileSub {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 10px 14px;
+}
+.mobileSubLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 4px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.72);
+  transition: color 0.15s ease;
+}
+.mobileSubLink:hover {
+  color: var(--paper);
+}
+/* Action links reuse the desktop markup (icon + arrow), laid out inline at the
+   foot of the panel. Colours come from .shop/.cta as-is — the panel is dark, so
+   only the sizing needs bumping for touch. */
+.mobileActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 0;
+}
+.mobileActions .shop,
+.mobileActions .cta {
+  font-size: 15px;
+  padding: 11px 14px;
 }

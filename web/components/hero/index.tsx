@@ -1,7 +1,7 @@
 import { preload } from 'react-dom'
 import { urlFor } from '@/sanity/client'
 import BackgroundMedia, { type BackgroundVideo } from '@/components/backgroundMedia'
-import HeroCTAs from './components/heroCtas'
+import HeroCTAs, { type CTA } from './components/heroCtas'
 import styles from './styles.module.scss'
 
 type Props = {
@@ -14,12 +14,13 @@ type Props = {
     tagline?: string
     subheadline?: string
     markImage?: { asset: unknown }
+    markWidth?: number
     backgroundImage?: { asset: unknown; alt?: string }
     backgroundVideo?: BackgroundVideo
     overlayColor?: string
     overlayOpacity?: number
-    ctaPrimary?: { label?: string }
-    ctaSecondary?: { label?: string }
+    ctaPrimary?: CTA
+    ctaSecondary?: CTA
     backgroundColor?: string
     backgroundGradient?: {
       type?: string
@@ -42,7 +43,9 @@ type Props = {
 
 export default function Hero({ block }: Props) {
   const markSrc = block.markImage?.asset
-    ? urlFor(block.markImage).height(92).url()
+    ? block.markWidth
+      ? urlFor(block.markImage).width(Math.round(block.markWidth * 2)).url()
+      : urlFor(block.markImage).height(92).url()
     : null
 
   const s: Record<string, string> = {}
@@ -71,6 +74,7 @@ export default function Hero({ block }: Props) {
     preload(backgroundUrl, { as: 'image', fetchPriority: 'high' })
   }
 
+  if (block.markWidth) s['--hero-mark-w'] = block.markWidth + 'px'
   if (block.eyebrowColor) s['--hero-eyebrow-color'] = block.eyebrowColor
   if (block.eyebrowFontSize) s['--hero-eyebrow-size'] = block.eyebrowFontSize + 'px'
   if (block.headlineColor) s['--hero-headline'] = block.headlineColor
@@ -128,8 +132,8 @@ export default function Hero({ block }: Props) {
             <p className={styles.sub}>{block.subheadline}</p>
           )}
           <HeroCTAs
-            primaryLabel={block.ctaPrimary?.label}
-            secondaryLabel={block.ctaSecondary?.label}
+            primary={block.ctaPrimary}
+            secondary={block.ctaSecondary}
           />
         </div>
       </div>

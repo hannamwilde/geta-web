@@ -52,18 +52,13 @@ type Props = { data: NavData | null };
 
 export default function Nav({ data }: Props) {
   const { theme } = useNavTheme();
-  const [scrolled, setScrolled] = useState(false);
   const [overMozaik, setOverMozaik] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  // Tracked separately from `openMenu`: that one is closed by an outside-click
+  // listener, which would fire on taps inside the mobile panel.
+  const [openMobileItem, setOpenMobileItem] = useState<string | null>(null);
   const barRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     if (theme === "purple") {
@@ -113,11 +108,60 @@ export default function Nav({ data }: Props) {
   const items = data?.menuItems || [];
   const rightLinks = data?.rightLinks || [];
 
+  // Desktop and mobile render the action links identically — same icons, same
+  // markup — so they can't drift. `onDone` lets the mobile panel close itself.
+  const renderAction = (link: RightLink, i: number, onDone?: () => void) => {
+    const key = link._key || i;
+    if (link.action === "openContact" || link.action === "openBook") {
+      const open = link.action === "openContact" ? openContact : openBook;
+      return (
+        <button
+          key={key}
+          className={styles.cta}
+          onClick={() => {
+            onDone?.();
+            open();
+          }}
+        >
+          {link.label}
+          <Icon name="arrow-right" size={14} stroke={2} />
+        </button>
+      );
+    }
+    return (
+      <a
+        key={key}
+        href={normalizeHref(resolveHref(link.linkType, link.href, link.pageRef))}
+        className={link.style === "cta" ? styles.cta : styles.shop}
+        {...(link.external ? { target: "_blank", rel: "noreferrer" } : {})}
+        onClick={onDone}
+      >
+        {link.style !== "cta" && (
+          <img
+            src="/assets/shopify-icon.png"
+            alt=""
+            className={styles.shopIcon}
+            aria-hidden
+          />
+        )}
+        <span>{link.label}</span>
+        {link.style === "cta" && (
+          <Icon name="arrow-right" size={14} stroke={2} />
+        )}
+      </a>
+    );
+  };
+
+  const closeMobile = () => {
+    setMobileOpen(false);
+    setOpenMobileItem(null);
+  };
+
   const isPurple = theme === "purple" || overMozaik;
 
   return (
     <header
-      className={`${styles.nav}${scrolled ? " " + styles.scrolled : ""}${isPurple ? " " + styles.overMozaik : ""}`}
+      className={`${styles.nav}${isPurple ? " " + styles.overMozaik : ""}`}
     >
       <div className={`container ${styles.inner}`}>
         {/* Desktop bar */}
@@ -201,132 +245,90 @@ export default function Nav({ data }: Props) {
           </nav>
 
           <div className={styles.actions}>
-            {rightLinks.map((link, i) => {
-              if (link.action === "openContact")
-                return (
-                  <button
-                    key={link._key || i}
-                    className={styles.cta}
-                    onClick={openContact}
-                  >
-                    {link.label}
-                    <Icon name="arrow-right" size={14} stroke={2} />
-                  </button>
-                );
-              if (link.action === "openBook")
-                return (
-                  <button
-                    key={link._key || i}
-                    className={styles.cta}
-                    onClick={openBook}
-                  >
-                    {link.label}
-                    <Icon name="arrow-right" size={14} stroke={2} />
-                  </button>
-                );
-              return (
-                <a
-                  key={link._key || i}
-                  href={normalizeHref(resolveHref(link.linkType, link.href, link.pageRef))}
-                  className={link.style === "cta" ? styles.cta : styles.shop}
-                  {...(link.external
-                    ? { target: "_blank", rel: "noreferrer" }
-                    : {})}
-                >
-                  {link.style !== "cta" && (
-                    <img
-                      src="/assets/shopify-icon.png"
-                      alt=""
-                      className={styles.shopIcon}
-                      aria-hidden
-                    />
-                  )}
-                  <span>{link.label}</span>
-                  {link.style === "cta" && (
-                    <Icon name="arrow-right" size={14} stroke={2} />
-                  )}
-                </a>
-              );
-            })}
+            {rightLinks.map((link, i) => renderAction(link, i))}
           </div>
         </div>
 
-        {/* Mobile */}
-        <a
-          href="/"
-          className={`${styles.logo} show-mobile`}
-          aria-label="Geta Digital home"
-        >
-          <img
-            src="/assets/geta-logo-white.png"
-            alt="Geta"
-            width={512}
-            height={157}
-            style={{ display: "block", height: 22, width: "auto" }}
-          />
-        </a>
-        <button
-          className={`${styles.burger} show-mobile`}
-          onClick={() => setMobileOpen((o) => !o)}
-          aria-label="Menu"
-        >
-          <Icon name={mobileOpen ? "close" : "menu"} size={24} />
-        </button>
+        {/* Mobile — same bar treatment as the desktop nav */}
+        <div className={`${styles.mobileBar} show-mobile`}>
+          <a href="/" className={styles.logo} aria-label="Geta Digital home">
+            <img
+              src="/assets/geta-logo-white.png"
+              alt="Geta"
+              width={512}
+              height={157}
+              style={{ display: "block", height: 22, width: "auto" }}
+            />
+          </a>
+          <button
+            className={styles.burger}
+            onClick={() => {
+              setMobileOpen((o) => !o);
+              setOpenMobileItem(null);
+            }}
+            aria-label="Menu"
+          >
+            <Icon name={mobileOpen ? "close" : "menu"} size={24} />
+          </button>
+        </div>
       </div>
 
       {mobileOpen && (
         <div className={`${styles.mobile} show-mobile`}>
-          {items.map((it) => (
-            <a
-              key={it._key}
-              href={normalizeHref(resolveHref(it.linkType, it.href, it.pageRef))}
-              className={styles.mobileLink}
-              onClick={() => setMobileOpen(false)}
-            >
-              {it.label}
-            </a>
-          ))}
-          {rightLinks.map((link, i) => {
-            if (link.action === "openContact")
+          {items.map((it) => {
+            // Mobile flattens the desktop mega columns into one stacked list.
+            const subLinks = (it.megaColumns || []).flatMap((c) => c.links || []);
+            if (!subLinks.length) {
               return (
-                <button
-                  key={link._key || i}
-                  className="btn btn-primary"
-                  onClick={() => {
-                    setMobileOpen(false);
-                    openContact();
-                  }}
+                <a
+                  key={it._key}
+                  href={normalizeHref(resolveHref(it.linkType, it.href, it.pageRef))}
+                  className={styles.mobileLink}
+                  onClick={closeMobile}
                 >
-                  {link.label}
-                </button>
+                  {it.label}
+                </a>
               );
-            if (link.action === "openBook")
-              return (
-                <button
-                  key={link._key || i}
-                  className="btn btn-primary"
-                  onClick={() => {
-                    setMobileOpen(false);
-                    openBook();
-                  }}
-                >
-                  {link.label}
-                </button>
-              );
+            }
+            const open = openMobileItem === it._key;
             return (
-              <a
-                key={link._key || i}
-                href={normalizeHref(resolveHref(link.linkType, link.href, link.pageRef))}
-                className={styles.mobileLink}
-                {...(link.external
-                  ? { target: "_blank", rel: "noreferrer" }
-                  : {})}
-                onClick={() => setMobileOpen(false)}
-              >
-                {link.label}
-              </a>
+              <div key={it._key} className={styles.mobileGroup}>
+                <button
+                  className={`${styles.mobileLink} ${styles.mobileParent}${open ? " " + styles.mobileParentOpen : ""}`}
+                  onClick={() => setOpenMobileItem(open ? null : it._key)}
+                  aria-expanded={open}
+                >
+                  {it.label}
+                  <Icon name="chevron-down" size={18} stroke={1.8} />
+                </button>
+                {open && (
+                  <div className={styles.mobileSub}>
+                    {subLinks.map((link) => (
+                      <a
+                        key={link._key}
+                        href={normalizeHref(resolveHref(link.linkType, link.href, link.pageRef))}
+                        className={styles.mobileSubLink}
+                        onClick={closeMobile}
+                        {...(link.external
+                          ? { target: "_blank", rel: "noreferrer" }
+                          : {})}
+                      >
+                        <span>{link.label}</span>
+                        {link.external && (
+                          <Icon name="arrow-up-right" size={14} stroke={1.6} />
+                        )}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
             );
           })}
+          <div className={styles.mobileActions}>
+            {rightLinks.map((link, i) =>
+              renderAction(link, i, closeMobile),
+            )}
+          </div>
         </div>
       )}
     </header>
