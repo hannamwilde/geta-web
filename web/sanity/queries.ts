@@ -6,7 +6,7 @@ const SECTIONS = `
     eyebrow, headline, subheadline, tagline, intro, body,
     quote, author, companyRole,
     alignment, textAlignment, contentLayout,
-    backgroundColor, backgroundGradient { type, from, to, angle, position }, textColor, iconColor,
+    backgroundColor, backgroundGradient { type, from, to, angle, position }, textColor, iconColor, iconBackgroundColor,
     eyebrowStyle, eyebrowColor, eyebrowFontSize,
     headlineColor, headlineFontSize,
     paddingTop, paddingBottom, borderRadius, itemTextColor,

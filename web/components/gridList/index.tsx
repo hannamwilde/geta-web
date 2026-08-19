@@ -25,6 +25,8 @@ type Props = {
     headlineColor?: string
     headlineFontSize?: number
     itemTextColor?: string
+    iconBackgroundColor?: string
+    iconColor?: string
   }
 }
 
@@ -47,6 +49,10 @@ export default function GridList({ block }: Props) {
     ...(block.headlineFontSize ? { fontSize: block.headlineFontSize + 'px' } : {}),
   }
   const nameStyle: React.CSSProperties = block.itemTextColor ? { color: block.itemTextColor } : {}
+  const iconWrapStyle: React.CSSProperties = {
+    ...(block.iconBackgroundColor ? { background: block.iconBackgroundColor } : {}),
+    ...(block.iconColor ? { color: block.iconColor } : {}),
+  }
 
   return (
     <section className={styles.section} style={sectionStyle}>
@@ -64,7 +70,7 @@ export default function GridList({ block }: Props) {
             <article key={item._key} className={styles.row}>
               <div className={styles.nameCell}>
                 {item.icon && (
-                  <span className={styles.iconWrap}>
+                  <span className={styles.iconWrap} style={iconWrapStyle}>
                     <Icon name={item.icon} size={24} stroke={1.7} />
                   </span>
                 )}
