@@ -30,7 +30,7 @@ const SECTIONS = `
     apps[]{ _key, name, body, icon },
     archItems[]{ _key, icon, iconBackgroundColor, title, body, backgroundColor, textColor, iconColor, points[] },
     items[]{
-      _key, title, body, href, linkType, pageRef->{ slug }, linkLabel, icon,
+      _key, title, body, href, linkType, pageRef->{ slug }, linkLabel, icon, piece,
       visualType, imageSize,
       image { asset, alt, crop, hotspot },
       width, titleFontSize,

@@ -1,0 +1,26 @@
+.mark {
+  position: relative;
+  display: inline-block;
+  vertical-align: -0.06em;
+  width: clamp(52px, 5.6vw, 82px);
+  aspect-ratio: 1.122;
+  margin-right: 0.12em;
+  z-index: 2;
+
+  .piece {
+    position: absolute;
+    object-fit: contain;
+    opacity: 0.06;
+    transform-origin: 50% 50%;
+    will-change: transform, opacity;
+    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.45));
+  }
+
+  /* Without the scroll animation the mark simply sits assembled. */
+  @media (prefers-reduced-motion: reduce) {
+    .piece {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}

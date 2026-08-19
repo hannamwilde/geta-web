@@ -8,6 +8,8 @@ import ListBlock from "@/components/listBlock";
 import LinkBlock from "@/components/linkBlock";
 import BannerBlock from "@/components/bannerBlock";
 import ImageSlider from "@/components/imageSlider";
+import MozaikServices from "@/components/mozaikServices";
+import MozaikPropsHeading from "@/components/mozaikPropsHeading";
 import TrustBar from "@/components/trustBar";
 import ContactBanner from "@/components/contactBanner";
 import Services from "@/components/services";
@@ -62,6 +64,10 @@ function renderBlock(
       return <Cases key={block._key} block={block} cases={cases} />;
     case "mozaikSection":
       return <Mozaik key={block._key} block={block} />;
+    case "mozaikServicesSection":
+      return <MozaikServices key={block._key} block={block} />;
+    case "mozaikPropsHeading":
+      return <MozaikPropsHeading key={block._key} block={block} />;
     case "eventsSection":
       return (
         <Events
