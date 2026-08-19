@@ -33,28 +33,28 @@
   transition:
     background 0.4s ease,
     border-color 0.4s ease;
+
+  .overMozaik & {
+    background: #171a3b;
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    color: var(--paper);
+    margin-right: 18px;
+  }
 }
 
-/* Mobile bar: logo left, burger hard right — no CTA to make room for. */
-.mobileBar {
-  justify-content: space-between;
-  padding: 7px 10px 7px 16px;
-}
-.mobileBar .logo {
-  margin-right: 0;
-}
-
-.overMozaik .bar,
-.overMozaik .mobileBar {
-  background: #171a3b;
-  border-color: rgba(255, 255, 255, 0.18);
-}
-
-.logo {
-  display: inline-flex;
-  align-items: center;
-  color: var(--paper);
-  margin-right: 18px;
+.bar {
+  .actions {
+    flex-shrink: 0;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
 }
 
 .links {
@@ -62,34 +62,36 @@
   align-items: center;
   gap: 2px;
   position: relative;
+
+  .linkWrap {
+    position: relative;
+
+    .link {
+      padding: 8px 13px;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.82);
+      border-radius: var(--r-pill);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition:
+        background 0.15s,
+        color 0.15s;
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      &:hover,
+      &.linkOpen {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--paper);
+      }
+    }
+  }
 }
 
-.linkWrap {
-  position: relative;
-}
-
-.link {
-  padding: 8px 13px;
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.82);
-  border-radius: var(--r-pill);
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  transition:
-    background 0.15s,
-    color 0.15s;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-.link:hover,
-.linkOpen {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--paper);
-}
-
+/* Mega menu panel, rendered inside the open .linkWrap. */
 .mega {
   position: absolute;
   top: calc(100% + 8px);
@@ -101,60 +103,73 @@
   padding: 20px;
   min-width: calc(var(--mega-cols, 2) * 230px);
   z-index: 60;
+
+  .megaGrid {
+    display: grid;
+    grid-template-columns: repeat(var(--mega-cols, 2), 1fr);
+    gap: 8px 24px;
+  }
+
+  .megaCol {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .megaItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-radius: var(--r-sm);
+    font-size: 14.5px;
+    color: var(--ink);
+    transition: background 0.15s;
+
+    &:hover {
+      background: var(--cream);
+    }
+
+    &.megaItemHighlight {
+      span {
+        font-weight: 700;
+        background: linear-gradient(
+          105deg,
+          #8b7df7 0%,
+          #a78bfa 42%,
+          #c77df0 78%,
+          #e0a9f5 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      &:hover {
+        background: rgba(139, 125, 247, 0.1);
+        color: inherit;
+      }
+    }
+  }
 }
 
-.megaGrid {
-  display: grid;
-  grid-template-columns: repeat(var(--mega-cols, 2), 1fr);
-  gap: 8px 24px;
-}
-
-.megaCol {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.megaItem {
-  display: flex;
-  align-items: center;
+/* Mobile bar: logo left, burger hard right — no CTA to make room for. */
+.mobileBar {
   justify-content: space-between;
-  padding: 8px 10px;
-  border-radius: var(--r-sm);
-  font-size: 14.5px;
-  color: var(--ink);
-  transition: background 0.15s;
-}
-.megaItem:hover {
-  background: var(--cream);
+  padding: 7px 10px 7px 16px;
+
+  .logo {
+    margin-right: 0;
+  }
+
+  .burger {
+    padding: 6px;
+    border-radius: var(--r-sm);
+    color: var(--paper);
+  }
 }
 
-.megaItemHighlight span {
-  font-weight: 700;
-  background: linear-gradient(
-    105deg,
-    #8b7df7 0%,
-    #a78bfa 42%,
-    #c77df0 78%,
-    #e0a9f5 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.megaItemHighlight:hover {
-  background: rgba(139, 125, 247, 0.1);
-  color: inherit;
-}
-
-.actions {
-  flex-shrink: 0;
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
+/* Action links are rendered into both .actions and .mobileActions. */
 .shop {
   display: inline-flex;
   align-items: center;
@@ -170,17 +185,18 @@
   transition:
     background 0.15s ease,
     color 0.15s ease;
-}
-.shop:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-}
 
-.shopIcon {
-  width: 17px;
-  height: 17px;
-  object-fit: contain;
-  display: block;
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+
+  .shopIcon {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    display: block;
+  }
 }
 
 .cta {
@@ -196,15 +212,10 @@
   transition: background 0.15s;
   border: none;
   cursor: pointer;
-}
-.cta:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
 
-.burger {
-  padding: 6px;
-  border-radius: var(--r-sm);
-  color: var(--paper);
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
 }
 
 /* Floating panel: dark like the bar above it, but borrowing the mega menu's
@@ -219,80 +230,87 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--r-lg);
   box-shadow: var(--shadow-float);
-}
 
-.mobileLink {
-  padding: 14px 4px;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--paper);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
+  .mobileLink {
+    padding: 14px 4px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--paper);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
 
-/* An expandable item and its sub-list count as one entry, so the rule sits on
-   the group and the parent button drops its own. */
-.mobileGroup {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-.mobileGroup .mobileLink {
-  border-bottom: none;
-}
+  /* An expandable item and its sub-list count as one entry, so the rule sits on
+     the group and the parent button drops its own. */
+  .mobileGroup {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 
-/* Parent row: label left, chevron hard right, flipping when expanded. */
-.mobileParent {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  width: 100%;
-  text-align: left;
-}
-.mobileParent svg {
-  flex-shrink: 0;
-  opacity: 0.65;
-  transition:
-    transform 0.25s ease,
-    opacity 0.25s ease;
-}
-.mobileParentOpen svg {
-  transform: rotate(180deg);
-  opacity: 1;
-}
+    .mobileLink {
+      border-bottom: none;
+    }
 
-/* Sub-items, indented under their parent. */
-.mobileSub {
-  display: flex;
-  flex-direction: column;
-  padding: 0 0 10px 14px;
-}
-.mobileSubLink {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 10px 4px;
-  font-size: 15px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.72);
-  transition: color 0.15s ease;
-}
-.mobileSubLink:hover {
-  color: var(--paper);
-}
-/* Action links reuse the desktop markup (icon + arrow), laid out inline at the
-   foot of the panel. Colours come from .shop/.cta as-is — the panel is dark, so
-   only the sizing needs bumping for touch. */
-.mobileActions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 12px;
-  padding-top: 0;
-}
-.mobileActions .shop,
-.mobileActions .cta {
-  font-size: 15px;
-  padding: 11px 14px;
+    /* Parent row: label left, chevron hard right, flipping when expanded. */
+    .mobileParent {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      text-align: left;
+
+      svg {
+        flex-shrink: 0;
+        opacity: 0.65;
+        transition:
+          transform 0.25s ease,
+          opacity 0.25s ease;
+      }
+
+      &.mobileParentOpen svg {
+        transform: rotate(180deg);
+        opacity: 1;
+      }
+    }
+
+    /* Sub-items, indented under their parent. */
+    .mobileSub {
+      display: flex;
+      flex-direction: column;
+      padding: 0 0 10px 14px;
+
+      .mobileSubLink {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 10px 4px;
+        font-size: 15px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.72);
+        transition: color 0.15s ease;
+
+        &:hover {
+          color: var(--paper);
+        }
+      }
+    }
+  }
+
+  /* Action links reuse the desktop markup (icon + arrow), laid out inline at the
+     foot of the panel. Colours come from .shop/.cta as-is — the panel is dark, so
+     only the sizing needs bumping for touch. */
+  .mobileActions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+    padding-top: 0;
+
+    .shop,
+    .cta {
+      font-size: 15px;
+      padding: 11px 14px;
+    }
+  }
 }
