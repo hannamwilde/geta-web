@@ -5,6 +5,7 @@
 - Use ES modules (import/export) syntax, not CommonJS (require)
 - Destructure imports when possible (eg. import { foo } from 'bar')
 - Keep comments short, max 1-2 lines
+- Use css nesting
 
 # Workflow
 

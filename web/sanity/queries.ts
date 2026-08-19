@@ -49,6 +49,13 @@ const SECTIONS = `
     cta { label, href },
     components[]{ _key, label, description, icon, logo { asset, alt } },
     upcomingLabel, upcomingWebinarLabel, pastLabel, pastWebinarLabel, registerLabel,
+    autoplay, autoplayInterval, showArrows, showDots, minHeight,
+    ctaBackground, ctaTextColor, ctaHoverBackground, ctaHoverTextColor,
+    slides[]{
+      _key, title, text,
+      backgroundImage { asset, alt, crop, hotspot },
+      cta { label, action, href, linkType, pageRef->{ slug } }
+    },
   }
 `
 

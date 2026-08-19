@@ -7,6 +7,7 @@ import BulletListBlock from "@/components/bulletListBlock";
 import ListBlock from "@/components/listBlock";
 import LinkBlock from "@/components/linkBlock";
 import BannerBlock from "@/components/bannerBlock";
+import ImageSlider from "@/components/imageSlider";
 import TrustBar from "@/components/trustBar";
 import ContactBanner from "@/components/contactBanner";
 import Services from "@/components/services";
@@ -49,6 +50,8 @@ function renderBlock(
       return <LinkBlock key={block._key} block={block} />;
     case "bannerBlock":
       return <BannerBlock key={block._key} block={block} />;
+    case "imageSliderBlock":
+      return <ImageSlider key={block._key} block={block} />;
     case "trustBarSection":
       return <TrustBar key={block._key} block={block} />;
     case "contactBannerSection":

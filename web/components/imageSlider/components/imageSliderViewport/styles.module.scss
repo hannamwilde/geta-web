@@ -1,0 +1,76 @@
+.viewport {
+  position: relative;
+
+  .track {
+    display: flex;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+  }
+
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: clamp(44px, 4.4vw, 60px);
+    aspect-ratio: 1;
+    border-radius: var(--r-pill);
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--ink);
+    box-shadow: var(--shadow-card);
+    transition: background 0.18s ease, transform 0.18s ease;
+
+    &:hover {
+      background: var(--paper);
+      transform: translateY(-50%) scale(1.06);
+    }
+
+    &.prev {
+      left: clamp(8px, 1.6vw, 28px);
+    }
+
+    &.next {
+      right: clamp(8px, 1.6vw, 28px);
+    }
+
+    /* Phones swipe the track instead — the arrows would sit on top of the copy. */
+    @media (max-width: 760px) {
+      display: none;
+    }
+  }
+
+  .dots {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: clamp(20px, 3vw, 36px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: var(--r-pill);
+    background: rgba(21, 21, 21, 0.25);
+    backdrop-filter: blur(6px);
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.45);
+      transition: background 0.18s ease, transform 0.18s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.75);
+      }
+
+      &[aria-current] {
+        background: var(--paper);
+        transform: scale(1.25);
+      }
+    }
+  }
+}
