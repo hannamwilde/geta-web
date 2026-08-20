@@ -14,7 +14,7 @@ const SECTIONS = `
     visualType, icon, statValue, statLabel,
     backgroundImage { asset, alt, crop, hotspot },
     backgroundVideo { asset->{ url, mimeType } },
-    overlayColor, overlayOpacity,
+    overlayColor, overlayOpacity, overlayGradient { type, from, to, angle, position },
     sideImage { asset, alt, crop, hotspot },
     sideImagePosition,
     photo { asset, alt, crop, hotspot },

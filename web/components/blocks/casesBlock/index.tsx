@@ -1,6 +1,6 @@
 import { urlFor } from "@/sanity/client";
 import { fetchTranslations } from "@/lib/translations/server";
-import { resolveBackground } from "@/lib/background";
+import { resolveBackground, type BackgroundImage } from "@/lib/background";
 import CasesBlockCTA from "./components/casesBlockCta";
 import styles from "./styles.module.scss";
 import { resolveBorder, type Border } from "@/lib/border";
@@ -18,6 +18,7 @@ type CaseItem = {
 
 type Props = {
   block: {
+    backgroundImage?: BackgroundImage;
     border?: Border;
     title?: string;
     lede?: string;
@@ -106,7 +107,7 @@ export default async function CasesBlock({ block, cases }: Props) {
   const t = await fetchTranslations();
   if (!cases || cases.length === 0) return null;
 
-  const bg = resolveBackground(block.backgroundColor, block.backgroundGradient);
+  const bg = resolveBackground(block.backgroundColor, block.backgroundGradient, block.backgroundImage);
   const sectionStyle: React.CSSProperties = {
     ...(Object.keys(bg).length ? bg : {}),
     ...resolveBorder(block.border),

@@ -1,5 +1,5 @@
 import Icon from '@/components/ui/icon'
-import { resolveBackground } from '@/lib/background'
+import { resolveBackground, type BackgroundImage } from '@/lib/background'
 import styles from './styles.module.scss'
 import { resolveBorder, type Border } from '@/lib/border'
 
@@ -14,6 +14,7 @@ type Gradient = { type?: string; from?: string; to?: string; angle?: number; pos
 
 type Props = {
   block: {
+    backgroundImage?: BackgroundImage;
     border?: Border
     eyebrow?: string
     headline?: string
@@ -38,7 +39,7 @@ export default function GridListBlock({ block }: Props) {
   if (items.length === 0) return null
 
   const sectionStyle: React.CSSProperties = {
-    ...resolveBackground(block.backgroundColor, block.backgroundGradient),
+    ...resolveBackground(block.backgroundColor, block.backgroundGradient, block.backgroundImage),
     ...resolveBorder(block.border),
     ...(block.paddingTop != null ? { paddingTop: block.paddingTop + 'px' } : {}),
     ...(block.paddingBottom != null ? { paddingBottom: block.paddingBottom + 'px' } : {}),

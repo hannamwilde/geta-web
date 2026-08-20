@@ -1,4 +1,4 @@
-import { resolveBackground } from "@/lib/background";
+import { resolveBackground, type BackgroundImage } from "@/lib/background";
 import AccordionBlockList, {
   type AccordionItem,
 } from "./components/accordionBlockList";
@@ -15,6 +15,7 @@ type Gradient = {
 
 type Props = {
   block: {
+    backgroundImage?: BackgroundImage;
     border?: Border;
     eyebrow?: string;
     headline?: string;
@@ -71,7 +72,7 @@ export default function AccordionBlock({ block }: Props) {
   if (items.length === 0) return null;
 
   const sectionStyle: React.CSSProperties = {
-    ...resolveBackground(block.backgroundColor, block.backgroundGradient),
+    ...resolveBackground(block.backgroundColor, block.backgroundGradient, block.backgroundImage),
     ...resolveBorder(block.border),
     ...(block.paddingTop != null ? { paddingTop: block.paddingTop + "px" } : {}),
     ...(block.paddingBottom != null

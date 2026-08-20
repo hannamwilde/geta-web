@@ -1,5 +1,5 @@
 import Icon from '@/components/ui/icon'
-import { resolveBackground } from '@/lib/background'
+import { resolveBackground, type BackgroundImage } from '@/lib/background'
 import styles from './styles.module.scss'
 import { resolveBorder, type Border } from '@/lib/border'
 
@@ -17,6 +17,7 @@ type ArchItem = {
 
 type Props = {
   block: {
+    backgroundImage?: BackgroundImage;
     border?: Border
     eyebrow?: string
     headline?: string
@@ -36,7 +37,7 @@ export default function BulletListBlock({ block }: Props) {
   if (items.length === 0) return null
 
   const sectionStyle: React.CSSProperties = {
-    ...resolveBackground(block.backgroundColor, block.backgroundGradient),
+    ...resolveBackground(block.backgroundColor, block.backgroundGradient, block.backgroundImage),
     ...resolveBorder(block.border),
     ...(block.borderRadius != null ? { '--r-lg': block.borderRadius + 'px', '--r-xl': block.borderRadius + 'px' } as React.CSSProperties : {}),
   }

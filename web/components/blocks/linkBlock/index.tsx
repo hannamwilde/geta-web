@@ -1,5 +1,6 @@
 import { urlFor } from "@/sanity/client";
 import { normalizeHref } from "@/lib/href";
+import { resolveBackground, type BackgroundImage } from "@/lib/background";
 import { resolveHref } from "@/lib/resolveHref";
 import Icon from "@/components/ui/icon";
 import styles from "./styles.module.scss";
@@ -19,6 +20,7 @@ type LinkItem = {
 
 type Props = {
   block: {
+    backgroundImage?: BackgroundImage;
     border?: Border;
     title?: string;
     links?: LinkItem[];
@@ -44,16 +46,9 @@ type Props = {
 };
 
 export default function LinkBlock({ block }: Props) {
-  const s: React.CSSProperties = {};
-  if (block.backgroundGradient?.from && block.backgroundGradient?.to) {
-    const g = block.backgroundGradient;
-    s.background =
-      g.type === "radial"
-        ? `radial-gradient(circle at ${g.position ?? "center"}, ${g.from}, ${g.to})`
-        : `linear-gradient(${g.angle ?? 135}deg, ${g.from}, ${g.to})`;
-  } else if (block.backgroundColor) {
-    s.backgroundColor = block.backgroundColor;
-  }
+  const s: React.CSSProperties = {
+    ...resolveBackground(block.backgroundColor, block.backgroundGradient, block.backgroundImage),
+  };
   if (block.paddingTop != null) s.paddingTop = block.paddingTop + "px";
   if (block.paddingBottom != null) s.paddingBottom = block.paddingBottom + "px";
   if (block.textColor)

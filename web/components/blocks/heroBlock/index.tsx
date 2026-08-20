@@ -1,6 +1,7 @@
 import { preload } from 'react-dom'
 import { urlFor } from '@/sanity/client'
 import BackgroundMedia, { type BackgroundVideo } from '@/components/ui/backgroundMedia'
+import type { Gradient } from '@/lib/background'
 import HeroBlockCTAs, { type CTA } from './components/heroBlockCtas'
 import styles from './styles.module.scss'
 import { resolveBorder, type Border } from '@/lib/border'
@@ -20,6 +21,7 @@ type Props = {
     backgroundImage?: { asset: unknown; alt?: string }
     backgroundVideo?: BackgroundVideo
     overlayColor?: string
+    overlayGradient?: Gradient
     overlayOpacity?: number
     ctaPrimary?: CTA
     ctaSecondary?: CTA
@@ -109,6 +111,7 @@ export default function HeroBlock({ block }: Props) {
         video={block.backgroundVideo}
         posterUrl={backgroundUrl}
         overlayColor={block.overlayColor}
+        overlayGradient={block.overlayGradient}
         overlayOpacity={block.overlayOpacity}
       />
       <div className={styles.container}>

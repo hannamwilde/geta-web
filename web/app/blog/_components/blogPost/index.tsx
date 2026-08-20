@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/client";
+import BlogPostBody from "./components/blogPostBody";
 import styles from "./styles.module.scss";
 
 type PostData = {
@@ -25,14 +25,21 @@ function formatDate(dateStr: string) {
 }
 
 export default function BlogPost({ post }: { post: PostData }) {
+  // Wide crop around the hotspot — the hero is a letterbox band, not a 1200x630 card.
   const coverUrl = post.coverImage?.asset
-    ? urlFor(post.coverImage).width(1200).height(630).url()
+    ? urlFor(post.coverImage).width(1920).height(900).url()
     : null;
 
   return (
     <div className={styles.page}>
-      <header className={styles.hero}>
-        <div className="container">
+      <header className={styles.hero} data-has-cover={coverUrl ? "true" : undefined}>
+        {coverUrl && (
+          <>
+            <img src={coverUrl} alt="" className={styles.coverMedia} fetchPriority="high" />
+            <div className={styles.overlay} aria-hidden />
+          </>
+        )}
+        <div className={`container ${styles.heroContent}`}>
           <nav className={styles.breadcrumb} aria-label="Brödsmulor">
             <Link href="/blog">← Blogg</Link>
           </nav>
@@ -64,23 +71,11 @@ export default function BlogPost({ post }: { post: PostData }) {
         </div>
       </header>
 
-      {coverUrl && (
-        <div className={styles.cover}>
-          <div className="container">
-            <img
-              src={coverUrl}
-              alt={post.coverImage?.alt || post.title}
-              className={styles.coverImage}
-            />
-          </div>
-        </div>
-      )}
-
       {post.body && post.body.length > 0 && (
         <article className={styles.body}>
           <div className="container">
             <div className={styles.prose}>
-              <PortableText value={post.body} />
+              <BlogPostBody value={post.body} />
             </div>
           </div>
         </article>

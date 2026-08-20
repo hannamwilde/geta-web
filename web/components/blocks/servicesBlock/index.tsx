@@ -1,5 +1,5 @@
 import { urlFor } from '@/sanity/client'
-import { resolveBackground } from '@/lib/background'
+import { resolveBackground, type BackgroundImage } from '@/lib/background'
 import { resolveHref } from '@/lib/resolveHref'
 import styles from './styles.module.scss'
 import { resolveBorder, type Border } from '@/lib/border'
@@ -17,6 +17,7 @@ type Pillar = {
 
 type Props = {
   block: {
+    backgroundImage?: BackgroundImage;
     border?: Border
     eyebrow?: string
     headline?: string
@@ -43,7 +44,7 @@ export default function ServicesBlock({ block }: Props) {
   const hasGradient = block.tagline && (block.taglineGradientFrom || block.taglineGradientTo)
 
   const sectionStyle = {
-    ...resolveBackground(block.backgroundColor, block.backgroundGradient),
+    ...resolveBackground(block.backgroundColor, block.backgroundGradient, block.backgroundImage),
     ...resolveBorder(block.border),
     ...(block.paddingTop != null ? { paddingTop: block.paddingTop + 'px' } : {}),
     ...(block.paddingBottom != null ? { paddingBottom: block.paddingBottom + 'px' } : {}),

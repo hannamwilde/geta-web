@@ -1,4 +1,4 @@
-import { resolveBackground } from "@/lib/background";
+import { resolveBackground, type BackgroundImage } from "@/lib/background";
 import styles from "./styles.module.scss";
 import { resolveBorder, type Border } from "@/lib/border";
 
@@ -19,6 +19,7 @@ type Gradient = {
 
 type Props = {
   block: {
+    backgroundImage?: BackgroundImage;
     border?: Border;
     headline?: string;
     subheadline?: string;
@@ -43,7 +44,7 @@ export default function MozaikServicesBlock({ block }: Props) {
   if (!items.length) return null;
 
   const sectionStyle: React.CSSProperties = {
-    ...resolveBackground(block.backgroundColor, block.backgroundGradient),
+    ...resolveBackground(block.backgroundColor, block.backgroundGradient, block.backgroundImage),
     ...resolveBorder(block.border),
     ...(block.paddingTop != null ? { paddingTop: block.paddingTop + "px" } : {}),
     ...(block.paddingBottom != null ? { paddingBottom: block.paddingBottom + "px" } : {}),

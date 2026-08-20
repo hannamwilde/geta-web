@@ -3,6 +3,7 @@ import Icon from "@/components/ui/icon";
 import BackgroundMedia, {
   type BackgroundVideo,
 } from "@/components/ui/backgroundMedia";
+import type { Gradient } from "@/lib/background";
 import BannerBlockCTAs from "./components/bannerBlockCtas";
 import styles from "./styles.module.scss";
 import { resolveBorder, type Border } from "@/lib/border";
@@ -45,6 +46,7 @@ type Props = {
     backgroundImage?: { asset: unknown; alt?: string };
     backgroundVideo?: BackgroundVideo;
     overlayColor?: string;
+    overlayGradient?: Gradient;
     overlayOpacity?: number;
     visualType?: string;
     photo?: { asset: unknown; alt?: string };
@@ -127,6 +129,7 @@ export default function BannerBlock({ block }: Props) {
         video={block.backgroundVideo}
         posterUrl={backgroundUrl}
         overlayColor={block.overlayColor}
+        overlayGradient={block.overlayGradient}
         overlayOpacity={block.overlayOpacity}
       />
       <div className="container">

@@ -2,7 +2,7 @@ import { urlFor } from "@/sanity/client";
 import { normalizeHref } from "@/lib/href";
 import { resolveHref } from "@/lib/resolveHref";
 import Icon from "@/components/ui/icon";
-import { resolveBackground } from "@/lib/background";
+import { resolveBackground, type BackgroundImage } from "@/lib/background";
 import styles from "./styles.module.scss";
 import { resolveBorder, type Border } from "@/lib/border";
 
@@ -29,6 +29,7 @@ type Item = {
 
 type Props = {
   block: {
+    backgroundImage?: BackgroundImage;
     border?: Border;
     eyebrow?: string;
     headline?: string;
@@ -50,7 +51,7 @@ type Props = {
 
 export default function ListBlock({ block }: Props) {
   const sectionStyle: React.CSSProperties = {
-    ...resolveBackground(block.backgroundColor, block.backgroundGradient),
+    ...resolveBackground(block.backgroundColor, block.backgroundGradient, block.backgroundImage),
     ...resolveBorder(block.border),
     ...(block.borderRadius != null ? { '--r-lg': block.borderRadius + 'px', '--r-xl': block.borderRadius + 'px' } as React.CSSProperties : {}),
   };

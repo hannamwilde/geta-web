@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { gradientCss, type Gradient } from '@/lib/background'
 import styles from './styles.module.scss'
 
 export type BackgroundVideo = {
@@ -12,6 +13,8 @@ type Props = {
   /** Poster frame — normally the section's background image, which also renders as the fallback. */
   posterUrl?: string | null
   overlayColor?: string
+  /** Wins over overlayColor when both stops are set, mirroring section backgrounds. */
+  overlayGradient?: Gradient
   overlayOpacity?: number
 }
 
@@ -26,6 +29,7 @@ export default function BackgroundMedia({
   video,
   posterUrl,
   overlayColor,
+  overlayGradient,
   overlayOpacity,
 }: Props) {
   const videoUrl = video?.asset?.url
@@ -40,8 +44,8 @@ export default function BackgroundMedia({
     return () => mq.removeEventListener('change', sync)
   }, [videoUrl])
 
-  const hasOverlay = Boolean(overlayColor)
-  if (!videoUrl && !hasOverlay) return null
+  const overlayBackground = gradientCss(overlayGradient) ?? overlayColor
+  if (!videoUrl && !overlayBackground) return null
 
   return (
     <div className={styles.media} aria-hidden>
@@ -58,11 +62,11 @@ export default function BackgroundMedia({
           <source src={videoUrl} type={video?.asset?.mimeType || 'video/mp4'} />
         </video>
       )}
-      {hasOverlay && (
+      {overlayBackground && (
         <div
           className={styles.overlay}
           style={{
-            background: overlayColor,
+            background: overlayBackground,
             opacity: (overlayOpacity ?? 45) / 100,
           }}
         />

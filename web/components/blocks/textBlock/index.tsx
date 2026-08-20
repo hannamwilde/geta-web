@@ -1,5 +1,5 @@
 import { urlFor } from '@/sanity/client'
-import { resolveBackground } from '@/lib/background'
+import { resolveBackground, type BackgroundImage } from '@/lib/background'
 import styles from './styles.module.scss'
 import { resolveBorder, type Border } from '@/lib/border'
 
@@ -15,7 +15,7 @@ type Props = {
     backgroundColor?: string
     backgroundGradient?: { type?: string; from?: string; to?: string; angle?: number; position?: string } | null
     textColor?: string
-    backgroundImage?: { asset: unknown; alt?: string }
+    backgroundImage?: BackgroundImage
     sideImage?: { asset: unknown; alt?: string }
     sideImagePosition?: string
     borderRadius?: number
@@ -23,13 +23,8 @@ type Props = {
 }
 
 export default function TextBlock({ block }: Props) {
-  const sectionStyle: React.CSSProperties = { ...resolveBackground(block.backgroundColor, block.backgroundGradient), ...resolveBorder(block.border) }
+  const sectionStyle: React.CSSProperties = { ...resolveBackground(block.backgroundColor, block.backgroundGradient, block.backgroundImage), ...resolveBorder(block.border) }
   if (block.textColor) sectionStyle.color = block.textColor
-  if (block.backgroundImage?.asset) {
-    sectionStyle.backgroundImage = `url(${urlFor(block.backgroundImage).width(1400).url()})`
-    sectionStyle.backgroundSize = 'cover'
-    sectionStyle.backgroundPosition = 'center'
-  }
   if (block.paddingTop != null) sectionStyle.paddingTop = block.paddingTop + 'px'
   if (block.paddingBottom != null) sectionStyle.paddingBottom = block.paddingBottom + 'px'
   if (block.borderRadius != null) { (sectionStyle as Record<string, string>)['--r-lg'] = block.borderRadius + 'px' }
