@@ -29,6 +29,16 @@ const SECTIONS = `
     ctaSecondaryColor, ctaSecondaryHoverBackground, ctaSecondaryHoverColor,
     apps[]{ _key, name, body, icon },
     archItems[]{ _key, icon, iconBackgroundColor, title, body, backgroundColor, textColor, iconColor, points[] },
+    introColor, introFontSize,
+    itemBackgroundColor, itemOpenBackgroundColor, itemBorderColor, itemOpenBorderColor,
+    numberBackgroundColor, numberColor,
+    questionColor, questionFontSize, answerColor, answerFontSize,
+    toggleColor, linkColor,
+    showNumbers, toggleIcon, openFirstItem, allowMultipleOpen,
+    accordionItems[]{
+      _key, question, answer,
+      cta { label, action, href, linkType, pageRef->{ slug } }
+    },
     items[]{
       _key, title, body, href, linkType, pageRef->{ slug }, linkLabel, icon, piece,
       visualType, imageSize,

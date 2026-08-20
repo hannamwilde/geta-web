@@ -3,6 +3,7 @@ import Events from "@/components/events";
 import GridList from "@/components/gridList";
 import TextBlock from "@/components/textBlock";
 import QuoteBlock from "@/components/quoteBlock";
+import AccordionBlock from "@/components/accordionBlock";
 import BulletListBlock from "@/components/bulletListBlock";
 import ListBlock from "@/components/listBlock";
 import LinkBlock from "@/components/linkBlock";
@@ -44,6 +45,8 @@ function renderBlock(
       return <TextBlock key={block._key} block={block} />;
     case "quoteBlock":
       return <QuoteBlock key={block._key} block={block} />;
+    case "accordionBlock":
+      return <AccordionBlock key={block._key} block={block} />;
     case "bulletListBlock":
       return <BulletListBlock key={block._key} block={block} />;
     case "listBlock":

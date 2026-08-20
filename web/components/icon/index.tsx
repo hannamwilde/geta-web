@@ -22,6 +22,8 @@ export default function Icon({ name, size = 20, stroke = 1.6, className = '', st
     case 'chevron-down': return <svg {...p}><path d="m6 9 6 6 6-6" /></svg>
     case 'chevron-left': return <svg {...p}><path d="m15 6-6 6 6 6" /></svg>
     case 'chevron-right': return <svg {...p}><path d="m9 6 6 6-6 6" /></svg>
+    case 'plus': return <svg {...p}><path d="M12 5v14M5 12h14" /></svg>
+    case 'minus': return <svg {...p}><path d="M5 12h14" /></svg>
     case 'check': return <svg {...p}><path d="m5 12 5 5L20 7" /></svg>
     case 'sparkle': return <svg {...p}><path d="M12 3v6M12 15v6M3 12h6M15 12h6M6.3 6.3l3 3M14.7 14.7l3 3M6.3 17.7l3-3M14.7 9.3l3-3" /></svg>
     case 'cart': return <svg {...p}><path d="M3 4h2l2.5 12h11l2-8H7" /><circle cx="9" cy="20" r="1.5" /><circle cx="18" cy="20" r="1.5" /></svg>
