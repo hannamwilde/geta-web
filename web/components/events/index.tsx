@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { urlFor } from "@/sanity/client";
 import styles from "./styles.module.scss";
+import { resolveBorder, type Border } from "@/lib/border";
 
 type EventItem = {
   _id: string;
@@ -17,6 +18,7 @@ type EventItem = {
 
 type Props = {
   block: {
+    border?: Border;
     upcomingLabel?: string;
     upcomingWebinarLabel?: string;
     upcomingSub?: string;
@@ -313,9 +315,12 @@ export default function Events({ block, upcoming, past }: Props) {
 
   const registerLabel = block.registerLabel || "";
 
-  const evStyle = block.borderRadius != null
-    ? { '--r-lg': block.borderRadius + 'px', '--r-xl': block.borderRadius + 'px' } as React.CSSProperties
-    : undefined
+  const evStyle: React.CSSProperties = {
+    ...(block.borderRadius != null
+      ? ({ '--r-lg': block.borderRadius + 'px', '--r-xl': block.borderRadius + 'px' } as React.CSSProperties)
+      : {}),
+    ...resolveBorder(block.border),
+  }
 
   return (
     <div className={styles.evPage} style={evStyle}>

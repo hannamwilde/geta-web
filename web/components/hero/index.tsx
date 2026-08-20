@@ -3,9 +3,11 @@ import { urlFor } from '@/sanity/client'
 import BackgroundMedia, { type BackgroundVideo } from '@/components/backgroundMedia'
 import HeroCTAs, { type CTA } from './components/heroCtas'
 import styles from './styles.module.scss'
+import { resolveBorder, type Border } from '@/lib/border'
 
 type Props = {
   block: {
+    border?: Border
     eyebrow?: string
     eyebrowStyle?: string
     eyebrowColor?: string
@@ -98,7 +100,7 @@ export default function Hero({ block }: Props) {
     <section
       className={`${styles.hero} hero-section`}
       id="top"
-      style={s as React.CSSProperties}
+      style={{ ...(s as React.CSSProperties), ...resolveBorder(block.border) }}
       data-align={block.alignment || 'left'}
       data-text-align={block.textAlignment || block.alignment || 'left'}
       data-has-media={hasMedia ? 'true' : undefined}

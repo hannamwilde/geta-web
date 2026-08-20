@@ -10,6 +10,7 @@ const SECTIONS = `
     eyebrowStyle, eyebrowColor, eyebrowFontSize,
     headlineColor, headlineFontSize,
     paddingTop, paddingBottom, borderRadius, itemTextColor,
+    border { top, bottom, color, width },
     visualType, icon, statValue, statLabel,
     backgroundImage { asset, alt, crop, hotspot },
     backgroundVideo { asset->{ url, mimeType } },

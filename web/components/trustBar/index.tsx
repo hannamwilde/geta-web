@@ -2,6 +2,7 @@ import { urlFor } from '@/sanity/client'
 import { resolveBackground } from '@/lib/background'
 import { assetDimensions } from '@/lib/imageDimensions'
 import styles from './styles.module.scss'
+import { resolveBorder, type Border } from '@/lib/border'
 
 type Logo = {
   _id: string
@@ -13,6 +14,7 @@ type Logo = {
 
 type Props = {
   block?: {
+    border?: Border
     logos?: Logo[]
     backgroundColor?: string
     backgroundGradient?: { type?: string; from?: string; to?: string; angle?: number; position?: string } | null
@@ -46,7 +48,7 @@ function getLogoSize(item: Logo) {
 export default function TrustBar({ block }: Props) {
   const logos = (block?.logos && block.logos.length > 0) ? block.logos : FALLBACK
   const row = [...logos, ...logos]
-  const bg = resolveBackground(block?.backgroundColor, block?.backgroundGradient)
+  const bg = { ...resolveBackground(block?.backgroundColor, block?.backgroundGradient), ...resolveBorder(block?.border) }
 
   return (
     <section className={styles.marquee} style={Object.keys(bg).length ? bg : undefined} aria-label="Kunder som litar på Geta">

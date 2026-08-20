@@ -4,6 +4,7 @@ import { resolveHref } from "@/lib/resolveHref";
 import Icon from "@/components/icon";
 import { resolveBackground } from "@/lib/background";
 import styles from "./styles.module.scss";
+import { resolveBorder, type Border } from "@/lib/border";
 
 type PageRef = { slug?: { current?: string } } | null
 type Item = {
@@ -28,6 +29,7 @@ type Item = {
 
 type Props = {
   block: {
+    border?: Border;
     eyebrow?: string;
     headline?: string;
     subheadline?: string;
@@ -49,6 +51,7 @@ type Props = {
 export default function ListBlock({ block }: Props) {
   const sectionStyle: React.CSSProperties = {
     ...resolveBackground(block.backgroundColor, block.backgroundGradient),
+    ...resolveBorder(block.border),
     ...(block.borderRadius != null ? { '--r-lg': block.borderRadius + 'px', '--r-xl': block.borderRadius + 'px' } as React.CSSProperties : {}),
   };
 

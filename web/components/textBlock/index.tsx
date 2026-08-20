@@ -1,9 +1,11 @@
 import { urlFor } from '@/sanity/client'
 import { resolveBackground } from '@/lib/background'
 import styles from './styles.module.scss'
+import { resolveBorder, type Border } from '@/lib/border'
 
 type Props = {
   block: {
+    border?: Border
     headline?: string
     body?: string
     alignment?: string
@@ -21,7 +23,7 @@ type Props = {
 }
 
 export default function TextBlock({ block }: Props) {
-  const sectionStyle: React.CSSProperties = { ...resolveBackground(block.backgroundColor, block.backgroundGradient) }
+  const sectionStyle: React.CSSProperties = { ...resolveBackground(block.backgroundColor, block.backgroundGradient), ...resolveBorder(block.border) }
   if (block.textColor) sectionStyle.color = block.textColor
   if (block.backgroundImage?.asset) {
     sectionStyle.backgroundImage = `url(${urlFor(block.backgroundImage).width(1400).url()})`

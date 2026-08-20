@@ -5,11 +5,13 @@ import BackgroundMedia, {
 } from "@/components/backgroundMedia";
 import BannerBlockCTAs from "./components/bannerBlockCtas";
 import styles from "./styles.module.scss";
+import { resolveBorder, type Border } from "@/lib/border";
 
 type CTA = { label?: string; action?: string; href?: string };
 
 type Props = {
   block: {
+    border?: Border;
     eyebrow?: string;
     headline?: string;
     tagline?: string;
@@ -116,7 +118,7 @@ export default function BannerBlock({ block }: Props) {
   return (
     <section
       className={`${styles.hero} banner-block`}
-      style={s as React.CSSProperties}
+      style={{ ...(s as React.CSSProperties), ...resolveBorder(block.border) }}
       data-align={block.alignment || "left"}
       data-text-align={block.textAlignment || block.alignment || "left"}
       data-layout={block.contentLayout || "stacked"}

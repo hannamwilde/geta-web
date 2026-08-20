@@ -3,6 +3,7 @@ import { normalizeHref } from "@/lib/href";
 import { resolveHref } from "@/lib/resolveHref";
 import Icon from "@/components/icon";
 import styles from "./styles.module.scss";
+import { resolveBorder, type Border } from "@/lib/border";
 
 type PageRef = { slug?: { current?: string } } | null
 type LinkItem = {
@@ -18,6 +19,7 @@ type LinkItem = {
 
 type Props = {
   block: {
+    border?: Border;
     title?: string;
     links?: LinkItem[];
     backgroundColor?: string;
@@ -74,7 +76,7 @@ export default function LinkBlock({ block }: Props) {
   return (
     <section
       className={styles.section}
-      style={fullWidth ? { ...s, ...borderStyle } : s}
+      style={{ ...resolveBorder(block.border), ...(fullWidth ? { ...s, ...borderStyle } : s) }}
       data-align={block.alignment || "left"}
     >
       <div className={styles.container}>

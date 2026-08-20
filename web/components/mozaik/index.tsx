@@ -4,6 +4,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { urlFor } from "@/sanity/client";
 import Icon from "@/components/icon";
 import styles from "./styles.module.scss";
+import { resolveBorder, type Border } from "@/lib/border";
 
 type Component = {
   _key: string;
@@ -15,6 +16,7 @@ type Component = {
 
 type Props = {
   block: {
+    border?: Border;
     headline?: string;
     subheadline?: string;
     backgroundImage?: { asset: unknown; alt?: string };
@@ -182,7 +184,7 @@ export default function Mozaik({ block }: Props) {
   const hubShrink = 1 - ctaProg * 0.32;
 
   return (
-    <section className={styles.mz} id="mozaik">
+    <section className={styles.mz} id="mozaik" style={resolveBorder(block.border)}>
       {/* 300vh scroll track (desktop) */}
       <div className={styles.track} ref={trackRef}>
         <div className={styles.stage}>

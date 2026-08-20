@@ -3,6 +3,7 @@ import AccordionBlockList, {
   type AccordionItem,
 } from "./components/accordionBlockList";
 import styles from "./styles.module.scss";
+import { resolveBorder, type Border } from "@/lib/border";
 
 type Gradient = {
   type?: string;
@@ -14,6 +15,7 @@ type Gradient = {
 
 type Props = {
   block: {
+    border?: Border;
     eyebrow?: string;
     headline?: string;
     intro?: string;
@@ -70,6 +72,7 @@ export default function AccordionBlock({ block }: Props) {
 
   const sectionStyle: React.CSSProperties = {
     ...resolveBackground(block.backgroundColor, block.backgroundGradient),
+    ...resolveBorder(block.border),
     ...(block.paddingTop != null ? { paddingTop: block.paddingTop + "px" } : {}),
     ...(block.paddingBottom != null
       ? { paddingBottom: block.paddingBottom + "px" }

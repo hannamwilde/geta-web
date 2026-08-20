@@ -2,6 +2,7 @@ import { urlFor } from "@/sanity/client";
 import ImageSliderViewport from "./components/imageSliderViewport";
 import ImageSliderCta, { type CTA } from "./components/imageSliderCta";
 import styles from "./styles.module.scss";
+import { resolveBorder, type Border } from "@/lib/border";
 
 type SanityImage = { asset: unknown; alt?: string };
 
@@ -15,6 +16,7 @@ type Slide = {
 
 type Props = {
   block: {
+    border?: Border;
     slides?: Slide[];
     overlayColor?: string;
     overlayOpacity?: number;
@@ -58,7 +60,7 @@ export default function ImageSlider({ block }: Props) {
   return (
     <section
       className={styles.slider}
-      style={s as React.CSSProperties}
+      style={{ ...(s as React.CSSProperties), ...resolveBorder(block.border) }}
       data-align={block.alignment || "left"}
       data-text-align={block.textAlignment || block.alignment || "left"}
     >

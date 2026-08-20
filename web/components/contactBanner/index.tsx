@@ -3,9 +3,11 @@ import { fetchTranslations } from "@/lib/translations/server";
 import { resolveBackground } from "@/lib/background";
 import ContactBannerCta from "./components/contactBannerCta";
 import styles from "./styles.module.scss";
+import { resolveBorder, type Border } from "@/lib/border";
 
 type Props = {
   block: {
+    border?: Border;
     headline?: string;
     subheadline?: string;
     cta?: { label?: string; href?: string };
@@ -37,10 +39,10 @@ export default async function ContactBanner({ block }: Props) {
   const t = await fetchTranslations();
   const ctaLabel = block.cta?.label || t.general.contact;
 
-  const sectionStyle = resolveBackground(
-    block.backgroundColor,
-    block.backgroundGradient,
-  );
+  const sectionStyle: React.CSSProperties = {
+    ...resolveBackground(block.backgroundColor, block.backgroundGradient),
+    ...resolveBorder(block.border),
+  };
   const titleStyle: React.CSSProperties = block.headlineColor
     ? { color: block.headlineColor }
     : {};

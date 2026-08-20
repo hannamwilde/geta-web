@@ -3,6 +3,7 @@ import { fetchTranslations } from "@/lib/translations/server";
 import { resolveBackground } from "@/lib/background";
 import CasesCTA from "./components/casesCta";
 import styles from "./styles.module.scss";
+import { resolveBorder, type Border } from "@/lib/border";
 
 type Testimonial = { quote?: string; person?: string; role?: string };
 type CaseItem = {
@@ -17,6 +18,7 @@ type CaseItem = {
 
 type Props = {
   block: {
+    border?: Border;
     title?: string;
     lede?: string;
     ctaText?: string;
@@ -107,6 +109,7 @@ export default async function Cases({ block, cases }: Props) {
   const bg = resolveBackground(block.backgroundColor, block.backgroundGradient);
   const sectionStyle: React.CSSProperties = {
     ...(Object.keys(bg).length ? bg : {}),
+    ...resolveBorder(block.border),
     ...(block.borderRadius != null
       ? ({
           "--r-lg": block.borderRadius + "px",

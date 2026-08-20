@@ -1,8 +1,10 @@
 import { resolveBackground } from '@/lib/background'
 import styles from './styles.module.scss'
+import { resolveBorder, type Border } from '@/lib/border'
 
 type Props = {
   block: {
+    border?: Border
     quote?: string
     author?: string
     companyRole?: string
@@ -16,7 +18,7 @@ type Props = {
 }
 
 export default function QuoteBlock({ block }: Props) {
-  const style: React.CSSProperties = { ...resolveBackground(block.backgroundColor, block.backgroundGradient) }
+  const style: React.CSSProperties = { ...resolveBackground(block.backgroundColor, block.backgroundGradient), ...resolveBorder(block.border) }
   if (block.textColor) style.color = block.textColor
   if (block.paddingTop != null) style.paddingTop = block.paddingTop + 'px'
   if (block.paddingBottom != null) style.paddingBottom = block.paddingBottom + 'px'

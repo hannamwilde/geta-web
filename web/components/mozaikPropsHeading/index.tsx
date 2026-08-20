@@ -1,6 +1,7 @@
 import MozaikAssembledMark from "@/components/mozaikAssembledMark";
 import { resolveBackground } from "@/lib/background";
 import styles from "./styles.module.scss";
+import { resolveBorder, type Border } from "@/lib/border";
 
 type Gradient = {
   type?: string;
@@ -12,6 +13,7 @@ type Gradient = {
 
 type Props = {
   block: {
+    border?: Border;
     headline?: string;
     subheadline?: string;
     backgroundColor?: string;
@@ -38,6 +40,7 @@ export default function MozaikPropsHeading({ block }: Props) {
 
   const sectionStyle: React.CSSProperties = {
     ...resolveBackground(block.backgroundColor, block.backgroundGradient),
+    ...resolveBorder(block.border),
     ...(block.paddingTop != null ? { paddingTop: block.paddingTop + "px" } : {}),
     ...(block.paddingBottom != null ? { paddingBottom: block.paddingBottom + "px" } : {}),
   };
