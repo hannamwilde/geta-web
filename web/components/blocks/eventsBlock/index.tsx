@@ -189,7 +189,7 @@ function UpcomingCard({
             </a>
           )}
           {item.slug && (
-            <Link href={`/evenemang/${item.slug}`} className={styles.detailsBtn}>
+            <Link href={`/events/${item.slug}`} className={styles.detailsBtn}>
               Läs mer
               <IconArrowRight />
             </Link>
@@ -238,7 +238,7 @@ function PastCard({ item }: { item: EventItem }) {
 
   if (item.slug) {
     return (
-      <Link href={`/evenemang/${item.slug}`} className={styles.pastCard}>
+      <Link href={`/events/${item.slug}`} className={styles.pastCard}>
         {inner}
       </Link>
     );
@@ -317,10 +317,13 @@ export default function EventsBlock({ block, upcoming, past }: Props) {
 
   const evStyle: React.CSSProperties = {
     ...(block.borderRadius != null
-      ? ({ '--r-lg': block.borderRadius + 'px', '--r-xl': block.borderRadius + 'px' } as React.CSSProperties)
+      ? ({
+          "--r-lg": block.borderRadius + "px",
+          "--r-xl": block.borderRadius + "px",
+        } as React.CSSProperties)
       : {}),
     ...resolveBorder(block.border),
-  }
+  };
 
   return (
     <div className={styles.evPage} style={evStyle}>
@@ -340,10 +343,7 @@ export default function EventsBlock({ block, upcoming, past }: Props) {
         sub={block.pastSub}
         items={pastEvents}
       />
-      <PastSection
-        title={block.pastWebinarLabel || ""}
-        items={pastWebinars}
-      />
+      <PastSection title={block.pastWebinarLabel || ""} items={pastWebinars} />
     </div>
   );
 }

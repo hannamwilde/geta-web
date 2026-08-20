@@ -34,27 +34,31 @@ export default function BlogPost({ post }: { post: PostData }) {
       <header className={styles.hero}>
         <div className="container">
           <nav className={styles.breadcrumb} aria-label="Brödsmulor">
-            <Link href="/blogg">← Blogg</Link>
+            <Link href="/blog">← Blogg</Link>
           </nav>
 
           {post.tags && post.tags.length > 0 && (
             <div className={styles.tags}>
               {post.tags.map((tag) => (
-                <span key={tag} className={styles.tag}>{tag}</span>
+                <span key={tag} className={styles.tag}>
+                  {tag}
+                </span>
               ))}
             </div>
           )}
 
           <h1 className={styles.title}>{post.title}</h1>
 
-          {post.excerpt && (
-            <p className={styles.excerpt}>{post.excerpt}</p>
-          )}
+          {post.excerpt && <p className={styles.excerpt}>{post.excerpt}</p>}
 
           <div className={styles.meta}>
-            {post.author && <span className={styles.author}>{post.author}</span>}
+            {post.author && (
+              <span className={styles.author}>{post.author}</span>
+            )}
             {post.publishedAt && (
-              <span className={styles.date}>{formatDate(post.publishedAt)}</span>
+              <span className={styles.date}>
+                {formatDate(post.publishedAt)}
+              </span>
             )}
           </div>
         </div>
@@ -84,7 +88,9 @@ export default function BlogPost({ post }: { post: PostData }) {
 
       <div className={styles.back}>
         <div className="container">
-          <Link href="/blogg" className={styles.backLink}>← Alla inlägg</Link>
+          <Link href="/blog" className={styles.backLink}>
+            ← Alla inlägg
+          </Link>
         </div>
       </div>
     </div>

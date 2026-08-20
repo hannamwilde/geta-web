@@ -22,10 +22,16 @@ function formatDate(dateStr: string) {
 }
 
 function pageHref(page: number) {
-  return page === 1 ? "/blogg" : `/blogg?page=${page}`;
+  return page === 1 ? "/blog" : `/blog?page=${page}`;
 }
 
-function Pagination({ page, totalPages }: { page: number; totalPages: number }) {
+function Pagination({
+  page,
+  totalPages,
+}: {
+  page: number;
+  totalPages: number;
+}) {
   if (totalPages <= 1) return null;
 
   // Build the page number list with ellipsis
@@ -56,7 +62,9 @@ function Pagination({ page, totalPages }: { page: number; totalPages: number }) 
 
       {pages.map((p, i) =>
         p === "…" ? (
-          <span key={`ellipsis-${i}`} className={styles.pageEllipsis}>…</span>
+          <span key={`ellipsis-${i}`} className={styles.pageEllipsis}>
+            …
+          </span>
         ) : (
           <Link
             key={p}
@@ -66,7 +74,7 @@ function Pagination({ page, totalPages }: { page: number; totalPages: number }) 
           >
             {p}
           </Link>
-        )
+        ),
       )}
 
       <Link
@@ -116,7 +124,7 @@ export default function BlogList({
                   return (
                     <Link
                       key={post._id}
-                      href={`/blogg/${post.slug}`}
+                      href={`/blog/${post.slug}`}
                       className={styles.card}
                     >
                       {imgUrl && (
@@ -131,7 +139,9 @@ export default function BlogList({
                         {post.tags && post.tags.length > 0 && (
                           <div className={styles.tags}>
                             {post.tags.map((tag) => (
-                              <span key={tag} className={styles.tag}>{tag}</span>
+                              <span key={tag} className={styles.tag}>
+                                {tag}
+                              </span>
                             ))}
                           </div>
                         )}

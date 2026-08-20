@@ -3,7 +3,9 @@
    Translated from design: styles-pim-webinar.css
    ================================================ */
 
-.page { background: #2E2E2E; }
+.page {
+  background: #2e2e2e;
+}
 
 /* ── Hero ──────────────────────────────────────────────────────── */
 .hero {
@@ -20,8 +22,12 @@
     inset: 0;
     pointer-events: none;
     background-image:
-      radial-gradient(120% 80% at 92% 0%, rgba(255,255,255,0.07), transparent 56%),
-      radial-gradient(70% 70% at 0% 100%, rgba(0,0,0,0.22), transparent 60%);
+      radial-gradient(
+        120% 80% at 92% 0%,
+        rgba(255, 255, 255, 0.07),
+        transparent 56%
+      ),
+      radial-gradient(70% 70% at 0% 100%, rgba(0, 0, 0, 0.22), transparent 60%);
   }
 
   .heroInner {
@@ -56,7 +62,6 @@
     }
   }
 }
-
 
 .heroGrid {
   display: grid;
@@ -109,7 +114,7 @@
     margin: clamp(20px, 2.4vw, 28px) 0 0;
     font-size: clamp(16px, 1.4vw, 19px);
     line-height: 1.55;
-    color: rgba(255,255,255,0.82);
+    color: rgba(255, 255, 255, 0.82);
     max-width: 56ch;
   }
 
@@ -133,7 +138,9 @@
       transition: background 0.15s ease;
       white-space: nowrap;
 
-      &:hover { background: var(--cream); }
+      &:hover {
+        background: var(--cream);
+      }
     }
 
     .btnOutline {
@@ -141,12 +148,15 @@
       align-items: center;
       padding: 13px 24px;
       color: var(--paper);
-      border: 1.5px solid rgba(255,255,255,0.4);
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
       font-family: var(--font-display);
       font-size: 15px;
       font-weight: 600;
       border-radius: var(--r-pill);
-      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+      transition:
+        background 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease;
       white-space: nowrap;
 
       &:hover {
@@ -162,8 +172,8 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.16);
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: var(--r-lg);
     padding: clamp(20px, 2.4vw, 30px);
 
@@ -172,9 +182,11 @@
       flex-direction: column;
       gap: 3px;
       padding: 14px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 
-      &:last-child { border-bottom: none; }
+      &:last-child {
+        border-bottom: none;
+      }
 
       .factLabel {
         font-size: 12px;
@@ -189,7 +201,7 @@
         font-weight: 700;
         font-size: clamp(18px, 1.7vw, 22px);
         letter-spacing: -0.01em;
-        color: #FFFFFF;
+        color: #ffffff;
         text-transform: capitalize;
       }
     }
@@ -198,12 +210,12 @@
 
 /* ── Image band ────────────────────────────────────────────────── */
 .band {
-  background: #2E2E2E;
+  background: #2e2e2e;
   padding: clamp(28px, 4vw, 56px) 0 0;
 
   .bandImage {
     display: block;
-    width: min(1080px, calc(100% - 48px));
+    width: 100%;
     margin: 0 auto;
     height: clamp(260px, 36vw, 480px);
     border-radius: 18px;
@@ -214,7 +226,7 @@
 /* ── Shared section styles ─────────────────────────────────────── */
 .section {
   padding-top: clamp(56px, 7vw, 100px);
-  background: #2E2E2E;
+  background: #2e2e2e;
 }
 
 /* Used under both .secHead and .twoColHead, so these stay at the root. */
@@ -234,7 +246,7 @@
   font-size: clamp(28px, 3.6vw, 46px);
   line-height: 1.04;
   letter-spacing: -0.035em;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0;
   text-wrap: balance;
 }
@@ -243,14 +255,14 @@
   margin: 14px 0 0;
   font-size: clamp(16px, 1.3vw, 18px);
   line-height: 1.55;
-  color: rgba(255,255,255,0.72);
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .secBody {
   margin: 18px 0 0;
   font-size: clamp(16px, 1.3vw, 18px);
   line-height: 1.6;
-  color: rgba(255,255,255,0.82);
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .secHead {
@@ -265,10 +277,15 @@
   gap: clamp(32px, 6vw, 88px);
   align-items: start;
 
-  @media (max-width: 860px) { grid-template-columns: 1fr; gap: 28px; }
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
 
   .twoColHead {
-    .secTitle { font-size: clamp(26px, 2.8vw, 38px); }
+    .secTitle {
+      font-size: clamp(26px, 2.8vw, 38px);
+    }
   }
 
   .takeaways {
@@ -288,8 +305,10 @@
       padding: clamp(18px, 2vw, 24px) clamp(20px, 2.2vw, 26px);
       font-size: clamp(15px, 1.2vw, 17px);
       line-height: 1.5;
-      color: #FFFFFF;
-      transition: transform 0.3s cubic-bezier(0.2,0.7,0.2,1), background 0.3s ease;
+      color: #ffffff;
+      transition:
+        transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+        background 0.3s ease;
 
       &:hover {
         transform: translateX(4px);
@@ -304,7 +323,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba(255,255,255,0.14);
+        background: rgba(255, 255, 255, 0.14);
         color: var(--blue);
         margin-top: 1px;
       }
@@ -318,7 +337,9 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 
-  @media (max-width: 720px) { grid-template-columns: 1fr; }
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+  }
 
   .agendaItem {
     display: flex;
@@ -327,19 +348,24 @@
     background: var(--forest);
     border-radius: var(--r-lg);
     padding: clamp(22px, 2.4vw, 30px);
-    transition: transform 0.3s cubic-bezier(0.2,0.7,0.2,1), background 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+      background 0.3s ease,
+      box-shadow 0.3s ease;
 
     &:hover {
       transform: translateY(-4px);
       background: var(--forest-soft);
-      box-shadow: 0 24px 48px -26px rgba(0,0,0,0.6);
+      box-shadow: 0 24px 48px -26px rgba(0, 0, 0, 0.6);
     }
 
     /* last odd item spans full width */
     &:last-child:nth-child(odd) {
       grid-column: 1 / -1;
 
-      @media (max-width: 720px) { grid-column: auto; }
+      @media (max-width: 720px) {
+        grid-column: auto;
+      }
     }
 
     .agendaNum {
@@ -356,7 +382,7 @@
       font-weight: 700;
       font-size: clamp(18px, 1.7vw, 23px);
       letter-spacing: -0.02em;
-      color: #FFFFFF;
+      color: #ffffff;
       margin: 0 0 5px;
       text-wrap: balance;
     }
@@ -364,7 +390,7 @@
     .agendaSub {
       font-size: 14.5px;
       line-height: 1.5;
-      color: rgba(255,255,255,0.78);
+      color: rgba(255, 255, 255, 0.78);
       margin: 0;
     }
   }
@@ -387,7 +413,9 @@
     border-radius: var(--r-lg);
     padding: clamp(24px, 3vw, 44px);
 
-    @media (max-width: 720px) { grid-template-columns: 1fr; }
+    @media (max-width: 720px) {
+      grid-template-columns: 1fr;
+    }
   }
 
   .speakerNoPhoto {
@@ -414,7 +442,7 @@
     font-weight: 700;
     font-size: clamp(24px, 2.6vw, 34px);
     letter-spacing: -0.03em;
-    color: #FFFFFF;
+    color: #ffffff;
     margin: 0;
   }
 
@@ -431,7 +459,7 @@
   .speakerBio {
     font-size: clamp(15px, 1.2vw, 17px);
     line-height: 1.6;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255, 255, 255, 0.85);
     margin: 0;
     max-width: 60ch;
   }
@@ -456,7 +484,7 @@
       font-size: clamp(28px, 3.4vw, 46px);
       line-height: 1.04;
       letter-spacing: -0.03em;
-      color: #FFFFFF;
+      color: #ffffff;
       margin: 0;
     }
 
@@ -464,7 +492,7 @@
       margin: 14px 0 0;
       font-size: clamp(15px, 1.2vw, 18px);
       line-height: 1.5;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.8);
       max-width: 50ch;
     }
 
@@ -487,26 +515,31 @@
         transition: background 0.15s ease;
         white-space: nowrap;
 
-        &:hover { background: var(--cream); }
+        &:hover {
+          background: var(--cream);
+        }
       }
 
       .btnGhost {
         display: inline-flex;
         align-items: center;
         padding: 13px 24px;
-        color: #FFFFFF;
-        border: 1px solid rgba(255,255,255,0.4);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.4);
         font-family: var(--font-display);
         font-size: 15px;
         font-weight: 600;
         border-radius: var(--r-pill);
-        transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+        transition:
+          background 0.15s ease,
+          color 0.15s ease,
+          border-color 0.15s ease;
         white-space: nowrap;
 
         &:hover {
-          background: #FFFFFF;
+          background: #ffffff;
           color: var(--forest);
-          border-color: #FFFFFF;
+          border-color: #ffffff;
         }
       }
     }
