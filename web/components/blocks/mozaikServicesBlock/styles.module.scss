@@ -18,7 +18,7 @@
     max-width: 22ch;
     margin: 0 auto;
     font-weight: 700;
-    font-size: clamp(28px, 3.6vw, 46px);
+    font-size: var(--fs-h2);
     line-height: 1.04;
     letter-spacing: -0.035em;
     color: #fff;
@@ -27,7 +27,7 @@
 
   .sub {
     margin: 14px auto 0;
-    font-size: clamp(16px, 1.3vw, 18px);
+    font-size: var(--fs-subtitle);
     line-height: 1.55;
     color: var(--mzs-text, rgba(255, 255, 255, 0.72));
   }
@@ -81,7 +81,7 @@
 
   .name {
     font-weight: 700;
-    font-size: clamp(16px, 1.4vw, 19px);
+    font-size: var(--fs-h4);
     letter-spacing: -0.02em;
     color: var(--mzs-name, #fff);
   }

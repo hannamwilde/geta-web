@@ -23,7 +23,7 @@
   }
 
   .headline {
-    font-size: clamp(32px, 4.4vw, 60px);
+    font-size: var(--fs-h2);
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1.05;
@@ -33,7 +33,7 @@
   }
 
   .intro {
-    font-size: clamp(16px, 1.3vw, 19px);
+    font-size: var(--fs-subtitle);
     line-height: 1.55;
     color: rgba(255, 255, 255, 0.62);
     margin: 20px 0 0;

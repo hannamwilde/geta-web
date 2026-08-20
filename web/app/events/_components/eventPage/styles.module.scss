@@ -93,7 +93,7 @@
   .heroTitle {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(40px, 6vw, 84px);
+    font-size: var(--fs-h1);
     line-height: 0.96;
     letter-spacing: -0.04em;
     margin: 0;
@@ -103,7 +103,7 @@
   .heroSub {
     font-family: var(--font-display);
     font-weight: 500;
-    font-size: clamp(20px, 2.2vw, 30px);
+    font-size: var(--fs-h3);
     line-height: 1.12;
     letter-spacing: -0.02em;
     color: var(--blue);
@@ -112,7 +112,7 @@
 
   .heroLead {
     margin: clamp(20px, 2.4vw, 28px) 0 0;
-    font-size: clamp(16px, 1.4vw, 19px);
+    font-size: var(--fs-subtitle);
     line-height: 1.55;
     color: rgba(255, 255, 255, 0.82);
     max-width: 56ch;
@@ -199,7 +199,7 @@
       .factValue {
         font-family: var(--font-display);
         font-weight: 700;
-        font-size: clamp(18px, 1.7vw, 22px);
+        font-size: var(--fs-h4);
         letter-spacing: -0.01em;
         color: #ffffff;
         text-transform: capitalize;
@@ -243,7 +243,7 @@
 .secTitle {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(28px, 3.6vw, 46px);
+  font-size: var(--fs-h2);
   line-height: 1.04;
   letter-spacing: -0.035em;
   color: #ffffff;
@@ -253,14 +253,14 @@
 
 .secSub {
   margin: 14px 0 0;
-  font-size: clamp(16px, 1.3vw, 18px);
+  font-size: var(--fs-subtitle);
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.72);
 }
 
 .secBody {
   margin: 18px 0 0;
-  font-size: clamp(16px, 1.3vw, 18px);
+  font-size: var(--fs-subtitle);
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.82);
 }
@@ -284,7 +284,7 @@
 
   .twoColHead {
     .secTitle {
-      font-size: clamp(26px, 2.8vw, 38px);
+      font-size: var(--fs-h3);
     }
   }
 
@@ -380,7 +380,7 @@
     .agendaTitle {
       font-family: var(--font-display);
       font-weight: 700;
-      font-size: clamp(18px, 1.7vw, 23px);
+      font-size: var(--fs-h4);
       letter-spacing: -0.02em;
       color: #ffffff;
       margin: 0 0 5px;
@@ -440,7 +440,7 @@
   .speakerName {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(24px, 2.6vw, 34px);
+    font-size: var(--fs-h3);
     letter-spacing: -0.03em;
     color: #ffffff;
     margin: 0;
@@ -481,7 +481,7 @@
     .ctaTitle {
       font-family: var(--font-display);
       font-weight: 700;
-      font-size: clamp(28px, 3.4vw, 46px);
+      font-size: var(--fs-h2);
       line-height: 1.04;
       letter-spacing: -0.03em;
       color: #ffffff;

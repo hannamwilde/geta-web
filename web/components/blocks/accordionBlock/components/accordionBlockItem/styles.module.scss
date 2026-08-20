@@ -52,7 +52,7 @@
 
   .question {
     flex: 1;
-    font-size: var(--acc-question-size, clamp(17px, 1.5vw, 21px));
+    font-size: var(--acc-question-size, var(--fs-h4));
     font-weight: 700;
     letter-spacing: -0.015em;
     color: var(--acc-question-color, #fff);

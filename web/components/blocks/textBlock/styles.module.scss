@@ -26,13 +26,13 @@
 }
 
 .headline {
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-size: var(--fs-h2);
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
 .body {
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   line-height: 1.7;
   max-width: 680px;
 }

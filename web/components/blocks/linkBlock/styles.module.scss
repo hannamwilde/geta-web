@@ -21,7 +21,7 @@
 }
 
 .title {
-  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+  font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--lb-text, inherit);
   margin: clamp(16px, 2vw, 24px) 0;

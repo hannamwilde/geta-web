@@ -24,7 +24,7 @@
 
   .headline {
     font-weight: 700;
-    font-size: clamp(28px, 3.5vw, 46px);
+    font-size: var(--fs-h2);
     letter-spacing: -0.03em;
     line-height: 1.05;
     margin: 0;
@@ -63,7 +63,7 @@
 
   .cardTitle {
     font-weight: 700;
-    font-size: clamp(20px, 1.9vw, 26px);
+    font-size: var(--fs-h4);
     letter-spacing: -0.025em;
     color: #fff;
     margin: 0 0 12px;

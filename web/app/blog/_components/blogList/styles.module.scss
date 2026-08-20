@@ -14,7 +14,7 @@
   .heroTitle {
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(44px, 6vw, 84px);
+    font-size: var(--fs-h1);
     line-height: 0.97;
     letter-spacing: -0.04em;
     color: #ffffff;
@@ -22,7 +22,7 @@
   }
 
   .heroLead {
-    font-size: clamp(16px, 1.4vw, 19px);
+    font-size: var(--fs-subtitle);
     line-height: 1.55;
     color: rgba(255, 255, 255, 0.78);
     margin: 0;
@@ -106,7 +106,7 @@
     .cardTitle {
       font-family: var(--font-display);
       font-weight: 700;
-      font-size: clamp(18px, 1.6vw, 22px);
+      font-size: var(--fs-h4);
       line-height: 1.15;
       letter-spacing: -0.025em;
       color: var(--ink);

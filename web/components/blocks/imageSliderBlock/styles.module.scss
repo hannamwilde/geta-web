@@ -57,7 +57,7 @@
   .title {
     margin: 0;
     font-weight: 700;
-    font-size: var(--slider-title-size, clamp(32px, 5.6vw, 84px));
+    font-size: var(--slider-title-size, var(--fs-h1));
     line-height: 1.02;
     letter-spacing: -0.035em;
     color: var(--slider-title, var(--paper));
@@ -69,7 +69,7 @@
 
   .text {
     margin: 24px 0 0;
-    font-size: clamp(16px, 1.3vw, 20px);
+    font-size: var(--fs-subtitle);
     line-height: 1.6;
     color: var(--slider-text, rgba(255, 255, 255, 0.88));
     max-width: 640px;
