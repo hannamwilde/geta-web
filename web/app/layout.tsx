@@ -4,12 +4,12 @@ import "./globals.css";
 import { client } from "@/sanity/client";
 import { navQuery, footerQuery, modalsQuery } from "@/sanity/queries";
 import { fetchTranslations } from "@/lib/translations/server";
-import Nav from "@/components/nav";
-import Footer, { type FooterData } from "@/components/footer";
-import type { NavData } from "@/components/nav";
+import Nav from "@/components/layout/nav";
+import Footer, { type FooterData } from "@/components/layout/footer";
+import type { NavData } from "@/components/layout/nav";
 import { NavThemeProvider } from "@/context/NavThemeContext";
 import { ContactModalProvider } from "@/context/ContactModalContext";
-import ContactModal, { type ModalsData } from "@/components/contactModal";
+import ContactModal, { type ModalsData } from "@/components/layout/contactModal";
 
 const montserrat = Montserrat({
   subsets: ["latin"],

@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { client, urlFor } from '@/sanity/client'
 import { eventBySlugQuery, allEventSlugsQuery } from '@/sanity/queries'
-import EventPage from '@/components/eventPage'
-import NavThemeSetter from '@/components/navThemeSetter'
+import EventPage from '../_components/eventPage'
+import NavThemeSetter from '@/components/layout/navThemeSetter'
 
 export const revalidate = 30
 

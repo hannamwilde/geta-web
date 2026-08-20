@@ -3,7 +3,7 @@ import { client, urlFor } from '@/sanity/client'
 
 export const revalidate = 30
 import { homePageQuery, casesQuery } from '@/sanity/queries'
-import PageSections from '@/components/pageSections'
+import PageSections from '@/components/blocks/pageSections'
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await client.fetch(homePageQuery)

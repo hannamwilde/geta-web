@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { client } from '@/sanity/client'
 import { blogListQuery, blogCountQuery } from '@/sanity/queries'
-import BlogList from '@/components/blogList'
-import NavThemeSetter from '@/components/navThemeSetter'
+import BlogList from './_components/blogList'
+import NavThemeSetter from '@/components/layout/navThemeSetter'
 
 export const revalidate = 30
 

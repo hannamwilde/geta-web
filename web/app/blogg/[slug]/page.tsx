@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { client, urlFor } from '@/sanity/client'
 import { postBySlugQuery, allPostSlugsQuery } from '@/sanity/queries'
-import BlogPost from '@/components/blogPost'
-import NavThemeSetter from '@/components/navThemeSetter'
+import BlogPost from '../_components/blogPost'
+import NavThemeSetter from '@/components/layout/navThemeSetter'
 
 export const revalidate = 30
 
