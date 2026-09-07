@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useContactModal, type ModalType } from '@/context/ContactModalContext'
 import type { Translations } from '@/lib/translations'
 import { resolveSchedulingUrl } from '@/lib/googleCalendar'
+import { HONEYPOT_FIELD } from '@/lib/contactForm'
 import styles from './styles.module.scss'
 
 export type ModalsData = {
@@ -119,6 +120,18 @@ function Modal({ type, data, t, onClose }: { type: ModalType; data: ModalsData; 
             {subtitle && <p className={styles.lead}>{subtitle}</p>}
 
             <form className={styles.form} onSubmit={handleSubmit} noValidate>
+              {/* Decoy for bots: off-screen, unfocusable and never announced,
+                  so only automation fills it. The API discards those quietly. */}
+              <div className={styles.honeypot} aria-hidden="true">
+                <label htmlFor="cm-website">Leave this field empty</label>
+                <input
+                  id="cm-website"
+                  name={HONEYPOT_FIELD}
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
               <div className={styles.row}>
                 <div className={styles.field}>
                   <label className={styles.label} htmlFor="cm-name">{t.fieldName} *</label>
