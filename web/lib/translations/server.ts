@@ -9,6 +9,7 @@ function merge(base: Translations, override: DeepPartial<Translations> | null): 
   if (!override) return base
   return {
     general: { ...base.general, ...override.general },
+    errorPages: { ...base.errorPages, ...override.errorPages },
     modal: { ...base.modal, ...override.modal },
   }
 }

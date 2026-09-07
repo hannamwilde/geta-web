@@ -3,6 +3,16 @@ const sv = {
     readMore: "Läs mer",
     contact: "Kontakta oss",
   },
+  errorPages: {
+    notFoundTitle: "Sidan kunde inte hittas",
+    notFoundBody:
+      "Länken kan vara felstavad, eller så har sidan flyttat eller tagits bort.",
+    notFoundCta: "Till startsidan",
+    errorTitle: "Något gick fel",
+    errorBody:
+      "Ett oväntat fel uppstod. Försök igen — hjälper det inte hör gärna av dig.",
+    errorRetry: "Försök igen",
+  },
   modal: {
     close: "Stäng",
     errorMsg: "Något gick fel. Försök igen eller kontakta oss direkt.",

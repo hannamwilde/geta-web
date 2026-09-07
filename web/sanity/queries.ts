@@ -179,6 +179,10 @@ export const contactRecipientQuery = groq`
 export const translationsQuery = groq`
   *[_id == "translations"][0] {
     general { readMore, contact },
+    errorPages {
+      notFoundTitle, notFoundBody, notFoundCta,
+      errorTitle, errorBody, errorRetry
+    },
     modal {
       close, errorMsg, sending, successFallback,
       submit,
