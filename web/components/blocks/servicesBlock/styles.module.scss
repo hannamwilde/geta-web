@@ -1,7 +1,7 @@
 .section {
   position: relative;
   background: var(--forest);
-  padding: clamp(64px, 8vw, 118px) 0 clamp(56px, 6vw, 96px);
+  padding: clamp(var(--sp-2xl), 8vw, var(--sp-4xl)) 0 clamp(var(--sp-2xl), 6vw, var(--sp-3xl));
 }
 
 .inner {
@@ -28,7 +28,7 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: rgba(159, 208, 194, 0.9);
-    margin: 0 0 14px;
+    margin: 0 0 var(--sp-sm);
   }
 
   .title {
@@ -37,7 +37,7 @@
     line-height: 1.05;
     letter-spacing: -0.03em;
     color: var(--paper);
-    margin: 0 0 clamp(40px, 5vw, 68px);
+    margin: 0 0 clamp(var(--sp-xl), 5vw, var(--sp-2xl));
 
     .grad {
       background: linear-gradient(
@@ -55,7 +55,7 @@
 .grid {
   display: flex;
   align-items: stretch;
-  gap: clamp(16px, 1.8vw, 28px);
+  gap: clamp(var(--sp-sm), 1.8vw, var(--sp-lg));
 
   @media (max-width: 860px) {
     flex-direction: column;
@@ -87,7 +87,7 @@
 
         .cardCta {
           color: rgba(255, 255, 255, 0.9);
-          gap: 10px;
+          gap: var(--sp-xs);
         }
       }
     }
@@ -102,8 +102,8 @@
   align-items: center;
   text-align: center;
   min-height: clamp(450px, 40vw, 525px);
-  padding: clamp(16px, 1.2vw, 22px) clamp(16px, 1.2vw, 22px)
-    clamp(28px, 2.6vw, 38px);
+  padding: clamp(var(--sp-sm), 1.2vw, var(--sp-md)) clamp(var(--sp-sm), 1.2vw, var(--sp-md))
+    var(--sp-lg);
   border-radius: var(--r-lg);
   background: rgba(255, 255, 255, 0.085);
   border: 1px solid rgba(255, 255, 255, 0.16);
@@ -124,7 +124,7 @@
   .cardMedia {
     width: 100%;
     height: clamp(190px, 17vw, 250px);
-    margin-bottom: clamp(20px, 2vw, 28px);
+    margin-bottom: clamp(var(--sp-md), 2vw, var(--sp-lg));
     border-radius: calc(var(--r-lg) - 4px);
     overflow: hidden;
     flex-shrink: 0;
@@ -146,7 +146,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: clamp(16px, 1.6vw, 22px);
+    gap: clamp(var(--sp-sm), 1.6vw, var(--sp-md));
     width: 350px;
 
     .cardText {
@@ -157,7 +157,7 @@
         font-size: var(--fs-h4);
         letter-spacing: -0.01em;
         color: var(--paper);
-        margin: 0 0 clamp(14px, 1.4vw, 20px);
+        margin: 0 0 clamp(var(--sp-sm), 1.4vw, var(--sp-md));
       }
 
       .cardBody {
@@ -171,7 +171,7 @@
     .cardCta {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: var(--sp-2xs);
       font-size: 13px;
       font-weight: 600;
       letter-spacing: 0.04em;

@@ -12,15 +12,15 @@
   isolation: isolate;
   background: var(--forest);
   color: var(--paper);
-  padding-top: clamp(110px, 12vw, 160px);
-  padding-bottom: clamp(48px, 6vw, 72px);
+  padding-top: clamp(var(--sp-3xl), 12vw, var(--sp-4xl));
+  padding-bottom: clamp(var(--sp-xl), 6vw, var(--sp-2xl));
 
   /* With a cover image the hero becomes a letterbox band, content sitting at its foot. */
   &[data-has-cover="true"] {
     display: flex;
     align-items: flex-end;
     min-height: min(68vh, 560px);
-    padding-bottom: clamp(40px, 5vw, 64px);
+    padding-bottom: clamp(var(--sp-xl), 5vw, var(--sp-2xl));
   }
 
   .coverMedia {
@@ -52,7 +52,7 @@
     font-size: 13px;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.6);
-    margin-bottom: clamp(20px, 2.5vw, 32px);
+    margin-bottom: clamp(var(--sp-md), 2.5vw, var(--sp-lg));
     display: block;
 
     a {
@@ -68,8 +68,8 @@
   .tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 18px;
+    gap: var(--sp-2xs);
+    margin-bottom: var(--sp-sm);
 
     .tag {
       font-size: 11px;
@@ -78,7 +78,7 @@
       text-transform: uppercase;
       color: var(--forest);
       background: var(--blue);
-      padding: 5px 12px;
+      padding: var(--sp-3xs) var(--sp-xs);
       border-radius: var(--r-pill);
     }
   }
@@ -90,7 +90,7 @@
     line-height: 1;
     letter-spacing: -0.04em;
     color: #ffffff;
-    margin: 0 0 20px;
+    margin: 0 0 var(--sp-md);
     max-width: 18ch;
     text-wrap: balance;
   }
@@ -99,14 +99,14 @@
     font-size: var(--fs-subtitle);
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.78);
-    margin: 0 0 28px;
+    margin: 0 0 var(--sp-lg);
     max-width: 56ch;
   }
 
   .meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px 16px;
+    gap: var(--sp-2xs) var(--sp-sm);
     font-size: 14px;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.55);
@@ -224,7 +224,7 @@
 
 /* ── Back link ─────────────────────────────────────────────────── */
 .back {
-  padding: 0 0 clamp(48px, 6vw, 80px);
+  padding: 0 0 clamp(var(--sp-xl), 6vw, var(--sp-3xl));
 
   .backLink {
     font-size: 15px;
@@ -232,7 +232,7 @@
     color: var(--forest);
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--sp-2xs);
     transition: opacity 0.15s;
 
     &:hover {

@@ -2,8 +2,8 @@
   position: relative;
   background: var(--forest);
   color: var(--paper);
-  padding-top: clamp(128px, 14vw, 184px);
-  padding-bottom: clamp(56px, 7vw, 92px);
+  padding-top: var(--sp-4xl);
+  padding-bottom: clamp(var(--sp-2xl), 7vw, var(--sp-3xl));
   overflow: hidden;
 
   /* Keeps content above the background video/overlay layer. */
@@ -16,13 +16,13 @@
 .eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
+  gap: var(--sp-2xs);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--bb-text, rgba(255, 255, 255, 0.7));
-  margin-bottom: 18px;
+  margin-bottom: var(--sp-sm);
 
   .eyebrowDot {
     width: 7px;
@@ -48,11 +48,11 @@
   font-size: clamp(18px, 2vw, 26px);
   letter-spacing: -0.02em;
   color: var(--bb-tagline, var(--blue));
-  margin: 18px 0 0;
+  margin: var(--sp-sm) 0 0;
 }
 
 .intro {
-  margin: 22px 0 0;
+  margin: var(--sp-md) 0 0;
   font-size: var(--fs-subtitle);
   line-height: 1.62;
   color: var(--bb-text, rgba(255, 255, 255, 0.82));
@@ -62,8 +62,8 @@
 :global(.sp-hero-ctas) {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 34px;
+  gap: var(--sp-xs);
+  margin-top: var(--sp-lg);
 }
 
 :global(.banner-block .btn-primary) {
@@ -86,7 +86,7 @@
 .detailGrid {
   display: grid;
   grid-template-columns: 1.4fr 0.6fr;
-  gap: clamp(24px, 4vw, 64px);
+  gap: clamp(var(--sp-md), 4vw, var(--sp-2xl));
   align-items: center;
 
   @media (max-width: 880px) {
@@ -102,7 +102,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: var(--sp-md);
   aspect-ratio: 1 / 1;
   border-radius: var(--r-xl);
   background: rgba(255, 255, 255, 0.05);
@@ -140,7 +140,7 @@
     }
 
     .statLabel {
-      margin-top: 6px;
+      margin-top: var(--sp-2xs);
       font-size: 13px;
       color: rgba(255, 255, 255, 0.65);
       max-width: 18ch;
@@ -153,7 +153,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: clamp(24px, 4vw, 64px);
+  gap: clamp(var(--sp-md), 4vw, var(--sp-2xl));
   flex-wrap: wrap;
 }
 :global(.banner-block[data-layout="inline"] .bb-content-text) {

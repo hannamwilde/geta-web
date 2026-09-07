@@ -1,16 +1,16 @@
 .section {
-  padding: clamp(80px, 8vw, 128px) 0;
+  padding: clamp(var(--sp-3xl), 8vw, var(--sp-4xl)) 0;
 }
 
 .container {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 48px);
+  padding: 0 clamp(var(--sp-md), 4vw, var(--sp-xl));
 }
 
 .header {
   max-width: 760px;
-  margin-bottom: clamp(32px, 4vw, 56px);
+  margin-bottom: clamp(var(--sp-lg), 4vw, var(--sp-2xl));
 
   .eyebrow {
     display: block;
@@ -18,7 +18,7 @@
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: var(--sp-xs);
     color: rgba(255, 255, 255, 0.6);
   }
 
@@ -36,7 +36,7 @@
     font-size: var(--fs-subtitle);
     line-height: 1.55;
     color: rgba(255, 255, 255, 0.62);
-    margin: 20px 0 0;
+    margin: var(--sp-md) 0 0;
     max-width: 52ch;
   }
 }

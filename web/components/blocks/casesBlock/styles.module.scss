@@ -1,12 +1,12 @@
 .section {
   background: #f4efe5;
-  padding: 106px 0 80px;
+  padding: var(--sp-3xl) 0;
   overflow: hidden;
 }
 
 .head {
   max-width: 900px;
-  margin: 0 0 clamp(40px, 5vw, 68px);
+  margin: 0 0 clamp(var(--sp-xl), 5vw, var(--sp-2xl));
 
   .title {
     font-weight: 700;
@@ -18,7 +18,7 @@
   }
 
   .lede {
-    margin: 20px 0 0;
+    margin: var(--sp-md) 0 0;
     font-size: var(--fs-subtitle);
     line-height: 1.6;
     color: var(--ink-3);
@@ -29,7 +29,7 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(18px, 2vw, 30px);
+  gap: clamp(var(--sp-sm), 2vw, var(--sp-lg));
 
   @media (max-width: 940px) {
     grid-template-columns: 1fr;
@@ -60,7 +60,7 @@
       z-index: 2;
       display: inline-flex;
       align-items: center;
-      padding: 7px 13px;
+      padding: var(--sp-2xs) var(--sp-xs);
       border-radius: var(--r-pill);
       background: var(--forest);
       color: #fff;
@@ -75,18 +75,18 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding: clamp(22px, 2.2vw, 30px);
+    padding: clamp(var(--sp-md), 2.2vw, var(--sp-lg));
 
     .client {
       font-weight: 700;
       font-size: var(--fs-h3);
       letter-spacing: -0.025em;
       color: var(--ink);
-      margin: 0 0 12px;
+      margin: 0 0 var(--sp-xs);
     }
 
     .summary {
-      margin: 0 0 22px;
+      margin: 0 0 var(--sp-md);
       font-size: 15px;
       line-height: 1.58;
       color: var(--ink-3);
@@ -94,8 +94,8 @@
 
     .quote {
       position: relative;
-      margin: 0 0 20px;
-      padding: 4px 0 4px 20px;
+      margin: 0 0 var(--sp-md);
+      padding: var(--sp-3xs) 0 var(--sp-3xs) var(--sp-md);
       border-left: 3px solid var(--forest);
       font-weight: 600;
       font-size: clamp(15px, 1.15vw, 17px);
@@ -115,7 +115,7 @@
       display: flex;
       flex-direction: column;
       gap: 2px;
-      margin-bottom: 22px;
+      margin-bottom: var(--sp-md);
 
       .bylineName {
         font-weight: 700;
@@ -135,10 +135,10 @@
 .link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--sp-2xs);
   margin-top: auto;
   align-self: flex-start;
-  padding: 11px 20px;
+  padding: var(--sp-xs) var(--sp-md);
   border-radius: var(--r-pill);
   border: 1.5px solid var(--forest);
   color: var(--forest);
@@ -159,8 +159,8 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px 28px;
-  margin-top: clamp(44px, 5vw, 72px);
+  gap: var(--sp-md) var(--sp-lg);
+  margin-top: clamp(var(--sp-xl), 5vw, var(--sp-2xl));
   text-align: center;
 
   .ctaText {

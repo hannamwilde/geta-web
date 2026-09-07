@@ -1,16 +1,16 @@
 .section {
-  padding: clamp(80px, 8vw, 128px) 0;
+  padding: clamp(var(--sp-3xl), 8vw, var(--sp-4xl)) 0;
 }
 
 .container {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 48px);
+  padding: 0 clamp(var(--sp-md), 4vw, var(--sp-xl));
 }
 
 .head {
   max-width: 900px;
-  margin-bottom: clamp(40px, 4vw, 64px);
+  margin-bottom: clamp(var(--sp-xl), 4vw, var(--sp-2xl));
 
   .eyebrow {
     display: block;
@@ -18,7 +18,7 @@
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-bottom: 12px;
+    margin-bottom: var(--sp-xs);
     color: rgba(234, 234, 251, 0.6);
   }
 
@@ -40,8 +40,8 @@
 .row {
   display: grid;
   grid-template-columns: 0.9fr 1.5fr;
-  gap: clamp(16px, 3vw, 40px);
-  padding: clamp(22px, 2.6vw, 32px) 0;
+  gap: clamp(var(--sp-sm), 3vw, var(--sp-xl));
+  padding: clamp(var(--sp-md), 2.6vw, var(--sp-lg)) 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 
   &:last-child {
@@ -50,13 +50,13 @@
 
   @media (max-width: 720px) {
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: var(--sp-2xs);
   }
 
   .nameCell {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: var(--sp-lg);
 
     .iconWrap {
       flex-shrink: 0;

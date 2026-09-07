@@ -50,8 +50,8 @@
     bottom: clamp(20px, 3vw, 36px);
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
+    gap: var(--sp-xs);
+    padding: var(--sp-xs) var(--sp-sm);
     border-radius: var(--r-pill);
     background: rgba(21, 21, 21, 0.25);
     backdrop-filter: blur(6px);

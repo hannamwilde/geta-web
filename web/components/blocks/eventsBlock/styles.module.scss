@@ -9,7 +9,7 @@
 
 /* ---------- Sections ---------- */
 .evSection {
-  padding: clamp(56px, 7vw, 100px) 0;
+  padding: clamp(var(--sp-2xl), 7vw, var(--sp-3xl)) 0;
 
   & + & {
     padding-top: 0;
@@ -19,7 +19,7 @@
 /* ---------- Section heads ---------- */
 .secHead {
   margin-inline: auto;
-  margin-bottom: clamp(30px, 3.4vw, 48px);
+  margin-bottom: clamp(var(--sp-lg), 3.4vw, var(--sp-xl));
 
   .secTitle {
     font-family: var(--font-display);
@@ -33,7 +33,7 @@
   }
 
   .secSub {
-    margin: 14px 0 0;
+    margin: var(--sp-sm) 0 0;
     font-size: var(--fs-subtitle);
     line-height: 1.55;
     color: rgba(255, 255, 255, 0.72);
@@ -44,7 +44,7 @@
 .upcomingList {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--sp-sm);
 }
 
 .upcomingCard {
@@ -52,7 +52,7 @@
   flex-direction: column;
   background: var(--forest);
   border-radius: var(--r-lg);
-  padding: clamp(24px, 3vw, 40px);
+  padding: clamp(var(--sp-md), 3vw, var(--sp-xl));
   transition:
     background 0.3s ease,
     box-shadow 0.3s ease;
@@ -89,27 +89,27 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 10px 18px;
-      margin-bottom: 18px;
+      gap: var(--sp-xs) var(--sp-sm);
+      margin-bottom: var(--sp-sm);
 
       .metaDate {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
+        gap: var(--sp-2xs);
         font-family: var(--font-display);
         font-weight: 700;
         font-size: 15px;
         letter-spacing: -0.01em;
         color: var(--forest);
         background: var(--blue);
-        padding: 7px 14px;
+        padding: var(--sp-2xs) var(--sp-sm);
         border-radius: var(--r-pill);
       }
 
       .metaItem {
         display: inline-flex;
         align-items: center;
-        gap: 7px;
+        gap: var(--sp-2xs);
         font-size: 14px;
         font-weight: 500;
         color: rgba(255, 255, 255, 0.74);
@@ -128,7 +128,7 @@
       line-height: 1.08;
       letter-spacing: -0.03em;
       color: #ffffff;
-      margin: 0 0 16px;
+      margin: 0 0 var(--sp-sm);
       text-wrap: balance;
     }
 
@@ -136,20 +136,20 @@
       font-size: clamp(15px, 1.2vw, 17px);
       line-height: 1.6;
       color: rgba(255, 255, 255, 0.85);
-      margin: 0 0 26px;
+      margin: 0 0 var(--sp-md);
     }
 
     .cardActions {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: var(--sp-xs);
       align-items: center;
 
       .registerBtn {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        padding: 12px 22px;
+        gap: var(--sp-2xs);
+        padding: var(--sp-xs) var(--sp-md);
         background: var(--paper);
         color: var(--forest);
         font-family: var(--font-display);
@@ -168,8 +168,8 @@
       .detailsBtn {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        padding: 12px 22px;
+        gap: var(--sp-2xs);
+        padding: var(--sp-xs) var(--sp-md);
         color: rgba(255, 255, 255, 0.75);
         border: 1.5px solid rgba(255, 255, 255, 0.2);
         font-family: var(--font-display);
@@ -192,9 +192,9 @@
 .upcomingCardWithImage {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
-  gap: clamp(24px, 4vw, 56px);
+  gap: clamp(var(--sp-md), 4vw, var(--sp-2xl));
   align-items: stretch;
-  padding: clamp(20px, 2.5vw, 32px);
+  padding: clamp(var(--sp-md), 2.5vw, var(--sp-lg));
 
   @media (max-width: 860px) {
     grid-template-columns: 1fr;
@@ -205,7 +205,7 @@
 .pastGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: var(--sp-sm);
 
   @media (max-width: 880px) {
     grid-template-columns: repeat(2, 1fr);
@@ -220,10 +220,10 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 14px;
+  gap: var(--sp-sm);
   background: var(--forest);
   border-radius: var(--r-lg);
-  padding: clamp(16px, 1.8vw, 22px);
+  padding: clamp(var(--sp-sm), 1.8vw, var(--sp-md));
   transition:
     transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
     background 0.3s ease,
@@ -299,7 +299,7 @@
     color: var(--blue);
     background: transparent;
     border: 1px solid rgba(168, 218, 219, 0.4);
-    padding: 6px 12px;
+    padding: var(--sp-2xs) var(--sp-xs);
     border-radius: var(--r-pill);
   }
 
@@ -332,6 +332,6 @@
    Kept last so it still overrides .upcomingCardWithImage's padding. */
 @media (max-width: 600px) {
   .upcomingCard {
-    padding: 20px;
+    padding: var(--sp-md);
   }
 }

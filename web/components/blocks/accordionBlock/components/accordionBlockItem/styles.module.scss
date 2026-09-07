@@ -21,8 +21,8 @@
   width: 100%;
   display: flex;
   align-items: center;
-  gap: clamp(14px, 1.6vw, 22px);
-  padding: clamp(18px, 1.8vw, 24px) clamp(18px, 2vw, 28px);
+  gap: clamp(var(--sp-sm), 1.6vw, var(--sp-md));
+  padding: clamp(var(--sp-sm), 1.8vw, var(--sp-md)) clamp(var(--sp-sm), 2vw, var(--sp-lg));
   background: none;
   border: 0;
   text-align: left;
@@ -92,16 +92,16 @@
 }
 
 .panelInner {
-  padding: 0 clamp(18px, 2vw, 28px);
+  padding: 0 clamp(var(--sp-sm), 2vw, var(--sp-lg));
 }
 
 // Only indent past the number badge when there is one, so the answer lines up
 // with the question either way.
 .item[data-numbered="true"] .panelInner {
-  padding-left: calc(clamp(18px, 2vw, 28px) + 40px + clamp(14px, 1.6vw, 22px));
+  padding-left: calc(clamp(var(--sp-sm), 2vw, var(--sp-lg)) + 40px + clamp(var(--sp-sm), 1.6vw, var(--sp-md)));
 
   @media (max-width: 600px) {
-    padding-left: clamp(18px, 2vw, 28px);
+    padding-left: clamp(var(--sp-sm), 2vw, var(--sp-lg));
   }
 }
 
@@ -109,7 +109,7 @@
   font-size: var(--acc-answer-size, 16px);
   line-height: 1.65;
   color: var(--acc-answer-color, rgba(255, 255, 255, 0.72));
-  margin: 0 0 clamp(18px, 2vw, 24px);
+  margin: 0 0 clamp(var(--sp-sm), 2vw, var(--sp-md));
   max-width: 68ch;
   white-space: pre-line;
 }
@@ -117,8 +117,8 @@
 .cta {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: clamp(18px, 2vw, 26px);
+  gap: var(--sp-xs);
+  margin-bottom: clamp(var(--sp-sm), 2vw, var(--sp-md));
   padding: 0;
   background: none;
   border: 0;

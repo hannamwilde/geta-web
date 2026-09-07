@@ -20,8 +20,8 @@
    * height in Sanity; long copy still grows the slide past it.
    */
   min-height: var(--slider-h, min(56.25vw, 82vh));
-  padding-top: var(--slider-pt, clamp(116px, 13vw, 168px));
-  padding-bottom: var(--slider-pb, clamp(72px, 8vw, 112px));
+  padding-top: var(--slider-pt, var(--sp-4xl));
+  padding-bottom: var(--slider-pb, clamp(var(--sp-2xl), 8vw, var(--sp-4xl)));
 
   /* 16:9 is too letterboxed on a phone — go taller so the subject survives the crop. */
   @media (max-width: 760px) {
@@ -48,7 +48,7 @@
   width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 48px);
+  padding: 0 clamp(var(--sp-md), 4vw, var(--sp-xl));
 }
 
 .copy {
@@ -68,7 +68,7 @@
   }
 
   .text {
-    margin: 24px 0 0;
+    margin: var(--sp-md) 0 0;
     font-size: var(--fs-subtitle);
     line-height: 1.6;
     color: var(--slider-text, rgba(255, 255, 255, 0.88));
@@ -77,7 +77,7 @@
   }
 
   .cta {
-    margin-top: 32px;
+    margin-top: var(--sp-lg);
     /* Matches .btn-primary; the vars only kick in when an editor overrides them. */
     background: var(--slider-cta-bg, var(--forest));
     color: var(--slider-cta-color, var(--paper));

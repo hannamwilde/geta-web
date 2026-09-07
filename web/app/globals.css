@@ -10,7 +10,7 @@
   --ink: #151515;
   --ink-2: #2d2d2d;
   --ink-3: #5c5c5c;
-  --ink-4: #767676; /* lightest grey that still clears 4.5:1 on --paper */
+  --ink-4: #767676;
   --paper: #ffffff;
   --cream: #f4efe5;
   --cream-2: #eae3d2;
@@ -44,7 +44,19 @@
   --container: 1480px;
   --gutter: clamp(16px, 3vw, 40px);
 
-  /* Type scale */
+  /* Spacings */
+  --sp-3xs: 4px;
+  --sp-2xs: 8px;
+  --sp-xs: 12px;
+  --sp-sm: 16px;
+  --sp-md: 24px;
+  --sp-lg: 32px;
+  --sp-xl: 48px;
+  --sp-2xl: 64px;
+  --sp-3xl: 96px;
+  --sp-4xl: 128px;
+
+  /* Font sizes */
   --fs-h1: 52px;
   --fs-h2: 40px;
   --fs-h3: 36px;
@@ -137,8 +149,8 @@ select {
 }
 
 .section {
-  padding-top: clamp(64px, 9vw, 128px);
-  padding-bottom: clamp(64px, 9vw, 128px);
+  padding-top: clamp(var(--sp-2xl), 9vw, var(--sp-4xl));
+  padding-bottom: clamp(var(--sp-2xl), 9vw, var(--sp-4xl));
 }
 
 /* Typography */
@@ -154,8 +166,8 @@ select {
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 14px 22px;
+  gap: var(--sp-2xs);
+  padding: var(--sp-sm) var(--sp-md);
   border-radius: var(--r-pill);
   font-weight: 600;
   font-size: 15px;
@@ -218,7 +230,7 @@ select {
 .btn-ghost {
   background: transparent;
   color: var(--ink);
-  padding: 14px 6px;
+  padding: var(--sp-sm) var(--sp-2xs);
 }
 .btn-ghost:hover {
   color: var(--forest);
@@ -252,10 +264,10 @@ select {
   flex-direction: column;
 }
 .gap-2 {
-  gap: 8px;
+  gap: var(--sp-2xs);
 }
 .gap-4 {
-  gap: 16px;
+  gap: var(--sp-sm);
 }
 .center {
   text-align: center;

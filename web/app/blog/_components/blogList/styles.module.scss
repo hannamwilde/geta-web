@@ -2,14 +2,16 @@
    Blog list — light (cream) theme
    ================================================ */
 
-.page { background: var(--cream-soft); }
+.page {
+  background: var(--cream-soft);
+}
 
 /* ── Hero ──────────────────────────────────────────────────────── */
 .hero {
   background: var(--forest);
   color: var(--paper);
-  padding-top: clamp(110px, 12vw, 160px);
-  padding-bottom: clamp(48px, 6vw, 72px);
+  padding-top: clamp(var(--sp-3xl), 12vw, var(--sp-4xl));
+  padding-bottom: clamp(var(--sp-xl), 6vw, var(--sp-2xl));
 
   .heroTitle {
     font-family: var(--font-display);
@@ -18,7 +20,7 @@
     line-height: 0.97;
     letter-spacing: -0.04em;
     color: #ffffff;
-    margin: 0 0 20px;
+    margin: 0 0 var(--sp-md);
   }
 
   .heroLead {
@@ -32,7 +34,8 @@
 
 /* ── Post list ─────────────────────────────────────────────────── */
 .list {
-  padding: clamp(48px, 6vw, 80px) 0 clamp(64px, 8vw, 120px);
+  padding: clamp(var(--sp-xl), 6vw, var(--sp-3xl)) 0
+    clamp(var(--sp-2xl), 8vw, var(--sp-4xl));
 
   .empty {
     color: var(--ink-3);
@@ -43,11 +46,15 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: var(--sp-md);
 
-  @media (max-width: 960px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 960px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-  @media (max-width: 600px) { grid-template-columns: 1fr; }
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .card {
@@ -56,14 +63,18 @@
   background: #ffffff;
   border-radius: var(--r-xl);
   overflow: hidden;
-  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s ease;
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.3s ease;
   box-shadow: var(--shadow-card);
 
   &:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-card-hover);
 
-    .cardImage img { transform: scale(1.03); }
+    .cardImage img {
+      transform: scale(1.03);
+    }
   }
 
   .cardImage {
@@ -82,14 +93,14 @@
   .cardBody {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: clamp(20px, 2vw, 28px);
+    gap: var(--sp-xs);
+    padding: clamp(var(--sp-md), 2vw, var(--sp-lg));
     flex: 1;
 
     .tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: var(--sp-2xs);
 
       .tag {
         font-size: 11px;
@@ -98,7 +109,7 @@
         text-transform: uppercase;
         color: var(--forest);
         background: var(--forest-tint);
-        padding: 4px 10px;
+        padding: var(--sp-3xs) var(--sp-xs);
         border-radius: var(--r-pill);
       }
     }
@@ -128,12 +139,12 @@
     .cardMeta {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px 14px;
+      gap: var(--sp-2xs) var(--sp-sm);
       font-size: 13px;
       font-weight: 500;
       color: var(--ink-4);
       margin-top: auto;
-      padding-top: 6px;
+      padding-top: var(--sp-2xs);
       border-top: 1px solid var(--line);
     }
   }
@@ -144,8 +155,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6px;
-  margin-top: clamp(40px, 5vw, 64px);
+  gap: var(--sp-2xs);
+  margin-top: clamp(var(--sp-xl), 5vw, var(--sp-2xl));
   flex-wrap: wrap;
 
   .pageBtn {
@@ -154,14 +165,17 @@
     justify-content: center;
     min-width: 40px;
     height: 40px;
-    padding: 0 10px;
+    padding: 0 var(--sp-xs);
     border-radius: var(--r-lg);
     font-size: 14px;
     font-weight: 600;
     color: var(--ink);
     background: #ffffff;
     border: 1.5px solid var(--line);
-    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    transition:
+      background 0.15s,
+      border-color 0.15s,
+      color 0.15s;
     text-decoration: none;
 
     &:hover:not(.pageBtnDisabled):not(.pageBtnActive) {

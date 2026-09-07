@@ -1,11 +1,11 @@
 .section {
-  padding: clamp(48px, 7vw, 96px) 0;
+  padding: clamp(var(--sp-xl), 7vw, var(--sp-3xl)) 0;
 }
 
 .container {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 48px);
+  padding: 0 clamp(var(--sp-md), 4vw, var(--sp-xl));
 }
 
 .figure {
@@ -28,7 +28,7 @@
     font-weight: 600;
     line-height: 1.45;
     letter-spacing: -0.02em;
-    margin: 0 0 clamp(20px, 3vw, 32px);
+    margin: 0 0 clamp(var(--sp-md), 3vw, var(--sp-lg));
     font-style: normal;
   }
 

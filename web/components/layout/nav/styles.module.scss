@@ -11,9 +11,9 @@
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  gap: 12px;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  gap: var(--sp-xs);
+  padding-top: var(--sp-xs);
+  padding-bottom: var(--sp-xs);
 }
 
 .bar,
@@ -22,11 +22,11 @@
   display: flex;
   position: relative;
   align-items: center;
-  gap: 6px;
+  gap: var(--sp-2xs);
   background: var(--forest-deep);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 19px;
-  padding: 7px 7px 7px 18px;
+  padding: var(--sp-2xs) var(--sp-2xs) var(--sp-2xs) var(--sp-sm);
   box-shadow:
     0 14px 36px -18px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.07);
@@ -43,7 +43,7 @@
     display: inline-flex;
     align-items: center;
     color: var(--paper);
-    margin-right: 18px;
+    margin-right: var(--sp-sm);
   }
 }
 
@@ -53,7 +53,7 @@
     margin-left: auto;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--sp-2xs);
   }
 }
 
@@ -67,14 +67,14 @@
     position: relative;
 
     .link {
-      padding: 8px 13px;
+      padding: var(--sp-2xs) var(--sp-xs);
       font-size: 14px;
       font-weight: 500;
       color: rgba(255, 255, 255, 0.82);
       border-radius: var(--r-pill);
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: var(--sp-3xs);
       transition:
         background 0.15s,
         color 0.15s;
@@ -100,27 +100,27 @@
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   box-shadow: var(--shadow-float);
-  padding: 20px;
+  padding: var(--sp-md);
   min-width: calc(var(--mega-cols, 2) * 230px);
   z-index: 60;
 
   .megaGrid {
     display: grid;
     grid-template-columns: repeat(var(--mega-cols, 2), 1fr);
-    gap: 8px 24px;
+    gap: var(--sp-2xs) var(--sp-md);
   }
 
   .megaCol {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--sp-2xs);
   }
 
   .megaItem {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 10px;
+    padding: var(--sp-2xs) var(--sp-xs);
     border-radius: var(--r-sm);
     font-size: 14.5px;
     color: var(--ink);
@@ -156,14 +156,14 @@
 /* Mobile bar: logo left, burger hard right — no CTA to make room for. */
 .mobileBar {
   justify-content: space-between;
-  padding: 7px 10px 7px 16px;
+  padding: var(--sp-2xs) var(--sp-xs) var(--sp-2xs) var(--sp-sm);
 
   .logo {
     margin-right: 0;
   }
 
   .burger {
-    padding: 6px;
+    padding: var(--sp-2xs);
     border-radius: var(--r-sm);
     color: var(--paper);
   }
@@ -174,8 +174,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
-  padding: 9px 14px;
+  gap: var(--sp-2xs);
+  padding: var(--sp-2xs) var(--sp-sm);
   border-radius: 13px;
   font-size: 13px;
   font-weight: 600;
@@ -202,8 +202,8 @@
 .cta {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 9px 14px;
+  gap: var(--sp-2xs);
+  padding: var(--sp-2xs) var(--sp-sm);
   border-radius: 13px;
   font-size: 13px;
   font-weight: 600;
@@ -223,16 +223,16 @@
 .mobile {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--sp-3xs);
   margin: 0 var(--gutter);
-  padding: 6px 16px 16px;
+  padding: var(--sp-2xs) var(--sp-sm) var(--sp-sm);
   background: var(--forest-deep);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--r-lg);
   box-shadow: var(--shadow-float);
 
   .mobileLink {
-    padding: 14px 4px;
+    padding: var(--sp-sm) var(--sp-3xs);
     font-size: 18px;
     font-weight: 700;
     color: var(--paper);
@@ -253,7 +253,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: var(--sp-xs);
       width: 100%;
       text-align: left;
 
@@ -275,14 +275,14 @@
     .mobileSub {
       display: flex;
       flex-direction: column;
-      padding: 0 0 10px 14px;
+      padding: 0 0 var(--sp-xs) var(--sp-sm);
 
       .mobileSubLink {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 8px;
-        padding: 10px 4px;
+        gap: var(--sp-2xs);
+        padding: var(--sp-xs) var(--sp-3xs);
         font-size: 15px;
         font-weight: 600;
         color: rgba(255, 255, 255, 0.72);
@@ -303,14 +303,14 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 12px;
+    gap: var(--sp-2xs);
+    margin-top: var(--sp-xs);
     padding-top: 0;
 
     .shop,
     .cta {
       font-size: 15px;
-      padding: 11px 14px;
+      padding: var(--sp-xs) var(--sp-sm);
     }
   }
 }

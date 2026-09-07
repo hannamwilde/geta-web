@@ -12,8 +12,8 @@
   position: relative;
   background: var(--forest);
   color: var(--paper);
-  padding-top: clamp(104px, 11vw, 148px);
-  padding-bottom: clamp(48px, 6vw, 80px);
+  padding-top: clamp(var(--sp-3xl), 11vw, var(--sp-4xl));
+  padding-bottom: clamp(var(--sp-xl), 6vw, var(--sp-3xl));
   overflow: hidden;
 
   &::before {
@@ -38,11 +38,11 @@
     .breadcrumb {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: var(--sp-xs);
       font-size: 13px;
       font-weight: 500;
       color: rgba(255, 255, 255, 0.5);
-      margin-bottom: clamp(24px, 2.8vw, 40px);
+      margin-bottom: clamp(var(--sp-md), 2.8vw, var(--sp-xl));
       flex-wrap: wrap;
 
       a,
@@ -66,13 +66,13 @@
 .heroGrid {
   display: grid;
   grid-template-columns: 1.55fr 0.85fr;
-  gap: clamp(28px, 5vw, 72px);
+  gap: clamp(var(--sp-lg), 5vw, var(--sp-2xl));
   align-items: end;
 
   @media (max-width: 860px) {
     grid-template-columns: 1fr;
     align-items: start;
-    gap: 32px;
+    gap: var(--sp-lg);
   }
 
   /* ── Hero content ────────────────────────────────────────── */
@@ -85,9 +85,9 @@
     text-transform: uppercase;
     color: var(--forest);
     background: var(--blue);
-    padding: 6px 13px;
+    padding: var(--sp-2xs) var(--sp-xs);
     border-radius: var(--r-pill);
-    margin-bottom: 18px;
+    margin-bottom: var(--sp-sm);
   }
 
   .heroTitle {
@@ -107,11 +107,11 @@
     line-height: 1.12;
     letter-spacing: -0.02em;
     color: var(--blue);
-    margin: 12px 0 0;
+    margin: var(--sp-xs) 0 0;
   }
 
   .heroLead {
-    margin: clamp(20px, 2.4vw, 28px) 0 0;
+    margin: clamp(var(--sp-md), 2.4vw, var(--sp-lg)) 0 0;
     font-size: var(--fs-subtitle);
     line-height: 1.55;
     color: rgba(255, 255, 255, 0.82);
@@ -121,14 +121,14 @@
   .heroCtas {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-top: clamp(26px, 3vw, 36px);
+    gap: var(--sp-xs);
+    margin-top: clamp(var(--sp-md), 3vw, var(--sp-lg));
 
     .btnPrimary {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 13px 24px;
+      gap: var(--sp-2xs);
+      padding: var(--sp-xs) var(--sp-md);
       background: var(--paper);
       color: var(--forest);
       font-family: var(--font-display);
@@ -146,7 +146,7 @@
     .btnOutline {
       display: inline-flex;
       align-items: center;
-      padding: 13px 24px;
+      padding: var(--sp-xs) var(--sp-md);
       color: var(--paper);
       border: 1.5px solid rgba(255, 255, 255, 0.4);
       font-family: var(--font-display);
@@ -175,13 +175,13 @@
     background: rgba(255, 255, 255, 0.07);
     border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: var(--r-lg);
-    padding: clamp(20px, 2.4vw, 30px);
+    padding: clamp(var(--sp-md), 2.4vw, var(--sp-lg));
 
     .fact {
       display: flex;
       flex-direction: column;
       gap: 3px;
-      padding: 14px 0;
+      padding: var(--sp-sm) 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 
       &:last-child {
@@ -211,7 +211,7 @@
 /* ── Image band ────────────────────────────────────────────────── */
 .band {
   background: #2e2e2e;
-  padding: clamp(28px, 4vw, 56px) 0 0;
+  padding: clamp(var(--sp-lg), 4vw, var(--sp-2xl)) 0 0;
 
   .bandImage {
     display: block;
@@ -225,7 +225,7 @@
 
 /* ── Shared section styles ─────────────────────────────────────── */
 .section {
-  padding-top: clamp(56px, 7vw, 100px);
+  padding-top: clamp(var(--sp-2xl), 7vw, var(--sp-3xl));
   background: #2e2e2e;
 }
 
@@ -237,7 +237,7 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--blue);
-  margin-bottom: 16px;
+  margin-bottom: var(--sp-sm);
 }
 
 .secTitle {
@@ -252,14 +252,14 @@
 }
 
 .secSub {
-  margin: 14px 0 0;
+  margin: var(--sp-sm) 0 0;
   font-size: var(--fs-subtitle);
   line-height: 1.55;
   color: rgba(255, 255, 255, 0.72);
 }
 
 .secBody {
-  margin: 18px 0 0;
+  margin: var(--sp-sm) 0 0;
   font-size: var(--fs-subtitle);
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.82);
@@ -267,19 +267,19 @@
 
 .secHead {
   max-width: 60ch;
-  margin-bottom: clamp(30px, 3.4vw, 48px);
+  margin-bottom: clamp(var(--sp-lg), 3.4vw, var(--sp-xl));
 }
 
 /* ── Takeaways (two-column) ────────────────────────────────────── */
 .twoCol {
   display: grid;
   grid-template-columns: 0.95fr 1.05fr;
-  gap: clamp(32px, 6vw, 88px);
+  gap: clamp(var(--sp-lg), 6vw, var(--sp-3xl));
   align-items: start;
 
   @media (max-width: 860px) {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: var(--sp-lg);
   }
 
   .twoColHead {
@@ -294,15 +294,15 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: var(--sp-sm);
 
     .takeaway {
       display: flex;
       align-items: flex-start;
-      gap: 16px;
+      gap: var(--sp-sm);
       background: var(--forest);
       border-radius: var(--r-lg);
-      padding: clamp(18px, 2vw, 24px) clamp(20px, 2.2vw, 26px);
+      padding: clamp(var(--sp-sm), 2vw, var(--sp-md)) var(--sp-md);
       font-size: clamp(15px, 1.2vw, 17px);
       line-height: 1.5;
       color: #ffffff;
@@ -335,7 +335,7 @@
 .agenda {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: var(--sp-sm);
 
   @media (max-width: 720px) {
     grid-template-columns: 1fr;
@@ -344,10 +344,10 @@
   .agendaItem {
     display: flex;
     align-items: flex-start;
-    gap: 18px;
+    gap: var(--sp-sm);
     background: var(--forest);
     border-radius: var(--r-lg);
-    padding: clamp(22px, 2.4vw, 30px);
+    padding: clamp(var(--sp-md), 2.4vw, var(--sp-lg));
     transition:
       transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
       background 0.3s ease,
@@ -383,7 +383,7 @@
       font-size: var(--fs-h4);
       letter-spacing: -0.02em;
       color: #ffffff;
-      margin: 0 0 5px;
+      margin: 0 0 var(--sp-3xs);
       text-wrap: balance;
     }
 
@@ -400,18 +400,18 @@
 .speakers {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--sp-sm);
 
   /* .speaker and .speakerNoPhoto are alternatives on the same element, so the
      shared children hang off .speakers rather than either variant. */
   .speaker {
     display: grid;
     grid-template-columns: 0.42fr 1fr;
-    gap: clamp(24px, 4vw, 56px);
+    gap: clamp(var(--sp-md), 4vw, var(--sp-2xl));
     align-items: center;
     background: var(--forest);
     border-radius: var(--r-lg);
-    padding: clamp(24px, 3vw, 44px);
+    padding: clamp(var(--sp-md), 3vw, var(--sp-xl));
 
     @media (max-width: 720px) {
       grid-template-columns: 1fr;
@@ -421,7 +421,7 @@
   .speakerNoPhoto {
     background: var(--forest);
     border-radius: var(--r-lg);
-    padding: clamp(24px, 3vw, 44px);
+    padding: clamp(var(--sp-md), 3vw, var(--sp-xl));
   }
 
   .speakerMedia {
@@ -453,7 +453,7 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--blue);
-    margin: 6px 0 16px;
+    margin: var(--sp-2xs) 0 var(--sp-sm);
   }
 
   .speakerBio {
@@ -467,15 +467,15 @@
 
 /* ── CTA band ──────────────────────────────────────────────────── */
 .cta {
-  margin-top: clamp(56px, 7vw, 100px);
+  margin-top: clamp(var(--sp-2xl), 7vw, var(--sp-3xl));
   background: var(--forest);
-  padding: clamp(48px, 6vw, 88px) 0;
+  padding: clamp(var(--sp-xl), 6vw, var(--sp-3xl)) 0;
 
   .ctaInner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: clamp(24px, 4vw, 56px);
+    gap: clamp(var(--sp-md), 4vw, var(--sp-2xl));
     flex-wrap: wrap;
 
     .ctaTitle {
@@ -489,7 +489,7 @@
     }
 
     .ctaBody {
-      margin: 14px 0 0;
+      margin: var(--sp-sm) 0 0;
       font-size: clamp(15px, 1.2vw, 18px);
       line-height: 1.5;
       color: rgba(255, 255, 255, 0.8);
@@ -499,13 +499,13 @@
     .ctaActions {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: var(--sp-xs);
       flex-shrink: 0;
 
       .btnLight {
         display: inline-flex;
         align-items: center;
-        padding: 13px 24px;
+        padding: var(--sp-xs) var(--sp-md);
         background: var(--paper);
         color: var(--forest);
         font-family: var(--font-display);
@@ -523,7 +523,7 @@
       .btnGhost {
         display: inline-flex;
         align-items: center;
-        padding: 13px 24px;
+        padding: var(--sp-xs) var(--sp-md);
         color: #ffffff;
         border: 1px solid rgba(255, 255, 255, 0.4);
         font-family: var(--font-display);

@@ -1,5 +1,5 @@
 .section {
-  padding: clamp(32px, 5vw, 64px) 0;
+  padding: clamp(var(--sp-lg), 5vw, var(--sp-2xl)) 0;
 
   &[data-align="center"] {
     .title { text-align: center; }
@@ -17,24 +17,24 @@
 .container {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 48px);
+  padding: 0 clamp(var(--sp-md), 4vw, var(--sp-xl));
 }
 
 .title {
   font-size: var(--fs-h4);
   font-weight: 700;
   color: var(--lb-text, inherit);
-  margin: clamp(16px, 2vw, 24px) 0;
+  margin: clamp(var(--sp-sm), 2vw, var(--sp-md)) 0;
 }
 
 .links {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 0 clamp(16px, 2vw, 24px);
+  margin: 0 0 clamp(var(--sp-sm), 2vw, var(--sp-md));
 
-  &[data-layout="inline"] { flex-direction: row; gap: 12px; align-items: center; }
-  &[data-has-images] { gap: 50px; align-items: center; }
-  &[data-layout="stacked"] { flex-direction: column; gap: 8px; align-items: flex-start; }
+  &[data-layout="inline"] { flex-direction: row; gap: var(--sp-xs); align-items: center; }
+  &[data-has-images] { gap: var(--sp-xl); align-items: center; }
+  &[data-layout="stacked"] { flex-direction: column; gap: var(--sp-2xs); align-items: flex-start; }
 
   .item {
     display: inline-flex; align-items: center;
@@ -45,7 +45,7 @@
     &.item--link {
       font-size: 0.9375rem;
       color: var(--lb-text, var(--forest));
-      gap: 6px; padding: 4px 0;
+      gap: var(--sp-2xs); padding: var(--sp-3xs) 0;
       border-bottom: 1.5px solid currentColor;
 
       &:hover { opacity: 0.65; }
@@ -53,7 +53,7 @@
 
     &.item--button {
       font-size: 0.9375rem;
-      padding: 10px 22px;
+      padding: var(--sp-xs) var(--sp-md);
       border-radius: 8px;
       background: var(--lb-btn-bg, var(--forest));
       color: var(--lb-btn-text, var(--paper));

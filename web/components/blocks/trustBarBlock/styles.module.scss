@@ -2,13 +2,13 @@
   background: #102D2B;
   border-top: 1px solid rgba(255,255,255,0.14);
   border-bottom: 1px solid rgba(255,255,255,0.14);
-  padding: clamp(28px, 3.4vw, 44px) 0;
+  padding: clamp(var(--sp-lg), 3.4vw, var(--sp-xl)) 0;
   overflow: hidden;
 
   .track {
     display: flex;
     align-items: center;
-    gap: clamp(72px, 8vw, 130px);
+    gap: clamp(var(--sp-2xl), 8vw, var(--sp-4xl));
     width: max-content;
     animation: marquee-scroll 42s linear infinite;
 
