@@ -4,6 +4,7 @@ import "./globals.css";
 import { client } from "@/sanity/client";
 import { navQuery, footerQuery, modalsQuery } from "@/sanity/queries";
 import { fetchTranslations } from "@/lib/translations/server";
+import { SITE_URL } from "@/lib/siteUrl";
 import Nav from "@/components/layout/nav";
 import Footer, { type FooterData } from "@/components/layout/footer";
 import type { NavData } from "@/components/layout/nav";
@@ -18,9 +19,6 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
   display: "swap",
 });
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://getadigital.com/sv";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

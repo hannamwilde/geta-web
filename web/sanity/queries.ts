@@ -98,6 +98,20 @@ export const sitemapPagesQuery = groq`
   }
 `
 
+export const sitemapPostsQuery = groq`
+  *[_type == "post" && defined(slug.current)] {
+    "slug": slug.current,
+    _updatedAt
+  }
+`
+
+export const sitemapEventsQuery = groq`
+  *[_type == "event" && defined(slug.current)] {
+    "slug": slug.current,
+    _updatedAt
+  }
+`
+
 export const sitemapHomeQuery = groq`
   *[_id == "homePage"][0] { _updatedAt, "noIndex": seo.noIndex }
 `
