@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { urlFor } from '@/sanity/client'
 import { resolveBackground, type BackgroundImage } from '@/lib/background'
 import styles from './styles.module.scss'
@@ -44,9 +45,12 @@ export default function TextBlock({ block }: Props) {
               {block.body && <p className={styles.body}>{block.body}</p>}
             </div>
             <div className={styles.imageCol}>
-              <img
+              <Image
                 src={sideImgUrl!}
                 alt={block.sideImage?.alt || ''}
+                width={900}
+                height={675}
+                sizes="(max-width: 860px) 100vw, 50vw"
                 className={styles.sideImg}
               />
             </div>

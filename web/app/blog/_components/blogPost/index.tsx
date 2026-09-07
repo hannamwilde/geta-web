@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/client";
 import BlogPostBody from "./components/blogPostBody";
@@ -35,7 +36,15 @@ export default function BlogPost({ post }: { post: PostData }) {
       <header className={styles.hero} data-has-cover={coverUrl ? "true" : undefined}>
         {coverUrl && (
           <>
-            <img src={coverUrl} alt="" className={styles.coverMedia} fetchPriority="high" />
+            <Image
+              src={coverUrl}
+              alt=""
+              width={1920}
+              height={900}
+              sizes="100vw"
+              priority
+              className={styles.coverMedia}
+            />
             <div className={styles.overlay} aria-hidden />
           </>
         )}

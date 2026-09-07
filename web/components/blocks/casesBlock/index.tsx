@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { urlFor } from "@/sanity/client";
 import { fetchTranslations } from "@/lib/translations/server";
 import { resolveBackground, type BackgroundImage } from "@/lib/background";
@@ -55,9 +56,12 @@ function CaseCard({ item, index }: { item: CaseItem; index: number }) {
     >
       <div className={styles.media}>
         {imgUrl ? (
-          <img
+          <Image
             src={imgUrl}
             alt={item.coverImage?.alt || item.client}
+            width={600}
+            height={480}
+            sizes="(max-width: 940px) 100vw, 33vw"
             style={{
               width: "100%",
               height: "100%",

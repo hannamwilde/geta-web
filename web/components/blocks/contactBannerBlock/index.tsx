@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { urlFor } from "@/sanity/client";
 import { fetchTranslations } from "@/lib/translations/server";
 import { resolveBackground } from "@/lib/background";
@@ -62,10 +63,13 @@ export default async function ContactBannerBlock({ block }: Props) {
       <div className="container">
         <div className={styles.frame} style={block.borderRadius != null ? { '--r-xl': block.borderRadius + 'px' } as React.CSSProperties : undefined}>
           {bgUrl && (
-            <img
+            <Image
               className={styles.bg}
               src={bgUrl}
               alt={block.backgroundImage?.alt || ""}
+              width={1400}
+              height={700}
+              sizes="100vw"
             />
           )}
           <div className={styles.dome} style={domeStyle}>

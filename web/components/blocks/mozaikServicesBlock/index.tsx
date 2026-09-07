@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { resolveBackground, type BackgroundImage } from "@/lib/background";
 import styles from "./styles.module.scss";
 import { resolveBorder, type Border } from "@/lib/border";
@@ -72,10 +73,12 @@ export default function MozaikServicesBlock({ block }: Props) {
           {items.map((item, i) => (
             <div key={item._key} className={styles.card}>
               <span className={styles.piece} data-mozaik-piece>
-                <img
+                <Image
                   src={`/assets/mozaik-piece-${String(item.piece ?? i + 1).padStart(2, "0")}.png`}
                   alt=""
                   aria-hidden
+                  width={46}
+                  height={46}
                 />
               </span>
               <span className={styles.name}>{item.title}</span>

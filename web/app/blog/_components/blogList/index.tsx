@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/client";
 import styles from "./styles.module.scss";
@@ -129,9 +130,12 @@ export default function BlogList({
                     >
                       {imgUrl && (
                         <div className={styles.cardImage}>
-                          <img
+                          <Image
                             src={imgUrl}
                             alt={post.coverImage?.alt || post.title}
+                            width={800}
+                            height={500}
+                            sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw"
                           />
                         </div>
                       )}

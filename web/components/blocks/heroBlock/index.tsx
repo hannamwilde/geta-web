@@ -1,3 +1,5 @@
+import Image from "next/image";
+import { assetDimensions } from '@/lib/imageDimensions'
 import { preload } from 'react-dom'
 import { urlFor } from '@/sanity/client'
 import BackgroundMedia, { type BackgroundVideo } from '@/components/ui/backgroundMedia'
@@ -51,6 +53,8 @@ export default function HeroBlock({ block }: Props) {
       ? urlFor(block.markImage).width(Math.round(block.markWidth * 2)).url()
       : urlFor(block.markImage).height(92).url()
     : null
+  // CSS drives the rendered width; these only give the browser an aspect ratio.
+  const markSize = assetDimensions(block.markImage?.asset) ?? { width: 92, height: 92 }
 
   const s: Record<string, string> = {}
 
@@ -117,7 +121,15 @@ export default function HeroBlock({ block }: Props) {
       <div className={styles.container}>
         <div className={`${styles.copy} hero-copy`}>
           {markSrc && (
-            <img className={styles.mark} src={markSrc} alt="" aria-hidden />
+            <Image
+              className={styles.mark}
+              src={markSrc}
+              alt=""
+              aria-hidden
+              width={markSize.width}
+              height={markSize.height}
+              priority
+            />
           )}
           {block.eyebrow && (
             <div className={`${styles.eyebrow} ${eyebrowVariant}`}>

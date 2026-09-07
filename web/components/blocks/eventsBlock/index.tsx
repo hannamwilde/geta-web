@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/client";
 import styles from "./styles.module.scss";
@@ -152,9 +153,12 @@ function UpcomingCard({
     >
       {imgUrl && (
         <div className={styles.cardImageWrap}>
-          <img
+          <Image
             src={imgUrl}
             alt={item.image?.alt || item.title}
+            width={900}
+            height={600}
+            sizes="(max-width: 860px) 100vw, 40vw"
             className={styles.cardImage}
           />
         </div>
@@ -218,9 +222,12 @@ function PastCard({ item }: { item: EventItem }) {
               : styles.pastImageWrap
           }
         >
-          <img
+          <Image
             src={imgUrl}
             alt={item.image?.alt || item.title}
+            width={600}
+            height={400}
+            sizes="(max-width: 860px) 100vw, 33vw"
             className={styles.pastImage}
           />
           {item.eventType === "webinar" && (

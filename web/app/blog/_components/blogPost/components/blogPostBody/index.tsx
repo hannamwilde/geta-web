@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { urlFor } from "@/sanity/client";
 import { assetDimensions } from "@/lib/imageDimensions";
@@ -16,12 +17,12 @@ const components: PortableTextComponents = {
       if (!value?.asset) return null;
       const size = assetDimensions(value.asset);
       return (
-        <img
+        <Image
           src={urlFor(value).width(1440).url()}
           alt={value.alt || ""}
-          width={size?.width}
-          height={size?.height}
-          loading="lazy"
+          width={size?.width ?? 1440}
+          height={size?.height ?? 810}
+          sizes="(max-width: 860px) 100vw, 720px"
         />
       );
     },

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import Icon from "@/components/ui/icon";
 import { normalizeHref } from "@/lib/href";
@@ -137,11 +138,13 @@ export default function Nav({ data }: Props) {
         onClick={onDone}
       >
         {link.style !== "cta" && (
-          <img
+          <Image
             src="/assets/shopify-icon.png"
             alt=""
             className={styles.shopIcon}
             aria-hidden
+            width={20}
+            height={20}
           />
         )}
         <span>{link.label}</span>
@@ -167,7 +170,7 @@ export default function Nav({ data }: Props) {
         {/* Desktop bar */}
         <div className={`${styles.bar} hide-mobile`} ref={barRef}>
           <a href="/" className={styles.logo} aria-label="Geta Digital home">
-            <img
+            <Image
               src="/assets/geta-logo-white.png"
               alt="Geta"
               width={512}
@@ -252,7 +255,7 @@ export default function Nav({ data }: Props) {
         {/* Mobile — same bar treatment as the desktop nav */}
         <div className={`${styles.mobileBar} show-mobile`}>
           <a href="/" className={styles.logo} aria-label="Geta Digital home">
-            <img
+            <Image
               src="/assets/geta-logo-white.png"
               alt="Geta"
               width={512}

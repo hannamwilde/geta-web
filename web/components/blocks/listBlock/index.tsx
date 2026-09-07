@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { urlFor } from "@/sanity/client";
 import { normalizeHref } from "@/lib/href";
 import { resolveHref } from "@/lib/resolveHref";
@@ -142,7 +143,13 @@ export default function ListBlock({ block }: Props) {
                     className={styles.itemImage}
                     data-size={item.imageSize || "large"}
                   >
-                    <img src={itemImageUrl} alt={item.image?.alt || ""} />
+                    <Image
+                      src={itemImageUrl}
+                      alt={item.image?.alt || ""}
+                      width={item.imageSize === "small" ? 80 : 800}
+                      height={item.imageSize === "small" ? 80 : 360}
+                      sizes="(max-width: 860px) 100vw, 33vw"
+                    />
                   </span>
                 ) : item.visualType !== "image" && item.icon ? (
                   <span className={styles.itemIcon}>

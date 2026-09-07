@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { urlFor } from '@/sanity/client'
 import { resolveBackground, type BackgroundImage } from '@/lib/background'
 import { resolveHref } from '@/lib/resolveHref'
@@ -107,7 +108,13 @@ export default function GrowingListBlock({ block }: Props) {
                 >
                   {imgUrl && (
                     <div className={styles.cardMedia}>
-                      <img src={imgUrl} alt={pillar.image?.alt || pillar.title} />
+                      <Image
+                        src={imgUrl}
+                        alt={pillar.image?.alt || pillar.title}
+                        width={600}
+                        height={500}
+                        sizes="(max-width: 900px) 100vw, 33vw"
+                      />
                     </div>
                   )}
                   <div className={styles.cardContent}>

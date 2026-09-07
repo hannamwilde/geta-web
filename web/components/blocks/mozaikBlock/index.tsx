@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { urlFor } from "@/sanity/client";
 import Icon from "@/components/ui/icon";
@@ -191,7 +192,15 @@ export default function MozaikBlock({ block }: Props) {
           {/* Background */}
           <div className={styles.bg} aria-hidden>
             {photoSrc ? (
-              <img className={styles.photo} src={photoSrc} alt="" />
+              <Image
+                className={styles.photo}
+                src={photoSrc}
+                alt=""
+                width={1800}
+                height={1200}
+                sizes="100vw"
+                priority
+              />
             ) : (
               <div className={styles.grid} />
             )}
@@ -221,11 +230,13 @@ export default function MozaikBlock({ block }: Props) {
                 .filter(Boolean)
                 .map((part, i) =>
                   part.toLowerCase() === "mozaik" ? (
-                    <img
+                    <Image
                       key={i}
                       className={styles.word}
                       src={wordSrc}
                       alt={part}
+                      width={240}
+                      height={80}
                     />
                   ) : (
                     <Fragment key={i}>{part}</Fragment>
@@ -263,7 +274,12 @@ export default function MozaikBlock({ block }: Props) {
                     >
                       <div className={styles.cardIcon}>
                         {logoUrl ? (
-                          <img src={logoUrl} alt={n.logo?.alt || n.label} />
+                          <Image
+                            src={logoUrl}
+                            alt={n.logo?.alt || n.label}
+                            width={40}
+                            height={40}
+                          />
                         ) : (
                           <Icon name={n.icon || ""} size={20} stroke={1.7} />
                         )}
@@ -413,16 +429,20 @@ export default function MozaikBlock({ block }: Props) {
                 >
                   <div className={styles.hubGlow} />
                   <div className={styles.hubDisc}>
-                    <img
+                    <Image
                       className={styles.mark}
                       src={markSrc}
                       alt=""
                       aria-hidden
+                      width={104}
+                      height={104}
                     />
-                    <img
+                    <Image
                       className={styles.hubName}
                       src={hubNameSrc}
                       alt="Mozaik"
+                      width={180}
+                      height={60}
                     />
                   </div>
                 </div>
@@ -461,7 +481,12 @@ export default function MozaikBlock({ block }: Props) {
                       >
                         <div className={styles.cardIcon}>
                           {logoUrl ? (
-                            <img src={logoUrl} alt={n.logo?.alt || n.label} />
+                            <Image
+                            src={logoUrl}
+                            alt={n.logo?.alt || n.label}
+                            width={40}
+                            height={40}
+                          />
                           ) : (
                             <Icon name={n.icon || ""} size={20} stroke={1.7} />
                           )}

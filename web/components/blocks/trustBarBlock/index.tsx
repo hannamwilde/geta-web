@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { urlFor } from '@/sanity/client'
 import { resolveBackground, type BackgroundImage } from '@/lib/background'
 import { assetDimensions } from '@/lib/imageDimensions'
@@ -41,9 +42,10 @@ function getLogoSrc(item: Logo) {
   return item.src || ''
 }
 
-/** Intrinsic size, so the row reserves each logo's width before it loads. */
+/** Intrinsic size, so the row reserves each logo's width before it loads.
+ *  The fallback keeps a sane aspect for local PNGs, which carry no ref to read. */
 function getLogoSize(item: Logo) {
-  return assetDimensions(item.logo?.asset) ?? undefined
+  return assetDimensions(item.logo?.asset) ?? { width: 200, height: 68 }
 }
 
 export default function TrustBarBlock({ block }: Props) {
@@ -58,9 +60,9 @@ export default function TrustBarBlock({ block }: Props) {
           <div className={styles.logo} key={logo._id + '-' + i} aria-hidden={i >= logos.length}>
             {logo.website
               ? <a href={logo.website} target="_blank" rel="noopener noreferrer" tabIndex={i >= logos.length ? -1 : 0}>
-                  <img src={getLogoSrc(logo)} alt={logo.name} loading="lazy" draggable={false} {...getLogoSize(logo)} />
+                  <Image src={getLogoSrc(logo)} alt={logo.name} draggable={false} sizes="180px" {...getLogoSize(logo)} />
                 </a>
-              : <img src={getLogoSrc(logo)} alt={logo.name} loading="lazy" draggable={false} {...getLogoSize(logo)} />
+              : <Image src={getLogoSrc(logo)} alt={logo.name} draggable={false} sizes="180px" {...getLogoSize(logo)} />
             }
           </div>
         ))}

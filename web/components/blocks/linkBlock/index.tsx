@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { urlFor } from "@/sanity/client";
 import { normalizeHref } from "@/lib/href";
 import { resolveBackground, type BackgroundImage } from "@/lib/background";
@@ -95,10 +96,14 @@ export default function LinkBlock({ block }: Props) {
                     className={`${styles.item} ${styles["item--" + (item.style || "link")]}`}
                   >
                     {item.style === "image" && imgUrl ? (
-                      <img
+                      <Image
                         className={styles.itemImage}
                         src={imgUrl}
                         alt={item.image?.alt || item.label || ""}
+                        width={160}
+                        height={80}
+                        sizes="160px"
+                        style={{ width: "auto", height: "40px" }}
                       />
                     ) : item.icon ? (
                       <Icon name={item.icon} size={16} stroke={1.8} />

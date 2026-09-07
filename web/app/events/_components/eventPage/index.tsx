@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { urlFor } from "@/sanity/client";
 import BackButton from "./components/backButton";
 import styles from "./styles.module.scss";
@@ -171,9 +172,13 @@ export default function EventPage({ event }: { event: EventPageData }) {
       {heroImageUrl && (
         <section className={styles.band}>
           <div className="container">
-            <img
+            <Image
               src={heroImageUrl}
               alt={event.heroImage?.alt || event.title}
+              width={1600}
+              height={800}
+              sizes="100vw"
+              priority
               className={styles.bandImage}
             />
           </div>
@@ -264,9 +269,12 @@ export default function EventPage({ event }: { event: EventPageData }) {
                   >
                     {photoUrl && (
                       <div className={styles.speakerMedia}>
-                        <img
+                        <Image
                           src={photoUrl}
                           alt={speaker.photo?.alt || speaker.name}
+                          width={560}
+                          height={560}
+                          sizes="(max-width: 700px) 40vw, 200px"
                           className={styles.speakerPhoto}
                         />
                       </div>

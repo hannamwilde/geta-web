@@ -41,6 +41,11 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  images: {
+    // Sanity's CDN does the resizing; see lib/sanityImageLoader.ts.
+    loader: "custom",
+    loaderFile: "./lib/sanityImageLoader.ts",
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

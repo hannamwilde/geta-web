@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { urlFor } from "@/sanity/client";
 import ImageSliderBlockViewport from "./components/imageSliderBlockViewport";
 import ImageSliderBlockCta, { type CTA } from "./components/imageSliderBlockCta";
@@ -79,14 +80,16 @@ export default function ImageSliderBlock({ block }: Props) {
             aria-roledescription="bild"
             aria-label={`${i + 1} av ${slides.length}`}
           >
-            <img
+            <Image
               className={styles.image}
               src={urlFor(slide.backgroundImage).width(1920).url()}
               alt={slide.backgroundImage?.alt || ""}
-              // The first slide is above the fold and often the LCP element; the rest
-              // only load once the visitor scrolls the track to them.
-              loading={i === 0 ? "eager" : "lazy"}
-              fetchPriority={i === 0 ? "high" : "low"}
+              width={1920}
+              height={1080}
+              sizes="100vw"
+              // The first slide is above the fold and often the LCP element; the
+              // rest stay lazy until the visitor scrolls the track to them.
+              priority={i === 0}
             />
             {overlayOpacity > 0 && (
               <div

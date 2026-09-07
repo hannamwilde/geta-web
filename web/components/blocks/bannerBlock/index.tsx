@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { urlFor } from "@/sanity/client";
 import Icon from "@/components/ui/icon";
 import BackgroundMedia, {
@@ -193,10 +194,13 @@ export default function BannerBlock({ block }: Props) {
               className={`${styles.mark}${photoUrl ? " " + styles.markPhoto : ""}`}
             >
               {photoUrl ? (
-                <img
+                <Image
                   className={styles.photo}
                   src={photoUrl}
                   alt={block.photo?.alt || ""}
+                  width={800}
+                  height={800}
+                  sizes="(max-width: 880px) 100vw, 40vw"
                 />
               ) : (
                 <>
