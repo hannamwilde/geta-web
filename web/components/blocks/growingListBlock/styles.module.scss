@@ -41,9 +41,9 @@
 
     .grad {
       background: linear-gradient(
-        var(--svc-grad-angle, 105deg),
-        var(--svc-grad-from, #79b6a6) 0%,
-        var(--svc-grad-to, #c4bcfb) 100%
+        var(--gl-grad-angle, 105deg),
+        var(--gl-grad-from, #79b6a6) 0%,
+        var(--gl-grad-to, #c4bcfb) 100%
       );
       -webkit-background-clip: text;
       background-clip: text;
@@ -164,7 +164,7 @@
         margin: 0;
         font-size: clamp(14px, 1.02vw, 15.5px);
         line-height: 1.6;
-        color: var(--svc-text, rgba(255, 255, 255, 0.74));
+        color: var(--gl-text, rgba(255, 255, 255, 0.74));
       }
     }
 

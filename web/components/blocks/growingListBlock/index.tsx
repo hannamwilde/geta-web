@@ -40,7 +40,7 @@ type Props = {
   }
 }
 
-export default function ServicesBlock({ block }: Props) {
+export default function GrowingListBlock({ block }: Props) {
   const hasGradient = block.tagline && (block.taglineGradientFrom || block.taglineGradientTo)
 
   const sectionStyle = {
@@ -48,10 +48,10 @@ export default function ServicesBlock({ block }: Props) {
     ...resolveBorder(block.border),
     ...(block.paddingTop != null ? { paddingTop: block.paddingTop + 'px' } : {}),
     ...(block.paddingBottom != null ? { paddingBottom: block.paddingBottom + 'px' } : {}),
-    ...(block.textColor ? { '--svc-text': block.textColor } : {}),
-    ...(hasGradient ? { '--svc-grad-from': block.taglineGradientFrom ?? '#79B6A6' } : {}),
-    ...(hasGradient ? { '--svc-grad-to': block.taglineGradientTo ?? '#C4BCFB' } : {}),
-    ...(hasGradient ? { '--svc-grad-angle': (block.taglineGradientAngle ?? 105) + 'deg' } : {}),
+    ...(block.textColor ? { '--gl-text': block.textColor } : {}),
+    ...(hasGradient ? { '--gl-grad-from': block.taglineGradientFrom ?? '#79B6A6' } : {}),
+    ...(hasGradient ? { '--gl-grad-to': block.taglineGradientTo ?? '#C4BCFB' } : {}),
+    ...(hasGradient ? { '--gl-grad-angle': (block.taglineGradientAngle ?? 105) + 'deg' } : {}),
     ...(block.borderRadius != null ? { '--r-lg': block.borderRadius + 'px', '--r-xl': block.borderRadius + 'px' } : {}),
   } as React.CSSProperties
 
@@ -66,7 +66,7 @@ export default function ServicesBlock({ block }: Props) {
   }
 
   return (
-    <section className={styles.section} id="services" style={sectionStyle}>
+    <section className={styles.section} id="growing-list" style={sectionStyle}>
       <div className={`container ${styles.inner}`}>
         {(block.eyebrow || block.headline) && (
           <div

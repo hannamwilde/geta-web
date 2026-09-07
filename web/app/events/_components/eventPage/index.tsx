@@ -112,7 +112,6 @@ export default function EventPage({ event }: { event: EventPageData }) {
 
   return (
     <div className={styles.page}>
-      {/* ── Hero ──────────────────────────────────────────────────── */}
       <header className={styles.hero}>
         <div className={`container ${styles.heroInner}`}>
           <nav className={styles.breadcrumb} aria-label="Brödsmulor">
@@ -128,9 +127,7 @@ export default function EventPage({ event }: { event: EventPageData }) {
               {event.subtitle && (
                 <p className={styles.heroSub}>{event.subtitle}</p>
               )}
-              {event.lead && (
-                <p className={styles.heroLead}>{event.lead}</p>
-              )}
+              {event.lead && <p className={styles.heroLead}>{event.lead}</p>}
               <div className={styles.heroCtas}>
                 {event.registrationUrl && (
                   <a
@@ -143,14 +140,15 @@ export default function EventPage({ event }: { event: EventPageData }) {
                     <IconArrowRight />
                   </a>
                 )}
-                <BackButton label="Alla evenemang" className={styles.btnOutline} />
               </div>
             </div>
 
             <aside className={styles.facts}>
               <div className={styles.fact}>
                 <span className={styles.factLabel}>Datum</span>
-                <span className={styles.factValue}>{formatDate(event.date)}</span>
+                <span className={styles.factValue}>
+                  {formatDate(event.date)}
+                </span>
               </div>
               <div className={styles.fact}>
                 <span className={styles.factLabel}>Tid</span>
@@ -170,7 +168,6 @@ export default function EventPage({ event }: { event: EventPageData }) {
         </div>
       </header>
 
-      {/* ── Banner image ──────────────────────────────────────────── */}
       {heroImageUrl && (
         <section className={styles.band}>
           <div className="container">
@@ -183,7 +180,6 @@ export default function EventPage({ event }: { event: EventPageData }) {
         </section>
       )}
 
-      {/* ── Takeaways ─────────────────────────────────────────────── */}
       {hasTakeaways && (
         <section className={styles.section}>
           <div className="container">
@@ -218,7 +214,6 @@ export default function EventPage({ event }: { event: EventPageData }) {
         </section>
       )}
 
-      {/* ── Agenda ────────────────────────────────────────────────── */}
       {hasAgenda && (
         <section className={styles.section}>
           <div className="container">
@@ -233,7 +228,9 @@ export default function EventPage({ event }: { event: EventPageData }) {
             <div className={styles.agenda}>
               {event.agenda!.map((item, i) => (
                 <article key={item._key} className={styles.agendaItem}>
-                  <span className={styles.agendaNum}>{String(i + 1).padStart(2, "0")}.</span>
+                  <span className={styles.agendaNum}>
+                    {String(i + 1).padStart(2, "0")}.
+                  </span>
                   <div>
                     <h3 className={styles.agendaTitle}>{item.title}</h3>
                     {item.sub && <p className={styles.agendaSub}>{item.sub}</p>}
@@ -245,7 +242,6 @@ export default function EventPage({ event }: { event: EventPageData }) {
         </section>
       )}
 
-      {/* ── Speakers ──────────────────────────────────────────────── */}
       {hasSpeakers && (
         <section className={styles.section}>
           <div className="container">
@@ -260,7 +256,12 @@ export default function EventPage({ event }: { event: EventPageData }) {
                   ? urlFor(speaker.photo).width(560).height(560).url()
                   : null;
                 return (
-                  <article key={speaker._key} className={photoUrl ? styles.speaker : styles.speakerNoPhoto}>
+                  <article
+                    key={speaker._key}
+                    className={
+                      photoUrl ? styles.speaker : styles.speakerNoPhoto
+                    }
+                  >
                     {photoUrl && (
                       <div className={styles.speakerMedia}>
                         <img
@@ -273,7 +274,9 @@ export default function EventPage({ event }: { event: EventPageData }) {
                     <div className={styles.speakerBody}>
                       <h3 className={styles.speakerName}>{speaker.name}</h3>
                       {speaker.role && (
-                        <span className={styles.speakerRole}>{speaker.role}</span>
+                        <span className={styles.speakerRole}>
+                          {speaker.role}
+                        </span>
                       )}
                       {speaker.bio && (
                         <p className={styles.speakerBio}>{speaker.bio}</p>
@@ -287,7 +290,6 @@ export default function EventPage({ event }: { event: EventPageData }) {
         </section>
       )}
 
-      {/* ── CTA band ──────────────────────────────────────────────── */}
       <section className={styles.cta}>
         <div className="container">
           <div className={styles.ctaInner}>

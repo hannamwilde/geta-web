@@ -2,6 +2,7 @@ import Link from "next/link";
 import { urlFor } from "@/sanity/client";
 import styles from "./styles.module.scss";
 import { resolveBorder, type Border } from "@/lib/border";
+import { fetchTranslations } from "@/lib/translations/server";
 
 type EventItem = {
   _id: string;
@@ -135,9 +136,11 @@ function IconPlay() {
 function UpcomingCard({
   item,
   registerLabel,
+  readMoreLabel,
 }: {
   item: EventItem;
   registerLabel: string;
+  readMoreLabel: string;
 }) {
   const imgUrl = item.image?.asset
     ? urlFor(item.image).width(900).height(600).url()
@@ -190,7 +193,7 @@ function UpcomingCard({
           )}
           {item.slug && (
             <Link href={`/events/${item.slug}`} className={styles.detailsBtn}>
-              Läs mer
+              {readMoreLabel}
               <IconArrowRight />
             </Link>
           )}
@@ -252,11 +255,13 @@ function EventSection({
   sub,
   items,
   registerLabel,
+  readMoreLabel,
 }: {
   title: string;
   sub?: string;
   items: EventItem[];
   registerLabel: string;
+  readMoreLabel: string;
 }) {
   if (items.length === 0) return null;
   return (
@@ -272,6 +277,7 @@ function EventSection({
               key={item._id}
               item={item}
               registerLabel={registerLabel}
+              readMoreLabel={readMoreLabel}
             />
           ))}
         </div>
@@ -307,7 +313,8 @@ function PastSection({
   );
 }
 
-export default function EventsBlock({ block, upcoming, past }: Props) {
+export default async function EventsBlock({ block, upcoming, past }: Props) {
+  const t = await fetchTranslations();
   const upcomingEvents = upcoming.filter((e) => e.eventType !== "webinar");
   const upcomingWebinars = upcoming.filter((e) => e.eventType === "webinar");
   const pastEvents = past.filter((e) => e.eventType !== "webinar");
@@ -332,11 +339,13 @@ export default function EventsBlock({ block, upcoming, past }: Props) {
         sub={block.upcomingSub}
         items={upcomingEvents}
         registerLabel={registerLabel}
+        readMoreLabel={t.general.readMore}
       />
       <EventSection
         title={block.upcomingWebinarLabel || ""}
         items={upcomingWebinars}
         registerLabel={registerLabel}
+        readMoreLabel={t.general.readMore}
       />
       <PastSection
         title={block.pastLabel || ""}

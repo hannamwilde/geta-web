@@ -13,7 +13,7 @@ import MozaikServicesBlock from "@/components/blocks/mozaikServicesBlock";
 import MozaikPropsHeadingBlock from "@/components/blocks/mozaikPropsHeadingBlock";
 import TrustBarBlock from "@/components/blocks/trustBarBlock";
 import ContactBannerBlock from "@/components/blocks/contactBannerBlock";
-import ServicesBlock from "@/components/blocks/servicesBlock";
+import GrowingListBlock from "@/components/blocks/growingListBlock";
 import CasesBlock from "@/components/blocks/casesBlock";
 import MozaikBlock from "@/components/blocks/mozaikBlock";
 
@@ -61,8 +61,8 @@ function renderBlock(
       return <TrustBarBlock key={block._key} block={block} />;
     case "contactBannerSection":
       return <ContactBannerBlock key={block._key} block={block} />;
-    case "servicesSection":
-      return <ServicesBlock key={block._key} block={block} />;
+    case "growingListSection":
+      return <GrowingListBlock key={block._key} block={block} />;
     case "casesSection":
       return <CasesBlock key={block._key} block={block} cases={cases} />;
     case "mozaikSection":
