@@ -202,6 +202,9 @@ export const translationsQuery = groq`
       submit,
       fieldName, fieldEmail, fieldCompany, fieldTopic, fieldMessage,
       topicPlaceholder, phName, phEmail, phCompany, phMessageContact, phMessageBook
+    },
+    cookieConsent {
+      title, body, accept, reject, policyLabel, policyHref
     }
   }
 `

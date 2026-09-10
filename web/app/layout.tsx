@@ -11,6 +11,8 @@ import type { NavData } from "@/components/layout/nav";
 import { NavThemeProvider } from "@/context/NavThemeContext";
 import { ContactModalProvider } from "@/context/ContactModalContext";
 import ContactModal, { type ModalsData } from "@/components/layout/contactModal";
+import { CookieConsentProvider } from "@/context/CookieConsentContext";
+import CookieConsent from "@/components/layout/cookieConsent";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -53,10 +55,13 @@ export default async function RootLayout({
       <body>
         <NavThemeProvider>
           <ContactModalProvider>
-            <Nav data={navData} />
-            {children}
-            <Footer data={footerData} />
-            <ContactModal data={modalsData ?? {}} t={translations.modal} />
+            <CookieConsentProvider>
+              <Nav data={navData} />
+              {children}
+              <Footer data={footerData} />
+              <ContactModal data={modalsData ?? {}} t={translations.modal} />
+              <CookieConsent t={translations.cookieConsent} />
+            </CookieConsentProvider>
           </ContactModalProvider>
         </NavThemeProvider>
       </body>

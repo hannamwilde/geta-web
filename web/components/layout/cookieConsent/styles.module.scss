@@ -1,0 +1,113 @@
+.banner {
+  position: fixed;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: var(--gutter);
+  z-index: 900;
+  margin: 0 auto;
+  max-width: 720px;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  padding: var(--sp-md) var(--sp-lg);
+  border-radius: var(--r-lg);
+  background: var(--forest);
+  color: var(--paper);
+  box-shadow: var(--shadow-float);
+  animation: consentIn 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Focused on mount so it is announced; the ring itself is just noise. */
+  &:focus {
+    outline: none;
+  }
+
+  .text {
+    flex: 1;
+  }
+
+  .title {
+    margin: 0 0 var(--sp-3xs);
+    font-size: var(--fs-h4);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .body {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .policyLink {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.15s;
+
+    &:hover {
+      color: var(--lime);
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: var(--sp-2xs);
+    flex-shrink: 0;
+  }
+
+  .btn {
+    padding: var(--sp-xs) var(--sp-md);
+    border-radius: var(--r-pill);
+    font-size: 15px;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--paper);
+    white-space: nowrap;
+    transition:
+      background 0.15s,
+      border-color 0.15s,
+      transform 0.18s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* The global ring is forest, invisible on this panel. */
+    &:focus-visible {
+      outline-color: var(--paper);
+    }
+  }
+}
+
+@media (max-width: 760px) {
+  .banner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--sp-sm);
+    padding: var(--sp-md);
+
+    .actions .btn {
+      flex: 1;
+      text-align: center;
+    }
+  }
+}
+
+@keyframes consentIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner {
+    animation: none;
+  }
+}

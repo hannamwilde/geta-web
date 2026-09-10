@@ -1,21 +1,15 @@
-/* ================================================
-   Blog post page
-   ================================================ */
-
 .page {
   background: var(--cream-soft);
 }
 
-/* ── Hero ──────────────────────────────────────────────────────── */
 .hero {
   position: relative;
   isolation: isolate;
-  background: var(--forest);
+  background: var(--forest-soft);
   color: var(--paper);
   padding-top: clamp(var(--sp-3xl), 12vw, var(--sp-4xl));
   padding-bottom: clamp(var(--sp-xl), 6vw, var(--sp-2xl));
 
-  /* With a cover image the hero becomes a letterbox band, content sitting at its foot. */
   &[data-has-cover="true"] {
     display: flex;
     align-items: flex-end;
@@ -38,105 +32,51 @@
     z-index: -1;
     background-image: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.71) 0%,
-      rgba(0, 0, 0, 0.61) 45%,
-      rgba(0, 0, 0, 0.85) 100%
+      rgba(2, 46, 44, 0.12) 0%,
+      rgba(2, 46, 44, 0.18) 55%,
+      rgba(2, 46, 44, 0.38) 100%
     );
   }
 
   .heroContent {
     position: relative;
-  }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-2xs);
+      margin-bottom: var(--sp-sm);
 
-  .breadcrumb {
-    font-size: 13px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: clamp(var(--sp-md), 2.5vw, var(--sp-lg));
-    display: block;
-
-    a {
-      color: rgba(255, 255, 255, 0.6);
-      transition: color 0.15s;
-
-      &:hover {
-        color: rgba(255, 255, 255, 0.9);
+      .tag {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--paper);
+        background: var(--forest);
+        padding: var(--sp-3xs) var(--sp-xs);
+        border-radius: var(--r-pill);
       }
     }
-  }
 
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-2xs);
-    margin-bottom: var(--sp-sm);
-
-    .tag {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--forest);
-      background: var(--blue);
-      padding: var(--sp-3xs) var(--sp-xs);
-      border-radius: var(--r-pill);
-    }
-  }
-
-  .title {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: var(--fs-h1);
-    line-height: 1;
-    letter-spacing: -0.04em;
-    color: #ffffff;
-    margin: 0 0 var(--sp-md);
-    max-width: 18ch;
-    text-wrap: balance;
-  }
-
-  .excerpt {
-    font-size: var(--fs-subtitle);
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.78);
-    margin: 0 0 var(--sp-lg);
-    max-width: 56ch;
-  }
-
-  .meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-2xs) var(--sp-sm);
-    font-size: 14px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.55);
-
-    .author {
-      color: rgba(255, 255, 255, 0.75);
-      font-weight: 600;
-    }
-  }
-
-  &[data-has-cover="true"] {
-    .breadcrumb,
-    .breadcrumb a {
-      color: rgba(255, 255, 255, 0.85);
-    }
-    .excerpt {
-      color: rgba(255, 255, 255, 0.92);
-    }
     .meta {
-      color: rgba(255, 255, 255, 0.85);
-    }
-    .meta .author {
-      color: rgba(255, 255, 255, 0.95);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-2xs) var(--sp-sm);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--paper);
+
+      .author {
+        color: var(--paper);
+        font-weight: 600;
+      }
     }
   }
 }
 
-/* ── Body ──────────────────────────────────────────────────────── */
 .body {
   .prose {
+    max-width: 100ch;
     font-size: var(--fs-body);
     line-height: 1.7;
     color: var(--ink);
@@ -147,7 +87,7 @@
       font-size: var(--fs-h2);
       letter-spacing: -0.03em;
       line-height: 1.1;
-      margin: 2em 0 0.6em;
+      margin: 1em 0 0.6em;
       color: var(--ink);
     }
 
@@ -156,7 +96,7 @@
       font-weight: 700;
       font-size: var(--fs-h3);
       letter-spacing: -0.02em;
-      margin: 1.6em 0 0.5em;
+      margin: 0.6em 0 0.5em;
       color: var(--ink);
     }
 
@@ -165,7 +105,7 @@
       font-weight: 700;
       font-size: var(--fs-h4);
       letter-spacing: -0.01em;
-      margin: 1.4em 0 0.4em;
+      margin: 0.4em 0 0.4em;
       color: var(--ink);
     }
 
@@ -222,7 +162,6 @@
   }
 }
 
-/* ── Back link ─────────────────────────────────────────────────── */
 .back {
   padding: 0 0 clamp(var(--sp-xl), 6vw, var(--sp-3xl));
 

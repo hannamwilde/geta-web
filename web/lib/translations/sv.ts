@@ -31,6 +31,16 @@ const sv = {
     phMessageContact: "Berätta vad du behöver hjälp med…",
     phMessageBook: "Berätta gärna lite om dig och ditt projekt…",
   },
+  cookieConsent: {
+    title: "Vi använder kakor",
+    body: "Vi använder kakor för att förstå hur webbplatsen används. Du väljer själv om vi får göra det.",
+    accept: "Godkänn",
+    reject: "Neka",
+    policyLabel: "Läs mer om kakor",
+    // Empty until a cookie policy page exists in Sanity — the link is hidden
+    // rather than pointing at a 404. `as string` keeps it widened for overrides.
+    policyHref: "" as string,
+  },
 } as const;
 
 export default sv;

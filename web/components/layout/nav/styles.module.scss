@@ -26,7 +26,8 @@
   background: var(--forest-deep);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 19px;
-  padding: var(--sp-2xs) var(--sp-2xs) var(--sp-2xs) var(--sp-sm);
+  padding: var(--sp-2xs) var(--sp-sm);
+  margin: 0 calc(var(--sp-sm) * -1);
   box-shadow:
     0 14px 36px -18px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.07);
