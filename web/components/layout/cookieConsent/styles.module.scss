@@ -16,7 +16,6 @@
   box-shadow: var(--shadow-float);
   animation: consentIn 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
 
-  /* Focused on mount so it is announced; the ring itself is just noise. */
   &:focus {
     outline: none;
   }
@@ -72,11 +71,6 @@
     &:hover {
       background: rgba(255, 255, 255, 0.18);
       border-color: rgba(255, 255, 255, 0.45);
-    }
-
-    /* The global ring is forest, invisible on this panel. */
-    &:focus-visible {
-      outline-color: var(--paper);
     }
   }
 }

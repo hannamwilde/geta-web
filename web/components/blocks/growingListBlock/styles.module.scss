@@ -63,8 +63,6 @@
     margin-inline: auto;
   }
 
-
-  /* Hovering the grid shrinks every card; the hovered one expands. */
   @media (hover: hover) and (min-width: 861px) {
     &:hover .card {
       flex-grow: 0.85;

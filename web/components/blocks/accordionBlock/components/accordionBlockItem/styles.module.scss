@@ -95,8 +95,6 @@
   padding: 0 clamp(var(--sp-sm), 2vw, var(--sp-lg));
 }
 
-// Only indent past the number badge when there is one, so the answer lines up
-// with the question either way.
 .item[data-numbered="true"] .panelInner {
   padding-left: calc(clamp(var(--sp-sm), 2vw, var(--sp-lg)) + 40px + clamp(var(--sp-sm), 1.6vw, var(--sp-md)));
 

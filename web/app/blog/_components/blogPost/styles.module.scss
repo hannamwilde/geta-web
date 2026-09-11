@@ -75,6 +75,7 @@
 }
 
 .body {
+  padding: var(--sp-xs) 0;
   .prose {
     max-width: 100ch;
     font-size: var(--fs-body);

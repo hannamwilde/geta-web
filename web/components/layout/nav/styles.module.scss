@@ -92,7 +92,6 @@
   }
 }
 
-/* Mega menu panel, rendered inside the open .linkWrap. */
 .mega {
   position: absolute;
   top: calc(100% + 8px);
@@ -154,7 +153,6 @@
   }
 }
 
-/* Mobile bar: logo left, burger hard right — no CTA to make room for. */
 .mobileBar {
   justify-content: space-between;
   padding: var(--sp-2xs) var(--sp-xs) var(--sp-2xs) var(--sp-sm);
@@ -170,7 +168,6 @@
   }
 }
 
-/* Action links are rendered into both .actions and .mobileActions. */
 .shop {
   display: inline-flex;
   align-items: center;
@@ -219,8 +216,6 @@
   }
 }
 
-/* Floating panel: dark like the bar above it, but borrowing the mega menu's
-   geometry — inset to the same gutter, rounded and lifted off the page. */
 .mobile {
   display: flex;
   flex-direction: column;
@@ -240,8 +235,6 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   }
 
-  /* An expandable item and its sub-list count as one entry, so the rule sits on
-     the group and the parent button drops its own. */
   .mobileGroup {
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 
@@ -249,7 +242,6 @@
       border-bottom: none;
     }
 
-    /* Parent row: label left, chevron hard right, flipping when expanded. */
     .mobileParent {
       display: flex;
       align-items: center;
@@ -272,7 +264,6 @@
       }
     }
 
-    /* Sub-items, indented under their parent. */
     .mobileSub {
       display: flex;
       flex-direction: column;
@@ -296,9 +287,6 @@
     }
   }
 
-  /* Action links reuse the desktop markup (icon + arrow), laid out inline at the
-     foot of the panel. Colours come from .shop/.cta as-is — the panel is dark, so
-     only the sizing needs bumping for touch. */
   .mobileActions {
     display: flex;
     align-items: center;

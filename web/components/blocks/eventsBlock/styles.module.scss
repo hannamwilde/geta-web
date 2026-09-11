@@ -1,13 +1,7 @@
-/* ================================================
-   Events — dark theme (charcoal base, forest cards)
-   Mirrors design: components/event-page.jsx
-   ================================================ */
-
 .evPage {
   background: #2e2e2e;
 }
 
-/* ---------- Sections ---------- */
 .evSection {
   padding: clamp(var(--sp-2xl), 7vw, var(--sp-3xl)) 0;
 
@@ -16,7 +10,6 @@
   }
 }
 
-/* ---------- Section heads ---------- */
 .secHead {
   margin-inline: auto;
   margin-bottom: clamp(var(--sp-lg), 3.4vw, var(--sp-xl));
@@ -40,7 +33,6 @@
   }
 }
 
-/* ---------- Upcoming cards ---------- */
 .upcomingList {
   display: flex;
   flex-direction: column;
@@ -188,7 +180,6 @@
   }
 }
 
-/* Image variant swaps the card to a two-column grid. */
 .upcomingCardWithImage {
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
@@ -201,7 +192,6 @@
   }
 }
 
-/* ---------- Past events grid ---------- */
 .pastGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -247,7 +237,6 @@
     margin-bottom: auto;
   }
 
-  /* Webinar thumbnail with play overlay */
   .webinarThumb {
     position: relative;
     border-radius: calc(var(--r-lg) - 6px);
@@ -328,8 +317,6 @@
   }
 }
 
-/* ---------- Responsive ----------
-   Kept last so it still overrides .upcomingCardWithImage's padding. */
 @media (max-width: 600px) {
   .upcomingCard {
     padding: var(--sp-md);

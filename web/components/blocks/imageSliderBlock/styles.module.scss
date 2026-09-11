@@ -14,16 +14,10 @@
   align-items: center;
   overflow: hidden;
 
-  /*
-   * Holds a 16:9 shape by default so the photo gets room to read, capped against
-   * the viewport so the slider can't push the fold away. Editors can override the
-   * height in Sanity; long copy still grows the slide past it.
-   */
   min-height: var(--slider-h, min(56.25vw, 82vh));
   padding-top: var(--slider-pt, var(--sp-4xl));
   padding-bottom: var(--slider-pb, clamp(var(--sp-2xl), 8vw, var(--sp-4xl)));
 
-  /* 16:9 is too letterboxed on a phone — go taller so the subject survives the crop. */
   @media (max-width: 760px) {
     min-height: var(--slider-h, min(120vw, 78vh));
   }
@@ -62,7 +56,6 @@
     letter-spacing: -0.035em;
     color: var(--slider-title, var(--paper));
     text-wrap: balance;
-    /* Swedish compounds get long — hyphenate rather than run off the slide. */
     hyphens: auto;
     overflow-wrap: break-word;
   }
@@ -78,7 +71,6 @@
 
   .cta {
     margin-top: var(--sp-lg);
-    /* Matches .btn-primary; the vars only kick in when an editor overrides them. */
     background: var(--slider-cta-bg, var(--forest));
     color: var(--slider-cta-color, var(--paper));
 
@@ -89,7 +81,6 @@
   }
 }
 
-/* Alignment — mirrors the hero's data attributes. */
 .slider[data-align="center"] .copy {
   margin-inline: auto;
 }
@@ -111,7 +102,6 @@
   }
 }
 
-/* Text shadow keeps copy legible on busy photos when no overlay is set. */
 .title,
 .text {
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);

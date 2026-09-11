@@ -16,7 +16,6 @@
     filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.45));
   }
 
-  /* Without the scroll animation the mark simply sits assembled. */
   @media (prefers-reduced-motion: reduce) {
     .piece {
       opacity: 1;

@@ -1,12 +1,7 @@
-/* ================================================
-   Blog list — light (cream) theme
-   ================================================ */
-
 .page {
   background: var(--cream-soft);
 }
 
-/* ── Hero ──────────────────────────────────────────────────────── */
 .hero {
   background: var(--forest);
   color: var(--paper);
@@ -32,7 +27,6 @@
   }
 }
 
-/* ── Post list ─────────────────────────────────────────────────── */
 .list {
   padding: clamp(var(--sp-xl), 6vw, var(--sp-3xl)) 0
     clamp(var(--sp-2xl), 8vw, var(--sp-4xl));
@@ -150,7 +144,6 @@
   }
 }
 
-/* ── Pagination ────────────────────────────────────────────────── */
 .pagination {
   display: flex;
   justify-content: center;

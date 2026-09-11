@@ -35,7 +35,6 @@ function Pagination({
 }) {
   if (totalPages <= 1) return null;
 
-  // Build the page number list with ellipsis
   const pages: (number | "…")[] = [];
   const delta = 2;
   const left = page - delta;

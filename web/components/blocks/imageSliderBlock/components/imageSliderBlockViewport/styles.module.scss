@@ -36,7 +36,6 @@
       right: clamp(8px, 1.6vw, 28px);
     }
 
-    /* Phones swipe the track instead — the arrows would sit on top of the copy. */
     @media (max-width: 760px) {
       display: none;
     }

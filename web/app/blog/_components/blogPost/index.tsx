@@ -26,7 +26,6 @@ function formatDate(dateStr: string) {
 }
 
 export default function BlogPost({ post }: { post: PostData }) {
-  // Wide crop around the hotspot — the hero is a letterbox band, not a 1200x630 card.
   const coverUrl = post.coverImage?.asset
     ? urlFor(post.coverImage).width(1920).height(900).url()
     : null;

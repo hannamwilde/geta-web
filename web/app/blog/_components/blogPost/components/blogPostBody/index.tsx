@@ -9,8 +9,6 @@ type SanityImage = {
   alt?: string;
 };
 
-// PortableText renders nothing for types/marks it doesn't know, so every custom
-// type and annotation the `post.body` schema allows needs an entry here.
 const components: PortableTextComponents = {
   types: {
     image: ({ value }: { value: SanityImage }) => {
@@ -30,11 +28,14 @@ const components: PortableTextComponents = {
   marks: {
     link: ({ value, children }) => {
       const href = normalizeHref(value?.href);
-      const external = /^https?:\/\//.test(href) && !href.includes("getadigital.com");
+      const external =
+        /^https?:\/\//.test(href) && !href.includes("getadigital.com");
       return (
         <a
           href={href}
-          {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          {...(external
+            ? { target: "_blank", rel: "noopener noreferrer" }
+            : {})}
         >
           {children}
         </a>

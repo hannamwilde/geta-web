@@ -6,7 +6,6 @@
   padding-bottom: clamp(var(--sp-2xl), 7vw, var(--sp-3xl));
   overflow: hidden;
 
-  /* Keeps content above the background video/overlay layer. */
   > :global(.container) {
     position: relative;
     z-index: 1;
@@ -148,7 +147,6 @@
   }
 }
 
-/* Layout variants */
 :global(.banner-block[data-layout="inline"] .bb-content) {
   display: flex;
   align-items: center;

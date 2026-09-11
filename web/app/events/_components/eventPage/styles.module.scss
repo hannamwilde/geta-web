@@ -1,13 +1,7 @@
-/* ================================================
-   EventPage — dark theme (forest hero, charcoal body)
-   Translated from design: styles-pim-webinar.css
-   ================================================ */
-
 .page {
   background: #2e2e2e;
 }
 
-/* ── Hero ──────────────────────────────────────────────────────── */
 .hero {
   position: relative;
   background: var(--forest);
@@ -34,7 +28,6 @@
     position: relative;
     z-index: 1;
 
-    /* ── Breadcrumb ────────────────────────────────────────────── */
     .breadcrumb {
       display: flex;
       align-items: center;
@@ -75,7 +68,6 @@
     gap: var(--sp-lg);
   }
 
-  /* ── Hero content ────────────────────────────────────────── */
   .pill {
     display: inline-flex;
     align-items: center;
@@ -167,7 +159,6 @@
     }
   }
 
-  /* ── Facts sidebar ───────────────────────────────────────── */
   .facts {
     display: flex;
     flex-direction: column;
@@ -208,7 +199,6 @@
   }
 }
 
-/* ── Image band ────────────────────────────────────────────────── */
 .band {
   background: #2e2e2e;
   padding: clamp(var(--sp-lg), 4vw, var(--sp-2xl)) 0 0;
@@ -223,13 +213,11 @@
   }
 }
 
-/* ── Shared section styles ─────────────────────────────────────── */
 .section {
   padding-top: clamp(var(--sp-2xl), 7vw, var(--sp-3xl));
   background: #2e2e2e;
 }
 
-/* Used under both .secHead and .twoColHead, so these stay at the root. */
 .eyebrow {
   display: inline-block;
   font-size: 12px;
@@ -270,7 +258,6 @@
   margin-bottom: clamp(var(--sp-lg), 3.4vw, var(--sp-xl));
 }
 
-/* ── Takeaways (two-column) ────────────────────────────────────── */
 .twoCol {
   display: grid;
   grid-template-columns: 0.95fr 1.05fr;
@@ -331,7 +318,6 @@
   }
 }
 
-/* ── Agenda (2-column card grid) ───────────────────────────────── */
 .agenda {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -359,7 +345,6 @@
       box-shadow: 0 24px 48px -26px rgba(0, 0, 0, 0.6);
     }
 
-    /* last odd item spans full width */
     &:last-child:nth-child(odd) {
       grid-column: 1 / -1;
 
@@ -396,14 +381,11 @@
   }
 }
 
-/* ── Speakers ──────────────────────────────────────────────────── */
 .speakers {
   display: flex;
   flex-direction: column;
   gap: var(--sp-sm);
 
-  /* .speaker and .speakerNoPhoto are alternatives on the same element, so the
-     shared children hang off .speakers rather than either variant. */
   .speaker {
     display: grid;
     grid-template-columns: 0.42fr 1fr;
@@ -465,7 +447,6 @@
   }
 }
 
-/* ── CTA band ──────────────────────────────────────────────────── */
 .cta {
   margin-top: clamp(var(--sp-2xl), 7vw, var(--sp-3xl));
   background: var(--forest);

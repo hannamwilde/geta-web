@@ -6,20 +6,12 @@
   color: var(--paper);
   overflow: hidden;
 
-  /*
-   * With a background image or video, hold an aspect ratio so the media gets
-   * room to read instead of being cropped to a thin strip by short content.
-   * min-height (not aspect-ratio) keeps it a floor: a long headline or a second
-   * CTA still grows the section rather than clipping against overflow: hidden.
-   * Capped against the viewport height so the hero can't push the fold away.
-   */
   &[data-has-media="true"] {
-    min-height: min(56.25vw, 82vh); /* 16:9 */
+    min-height: min(56.25vw, 82vh);
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    /* 16:9 is too letterboxed on a phone — go taller so the subject survives the crop. */
     @media (max-width: 760px) {
       min-height: min(110vw, 72vh);
     }
@@ -38,7 +30,6 @@
   position: relative;
 
   .mark {
-    /* --hero-mark-w is set only when an editor overrides the width in Sanity. */
     width: var(--hero-mark-w, clamp(52px, 7vw, 80px));
     max-width: 100%;
     height: auto;
@@ -109,7 +100,6 @@
   }
 }
 
-/* Alignment */
 :global(.hero-section[data-align="center"] .hero-copy) {
   margin-inline: auto;
 }
@@ -135,7 +125,6 @@
   }
 }
 
-/* CTAs are rendered by HeroCTAs (client component) but styled globally */
 :global(.hero-ctas) {
   display: flex;
   flex-wrap: wrap;
@@ -150,7 +139,6 @@
   justify-content: flex-end;
 }
 
-/* Invert button colours for dark forest background */
 :global(.hero-ctas .btn-primary) {
   background: var(--paper);
   color: var(--forest);
