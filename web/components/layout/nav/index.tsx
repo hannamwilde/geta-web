@@ -6,6 +6,7 @@ import Icon from "@/components/ui/icon";
 import { normalizeHref } from "@/lib/href";
 import { useNavTheme } from "@/context/NavThemeContext";
 import { useContactModal } from "@/context/ContactModalContext";
+import type { Translations } from "@/lib/translations";
 import styles from "./styles.module.scss";
 
 type PageRef = { slug?: { current?: string } } | null;
@@ -49,9 +50,9 @@ export type NavData = {
   rightLinks?: RightLink[];
 };
 
-type Props = { data: NavData | null };
+type Props = { data: NavData | null; t: Translations["a11y"] };
 
-export default function Nav({ data }: Props) {
+export default function Nav({ data, t }: Props) {
   const { theme } = useNavTheme();
   const [overMozaik, setOverMozaik] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -169,7 +170,7 @@ export default function Nav({ data }: Props) {
       <div className={`container ${styles.inner}`}>
         {/* Desktop bar */}
         <div className={`${styles.bar} hide-mobile`} ref={barRef}>
-          <a href="/" className={styles.logo} aria-label="Geta Digital home">
+          <a href="/" className={styles.logo} aria-label={t.homeLink}>
             <Image
               src="/assets/geta-logo-white.png"
               alt="Geta"
@@ -254,7 +255,7 @@ export default function Nav({ data }: Props) {
 
         {/* Mobile — same bar treatment as the desktop nav */}
         <div className={`${styles.mobileBar} show-mobile`}>
-          <a href="/" className={styles.logo} aria-label="Geta Digital home">
+          <a href="/" className={styles.logo} aria-label={t.homeLink}>
             <Image
               src="/assets/geta-logo-white.png"
               alt="Geta"
@@ -269,7 +270,7 @@ export default function Nav({ data }: Props) {
               setMobileOpen((o) => !o);
               setOpenMobileItem(null);
             }}
-            aria-label="Menu"
+            aria-label={t.menu}
           >
             <Icon name={mobileOpen ? "close" : "menu"} size={24} />
           </button>

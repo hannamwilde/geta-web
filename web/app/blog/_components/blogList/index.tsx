@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/client";
+import { fetchTranslations } from "@/lib/translations/server";
+import type { Translations } from "@/lib/translations";
 import styles from "./styles.module.scss";
 
 type PostItem = {
@@ -29,9 +31,11 @@ function pageHref(page: number) {
 function Pagination({
   page,
   totalPages,
+  t,
 }: {
   page: number;
   totalPages: number;
+  t: Translations["blogList"];
 }) {
   if (totalPages <= 1) return null;
 
@@ -49,13 +53,13 @@ function Pagination({
   }
 
   return (
-    <nav className={styles.pagination} aria-label="Sidnavigation">
+    <nav className={styles.pagination} aria-label={t.paginationLabel}>
       <Link
         href={pageHref(page - 1)}
         className={`${styles.pageBtn} ${page === 1 ? styles.pageBtnDisabled : ""}`}
         aria-disabled={page === 1}
         tabIndex={page === 1 ? -1 : undefined}
-        aria-label="Föregående sida"
+        aria-label={t.prevPage}
       >
         ←
       </Link>
@@ -82,7 +86,7 @@ function Pagination({
         className={`${styles.pageBtn} ${page === totalPages ? styles.pageBtnDisabled : ""}`}
         aria-disabled={page === totalPages}
         tabIndex={page === totalPages ? -1 : undefined}
-        aria-label="Nästa sida"
+        aria-label={t.nextPage}
       >
         →
       </Link>
@@ -90,7 +94,7 @@ function Pagination({
   );
 }
 
-export default function BlogList({
+export default async function BlogList({
   posts,
   page,
   totalPages,
@@ -99,21 +103,21 @@ export default function BlogList({
   page: number;
   totalPages: number;
 }) {
+  const { blogList: t } = await fetchTranslations();
+
   return (
     <div className={styles.page}>
       <header className={styles.hero}>
         <div className="container">
-          <h1 className={styles.heroTitle}>Blogg</h1>
-          <p className={styles.heroLead}>
-            Insikter, nyheter och best practices från teamet på Geta Digital.
-          </p>
+          <h1 className={styles.heroTitle}>{t.title}</h1>
+          <p className={styles.heroLead}>{t.lead}</p>
         </div>
       </header>
 
       <section className={styles.list}>
         <div className="container">
           {posts.length === 0 ? (
-            <p className={styles.empty}>Inga inlägg publicerade ännu.</p>
+            <p className={styles.empty}>{t.empty}</p>
           ) : (
             <>
               <div className={styles.grid}>
@@ -164,7 +168,7 @@ export default function BlogList({
                 })}
               </div>
 
-              <Pagination page={page} totalPages={totalPages} />
+              <Pagination page={page} totalPages={totalPages} t={t} />
             </>
           )}
         </div>

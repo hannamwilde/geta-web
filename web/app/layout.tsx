@@ -5,6 +5,7 @@ import { client } from "@/sanity/client";
 import { navQuery, footerQuery, modalsQuery } from "@/sanity/queries";
 import { fetchTranslations } from "@/lib/translations/server";
 import { SITE_URL } from "@/lib/siteUrl";
+import { fetchSiteSettings, htmlLang } from "@/lib/seo";
 import Nav from "@/components/layout/nav";
 import Footer, { type FooterData } from "@/components/layout/footer";
 import type { NavData } from "@/components/layout/nav";
@@ -22,41 +23,47 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: { default: "Geta Digital", template: "%s | Geta Digital" },
-  description:
-    "Geta Digital är en nordisk e-handelskonsult specialiserad på strategi, design och teknisk utveckling för e-handel.",
-  openGraph: {
-    siteName: "Geta Digital",
-    locale: "sv_SE",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "@getadigital",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const site = await fetchSiteSettings();
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: { default: site.defaultTitle, template: site.titleTemplate },
+    description: site.description,
+    ...(site.noIndex && { robots: { index: false, follow: false } }),
+    openGraph: {
+      siteName: site.siteName,
+      locale: site.locale,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      ...(site.twitterSite && { site: site.twitterSite }),
+    },
+  };
+}
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [navData, footerData, modalsData, translations] = await Promise.all([
-    client.fetch<NavData>(navQuery),
-    client.fetch<FooterData>(footerQuery),
-    client.fetch<ModalsData>(modalsQuery),
-    fetchTranslations(),
-  ]);
+  const [navData, footerData, modalsData, translations, site] =
+    await Promise.all([
+      client.fetch<NavData>(navQuery),
+      client.fetch<FooterData>(footerQuery),
+      client.fetch<ModalsData>(modalsQuery),
+      fetchTranslations(),
+      fetchSiteSettings(),
+    ]);
 
   return (
-    <html lang="sv" className={montserrat.variable}>
+    <html lang={htmlLang(site.locale)} className={montserrat.variable}>
       <body>
         <NavThemeProvider>
           <ContactModalProvider>
             <CookieConsentProvider>
-              <Nav data={navData} />
+              <Nav data={navData} t={translations.a11y} />
               {children}
               <Footer data={footerData} />
               <ContactModal data={modalsData ?? {}} t={translations.modal} />

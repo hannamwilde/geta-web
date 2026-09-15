@@ -4,10 +4,13 @@ import MessagePage from "@/components/layout/messagePage";
 import NavThemeSetter from "@/components/layout/navThemeSetter";
 import { fetchTranslations } from "@/lib/translations/server";
 
-export const metadata: Metadata = {
-  title: "Sidan kunde inte hittas",
-  robots: { index: false, follow: true },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await fetchTranslations();
+  return {
+    title: t.errorPages.notFoundTitle,
+    robots: { index: false, follow: true },
+  };
+}
 
 export default async function NotFound() {
   const t = await fetchTranslations();

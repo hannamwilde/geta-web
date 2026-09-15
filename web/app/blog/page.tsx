@@ -1,15 +1,22 @@
 import type { Metadata } from "next";
 import { client } from "@/sanity/client";
 import { blogListQuery, blogCountQuery } from "@/sanity/queries";
+import { fetchTranslations } from "@/lib/translations/server";
+import { buildMetadata } from "@/lib/seo";
 import BlogList from "./_components/blogList";
 import NavThemeSetter from "@/components/layout/navThemeSetter";
 
 export const revalidate = 30;
 
-export const metadata: Metadata = {
-  title: "Blog",
-  alternates: { canonical: "/blog" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const { blogList } = await fetchTranslations();
+
+  return buildMetadata({
+    title: blogList.metaTitle,
+    description: blogList.lead,
+    path: "/blog",
+  });
+}
 
 const PER_PAGE = 9;
 

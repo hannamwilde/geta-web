@@ -4,6 +4,8 @@ import ImageSliderBlockViewport from "./components/imageSliderBlockViewport";
 import ImageSliderBlockCta, { type CTA } from "./components/imageSliderBlockCta";
 import styles from "./styles.module.scss";
 import { resolveBorder, type Border } from "@/lib/border";
+import { fetchTranslations } from "@/lib/translations/server";
+import { fill } from "@/lib/translations";
 
 type SanityImage = { asset: unknown; alt?: string };
 
@@ -40,7 +42,8 @@ type Props = {
   };
 };
 
-export default function ImageSliderBlock({ block }: Props) {
+export default async function ImageSliderBlock({ block }: Props) {
+  const { a11y } = await fetchTranslations();
   const slides = (block.slides ?? []).filter((slide) => slide.backgroundImage?.asset);
   if (!slides.length) return null;
 
@@ -66,6 +69,7 @@ export default function ImageSliderBlock({ block }: Props) {
       data-text-align={block.textAlignment || block.alignment || "left"}
     >
       <ImageSliderBlockViewport
+        t={a11y}
         count={slides.length}
         autoplay={block.autoplay !== false}
         intervalMs={(block.autoplayInterval ?? 6) * 1000}
@@ -77,8 +81,11 @@ export default function ImageSliderBlock({ block }: Props) {
             key={slide._key}
             className={styles.slide}
             role="group"
-            aria-roledescription="bild"
-            aria-label={`${i + 1} av ${slides.length}`}
+            aria-roledescription={a11y.sliderRole}
+            aria-label={fill(a11y.sliderPosition, {
+              n: i + 1,
+              total: slides.length,
+            })}
           >
             <Image
               className={styles.image}

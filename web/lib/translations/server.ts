@@ -12,6 +12,9 @@ function merge(base: Translations, override: DeepPartial<Translations> | null): 
     errorPages: { ...base.errorPages, ...override.errorPages },
     modal: { ...base.modal, ...override.modal },
     cookieConsent: { ...base.cookieConsent, ...override.cookieConsent },
+    blogList: { ...base.blogList, ...override.blogList },
+    eventPage: { ...base.eventPage, ...override.eventPage },
+    a11y: { ...base.a11y, ...override.a11y },
   }
 }
 

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { normalizeHref } from '@/lib/href'
 import FooterToTop from './components/footerToTop'
+import { fetchTranslations } from '@/lib/translations/server'
 import styles from './styles.module.scss'
 
 type SocialLink = { _key?: string; platform: string; url: string }
@@ -44,7 +45,8 @@ const DEFAULT_SOCIALS: SocialLink[] = [
   { platform: 'instagram', url: 'https://www.instagram.com/getadigitalsverige/' },
 ]
 
-export default function Footer({ data }: Props) {
+export default async function Footer({ data }: Props) {
+  const { a11y } = await fetchTranslations()
   const tagline = data?.tagline || 'Nordisk e-handel som håller — sedan 2010.'
   const email = data?.email || 'post@getadigital.com'
   const phone = data?.phone || '026 390 13'
@@ -57,7 +59,7 @@ export default function Footer({ data }: Props) {
       <div className="container">
         <div className={styles.top}>
           <div className={styles.identity}>
-            <a href="/" className={styles.wordmarkLink} aria-label="Geta Digital">
+            <a href="/" className={styles.wordmarkLink} aria-label={a11y.homeLink}>
               <Image src="/assets/geta-logo-white.png" alt="Geta" width={512} height={157} style={{ height: 44, width: 'auto', display: 'block' }} />
             </a>
             <p className={styles.tagline}>{tagline}</p>
@@ -116,7 +118,7 @@ export default function Footer({ data }: Props) {
 
         <div className={styles.foot}>
           <div className={styles.org}>{orgLine}</div>
-          <FooterToTop />
+          <FooterToTop label={a11y.toTop} />
         </div>
       </div>
     </footer>

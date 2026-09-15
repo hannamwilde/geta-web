@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { urlFor } from "@/sanity/client";
+import { fetchTranslations } from "@/lib/translations/server";
 import BackButton from "./components/backButton";
 import styles from "./styles.module.scss";
 
@@ -98,8 +99,10 @@ function IconArrowRight() {
   );
 }
 
-export default function EventPage({ event }: { event: EventPageData }) {
-  const typeLabel = event.eventType === "webinar" ? "Webinar" : "Evenemang";
+export default async function EventPage({ event }: { event: EventPageData }) {
+  const { eventPage: t, a11y } = await fetchTranslations();
+  const typeLabel =
+    event.eventType === "webinar" ? t.typeWebinar : t.typeEvent;
   const hasTakeaways =
     (event.takeaways && event.takeaways.length > 0) ||
     event.takeawaysHeadline ||
@@ -115,8 +118,8 @@ export default function EventPage({ event }: { event: EventPageData }) {
     <div className={styles.page}>
       <header className={styles.hero}>
         <div className={`container ${styles.heroInner}`}>
-          <nav className={styles.breadcrumb} aria-label="Brödsmulor">
-            <BackButton label="← Tillbaka" className={styles.backLink} />
+          <nav className={styles.breadcrumb} aria-label={a11y.breadcrumb}>
+            <BackButton label={`← ${t.back}`} className={styles.backLink} />
             <span aria-hidden>/</span>
             <span>{event.title}</span>
           </nav>
@@ -146,13 +149,13 @@ export default function EventPage({ event }: { event: EventPageData }) {
 
             <aside className={styles.facts}>
               <div className={styles.fact}>
-                <span className={styles.factLabel}>Datum</span>
+                <span className={styles.factLabel}>{t.factDate}</span>
                 <span className={styles.factValue}>
                   {formatDate(event.date)}
                 </span>
               </div>
               <div className={styles.fact}>
-                <span className={styles.factLabel}>Tid</span>
+                <span className={styles.factLabel}>{t.factTime}</span>
                 <span className={styles.factValue}>
                   {formatTime(event.date)}
                   {event.endDate ? `–${formatTime(event.endDate)}` : ""}
@@ -160,7 +163,7 @@ export default function EventPage({ event }: { event: EventPageData }) {
               </div>
               {event.location && (
                 <div className={styles.fact}>
-                  <span className={styles.factLabel}>Plats</span>
+                  <span className={styles.factLabel}>{t.factLocation}</span>
                   <span className={styles.factValue}>{event.location}</span>
                 </div>
               )}

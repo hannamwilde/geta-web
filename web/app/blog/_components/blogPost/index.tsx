@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/client";
+import { fetchTranslations } from "@/lib/translations/server";
 import BlogPostBody from "./components/blogPostBody";
 import styles from "./styles.module.scss";
 
@@ -25,7 +26,8 @@ function formatDate(dateStr: string) {
   });
 }
 
-export default function BlogPost({ post }: { post: PostData }) {
+export default async function BlogPost({ post }: { post: PostData }) {
+  const { blogList: t } = await fetchTranslations();
   const coverUrl = post.coverImage?.asset
     ? urlFor(post.coverImage).width(1920).height(900).url()
     : null;
@@ -87,7 +89,7 @@ export default function BlogPost({ post }: { post: PostData }) {
       <div className={styles.back}>
         <div className="container">
           <Link href="/blog" className={styles.backLink}>
-            ← Alla inlägg
+            ← {t.backToList}
           </Link>
         </div>
       </div>

@@ -2,10 +2,12 @@
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import Icon from "@/components/ui/icon";
+import { fill, type Translations } from "@/lib/translations";
 import styles from "./styles.module.scss";
 
 type Props = {
   children: ReactNode;
+  t: Translations["a11y"];
   count: number;
   autoplay: boolean;
   intervalMs: number;
@@ -20,6 +22,7 @@ type Props = {
  */
 export default function ImageSliderBlockViewport({
   children,
+  t,
   count,
   autoplay,
   intervalMs,
@@ -103,8 +106,8 @@ export default function ImageSliderBlockViewport({
     <div
       className={styles.viewport}
       role="group"
-      aria-roledescription="bildspel"
-      aria-label="Bildspel"
+      aria-roledescription={t.slider}
+      aria-label={t.slider}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -122,7 +125,7 @@ export default function ImageSliderBlockViewport({
             type="button"
             className={`${styles.arrow} ${styles.prev}`}
             onClick={() => step(-1)}
-            aria-label="Föregående bild"
+            aria-label={t.sliderPrev}
           >
             <Icon name="chevron-left" size={26} stroke={2} />
           </button>
@@ -130,7 +133,7 @@ export default function ImageSliderBlockViewport({
             type="button"
             className={`${styles.arrow} ${styles.next}`}
             onClick={() => step(1)}
-            aria-label="Nästa bild"
+            aria-label={t.sliderNext}
           >
             <Icon name="chevron-right" size={26} stroke={2} />
           </button>
@@ -145,7 +148,7 @@ export default function ImageSliderBlockViewport({
               type="button"
               className={styles.dot}
               onClick={() => goTo(i)}
-              aria-label={`Gå till bild ${i + 1}`}
+              aria-label={fill(t.sliderGoTo, { n: i + 1 })}
               aria-current={i === active || undefined}
             />
           ))}

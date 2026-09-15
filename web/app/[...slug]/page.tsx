@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { client, urlFor } from '@/sanity/client'
+import { client } from '@/sanity/client'
+import { buildMetadata } from '@/lib/seo'
 
 export const revalidate = 30
 import { pageBySlugQuery, allPageSlugsQuery, casesQuery, upcomingEventsQuery, pastEventsQuery } from '@/sanity/queries'
@@ -19,24 +20,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slugPath = slug.join('/')
   const page = await client.fetch(pageBySlugQuery, { slug: slugPath })
   const seo = page?.seo
-  const ogImageUrl = seo?.ogImage?.asset
-    ? urlFor(seo.ogImage).width(1200).height(630).url()
-    : undefined
-  const canonicalPath = `/${slugPath}`
 
-  return {
-    title: seo?.title ?? page?.title ?? undefined,
-    description: seo?.description ?? undefined,
-    ...(seo?.noIndex && { robots: { index: false, follow: false } }),
-    alternates: { canonical: canonicalPath },
-    openGraph: {
-      url: canonicalPath,
-      ...(ogImageUrl && {
-        images: [{ url: ogImageUrl, width: 1200, height: 630, alt: seo?.ogImage?.alt ?? page?.title ?? 'Geta Digital' }],
-      }),
-    },
-    ...(ogImageUrl && { twitter: { images: [ogImageUrl] } }),
-  }
+  return buildMetadata({
+    title: seo?.title ?? page?.title,
+    description: seo?.description,
+    path: `/${slugPath}`,
+    image: seo?.ogImage,
+    imageAlt: seo?.ogImage?.alt ?? page?.title,
+    noIndex: seo?.noIndex,
+  })
 }
 
 export default async function Page({ params }: Props) {

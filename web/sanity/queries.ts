@@ -57,7 +57,7 @@ const SECTIONS = `
     logos[]->{ _id, name, logo { asset, alt }, website },
     pillars[]{ _key, title, body, image { asset, alt, crop, hotspot }, linkLabel, linkType, href, pageRef->{ slug } },
     lede, ctaText,
-    cta { label, href },
+    cta { label, action, href, linkType, pageRef->{ slug } },
     components[]{ _key, label, description, icon, logo { asset, alt } },
     upcomingLabel, upcomingWebinarLabel, pastLabel, pastWebinarLabel, registerLabel,
     autoplay, autoplayInterval, showArrows, showDots, minHeight,
@@ -190,6 +190,14 @@ export const contactRecipientQuery = groq`
   *[_id == "modals"][0].contactRecipientEmail
 `
 
+export const siteSettingsQuery = groq`
+  *[_id == "siteSettings"][0] {
+    siteName, locale, defaultTitle, titleTemplate, description,
+    ogImage { asset, alt, crop, hotspot },
+    twitterSite, noIndex
+  }
+`
+
 export const translationsQuery = groq`
   *[_id == "translations"][0] {
     general { readMore, contact },
@@ -205,6 +213,17 @@ export const translationsQuery = groq`
     },
     cookieConsent {
       title, body, accept, reject, policyLabel, policyHref
+    },
+    blogList {
+      title, lead, empty, metaTitle, backToList,
+      paginationLabel, prevPage, nextPage
+    },
+    eventPage {
+      typeWebinar, typeEvent, factDate, factTime, factLocation, back
+    },
+    a11y {
+      homeLink, menu, toTop, breadcrumb, trustBar,
+      slider, sliderRole, sliderPrev, sliderNext, sliderGoTo, sliderPosition
     }
   }
 `

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { client, urlFor } from "@/sanity/client";
+import { client } from "@/sanity/client";
+import { buildMetadata } from "@/lib/seo";
 import { postBySlugQuery, allPostSlugsQuery } from "@/sanity/queries";
 import BlogPost from "../_components/blogPost";
 import NavThemeSetter from "@/components/layout/navThemeSetter";
@@ -19,29 +20,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await client.fetch(postBySlugQuery, { slug });
   if (!post) return {};
 
-  const ogImageUrl = post.coverImage?.asset
-    ? urlFor(post.coverImage).width(1200).height(630).url()
-    : undefined;
-
-  return {
+  return buildMetadata({
     title: post.title,
-    description: post.excerpt ?? undefined,
-    alternates: { canonical: `/blog/${slug}` },
-    openGraph: {
-      url: `/blog/${slug}`,
-      ...(ogImageUrl && {
-        images: [
-          {
-            url: ogImageUrl,
-            width: 1200,
-            height: 630,
-            alt: post.coverImage?.alt ?? post.title,
-          },
-        ],
-      }),
-    },
-    ...(ogImageUrl && { twitter: { images: [ogImageUrl] } }),
-  };
+    description: post.excerpt,
+    path: `/blog/${slug}`,
+    image: post.coverImage,
+    imageAlt: post.coverImage?.alt ?? post.title,
+    type: "article",
+  });
 }
 
 export default async function Page({ params }: Props) {

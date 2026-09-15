@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { client, urlFor } from "@/sanity/client";
+import { client } from "@/sanity/client";
+import { buildMetadata } from "@/lib/seo";
 import { eventBySlugQuery, allEventSlugsQuery } from "@/sanity/queries";
 import EventPage from "../_components/eventPage";
 import NavThemeSetter from "@/components/layout/navThemeSetter";
@@ -19,29 +20,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const event = await client.fetch(eventBySlugQuery, { slug });
   if (!event) return {};
 
-  const ogImageUrl = event.image?.asset
-    ? urlFor(event.image).width(1200).height(630).url()
-    : undefined;
-
-  return {
+  return buildMetadata({
     title: event.title,
-    description: event.excerpt ?? undefined,
-    alternates: { canonical: `/events/${slug}` },
-    openGraph: {
-      url: `/events/${slug}`,
-      ...(ogImageUrl && {
-        images: [
-          {
-            url: ogImageUrl,
-            width: 1200,
-            height: 630,
-            alt: event.image?.alt ?? event.title,
-          },
-        ],
-      }),
-    },
-    ...(ogImageUrl && { twitter: { images: [ogImageUrl] } }),
-  };
+    description: event.excerpt,
+    path: `/events/${slug}`,
+    image: event.image,
+    imageAlt: event.image?.alt ?? event.title,
+    type: "article",
+  });
 }
 
 export default async function Page({ params }: Props) {

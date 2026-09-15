@@ -37,9 +37,38 @@ const sv = {
     accept: "Godkänn",
     reject: "Neka",
     policyLabel: "Läs mer om kakor",
-    // Empty until a cookie policy page exists in Sanity — the link is hidden
-    // rather than pointing at a 404. `as string` keeps it widened for overrides.
     policyHref: "" as string,
+  },
+  blogList: {
+    title: "Blogg",
+    lead: "Insikter, nyheter och best practices från teamet på Geta Digital.",
+    empty: "Inga inlägg publicerade ännu.",
+    metaTitle: "Blogg",
+    backToList: "Alla inlägg",
+    paginationLabel: "Sidnavigation",
+    prevPage: "Föregående sida",
+    nextPage: "Nästa sida",
+  },
+  eventPage: {
+    typeWebinar: "Webinar",
+    typeEvent: "Evenemang",
+    factDate: "Datum",
+    factTime: "Tid",
+    factLocation: "Plats",
+    back: "Tillbaka",
+  },
+  a11y: {
+    homeLink: "Geta Digital, startsida",
+    menu: "Meny",
+    toTop: "Till toppen",
+    breadcrumb: "Brödsmulor",
+    trustBar: "Kunder som litar på Geta",
+    slider: "Bildspel",
+    sliderRole: "bild",
+    sliderPrev: "Föregående bild",
+    sliderNext: "Nästa bild",
+    sliderGoTo: "Gå till bild {n}",
+    sliderPosition: "{n} av {total}",
   },
 } as const;
 

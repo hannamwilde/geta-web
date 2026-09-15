@@ -4,6 +4,7 @@ import { resolveBackground, type BackgroundImage } from '@/lib/background'
 import { assetDimensions } from '@/lib/imageDimensions'
 import styles from './styles.module.scss'
 import { resolveBorder, type Border } from '@/lib/border'
+import { fetchTranslations } from '@/lib/translations/server'
 
 type Logo = {
   _id: string
@@ -48,13 +49,14 @@ function getLogoSize(item: Logo) {
   return assetDimensions(item.logo?.asset) ?? { width: 200, height: 68 }
 }
 
-export default function TrustBarBlock({ block }: Props) {
+export default async function TrustBarBlock({ block }: Props) {
+  const { a11y } = await fetchTranslations()
   const logos = (block?.logos && block.logos.length > 0) ? block.logos : FALLBACK
   const row = [...logos, ...logos]
   const bg = { ...resolveBackground(block?.backgroundColor, block?.backgroundGradient, block?.backgroundImage), ...resolveBorder(block?.border) }
 
   return (
-    <section className={styles.marquee} style={Object.keys(bg).length ? bg : undefined} aria-label="Kunder som litar på Geta">
+    <section className={styles.marquee} style={Object.keys(bg).length ? bg : undefined} aria-label={a11y.trustBar}>
       <div className={styles.track}>
         {row.map((logo, i) => (
           <div className={styles.logo} key={logo._id + '-' + i} aria-hidden={i >= logos.length}>

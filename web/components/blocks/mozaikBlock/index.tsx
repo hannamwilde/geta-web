@@ -6,6 +6,9 @@ import { urlFor } from "@/sanity/client";
 import Icon from "@/components/ui/icon";
 import styles from "./styles.module.scss";
 import { resolveBorder, type Border } from "@/lib/border";
+import { resolveHref } from "@/lib/resolveHref";
+import { normalizeHref } from "@/lib/href";
+import { useContactModal } from "@/context/ContactModalContext";
 
 type Component = {
   _key: string;
@@ -13,6 +16,14 @@ type Component = {
   description?: string;
   icon?: string;
   logo?: { asset: unknown; alt?: string };
+};
+
+type CTA = {
+  label?: string;
+  action?: string;
+  href?: string;
+  linkType?: string;
+  pageRef?: { slug?: { current?: string } } | null;
 };
 
 type Props = {
@@ -25,6 +36,7 @@ type Props = {
     wordImage?: { asset: unknown };
     hubNameImage?: { asset: unknown };
     components?: Component[];
+    cta?: CTA;
   };
 };
 
@@ -59,6 +71,8 @@ type NodeStyle = React.CSSProperties & { "--c": string };
  */
 const MOZAIK_WORD = /(mozaik)/i;
 const HEADLINE_FALLBACK = "Mozaik är här, AI-driven digital handel";
+const CTA_LABEL_FALLBACK = "Upptäck Mozaik";
+const CTA_HREF_FALLBACK = "/losningar/mozaik";
 
 const CX = 500,
   CY = 500,
@@ -66,6 +80,7 @@ const CX = 500,
   RY = 388;
 
 export default function MozaikBlock({ block }: Props) {
+  const { open } = useContactModal();
   const trackRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const [revealed, setRevealed] = useState<number[]>([]);
@@ -183,6 +198,27 @@ export default function MozaikBlock({ block }: Props) {
   const ctaProg = easeOut(clamp((q - 0.28) / 0.55, 0, 1));
   const hubCoreOpacity = hubOpacity * (1 - clamp(ctaProg * 1.2, 0, 1));
   const hubShrink = 1 - ctaProg * 0.32;
+
+  const cta = block.cta;
+  const ctaLabel = cta?.label || CTA_LABEL_FALLBACK;
+  const ctaAction = cta?.action;
+  const ctaStyle: React.CSSProperties = mounted
+    ? {
+        opacity: ctaProg,
+        pointerEvents: ctaProg > 0.6 ? "auto" : "none",
+        transform: `translate(-50%, -50%) scale(${0.5 + ctaProg * 0.5})`,
+      }
+    : {
+        opacity: 0,
+        pointerEvents: "none",
+        transform: "translate(-50%, -50%) scale(0.5)",
+      };
+  const ctaInner = (
+    <>
+      <span>{ctaLabel}</span>
+      <Icon name="arrow-right" size={17} stroke={2} />
+    </>
+  );
 
   return (
     <section className={styles.mz} id="mozaik" style={resolveBorder(block.border)}>
@@ -505,26 +541,29 @@ export default function MozaikBlock({ block }: Props) {
               </div>
 
               {/* CTA — fades in at end of scroll */}
-              <a
-                className={styles.cta}
-                href="/losningar/mozaik"
-                style={
-                  mounted
-                    ? {
-                        opacity: ctaProg,
-                        pointerEvents: ctaProg > 0.6 ? "auto" : "none",
-                        transform: `translate(-50%, -50%) scale(${0.5 + ctaProg * 0.5})`,
-                      }
-                    : {
-                        opacity: 0,
-                        pointerEvents: "none",
-                        transform: "translate(-50%, -50%) scale(0.5)",
-                      }
-                }
-              >
-                <span>Upptäck Mozaik</span>
-                <Icon name="arrow-right" size={17} stroke={2} />
-              </a>
+              {ctaAction === "openContact" || ctaAction === "openBook" ? (
+                <button
+                  type="button"
+                  className={styles.cta}
+                  style={ctaStyle}
+                  onClick={() =>
+                    open(ctaAction === "openBook" ? "book" : "contact")
+                  }
+                >
+                  {ctaInner}
+                </button>
+              ) : (
+                <a
+                  className={styles.cta}
+                  href={normalizeHref(
+                    resolveHref(cta?.linkType, cta?.href, cta?.pageRef) ||
+                      CTA_HREF_FALLBACK,
+                  )}
+                  style={ctaStyle}
+                >
+                  {ctaInner}
+                </a>
+              )}
             </div>
           </div>
         </div>

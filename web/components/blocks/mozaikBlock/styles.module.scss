@@ -383,6 +383,8 @@
   background: linear-gradient(100deg, var(--mz-crimson) 0%, var(--mz-orchid) 46%, var(--mz-violet) 100%);
   border: 1px solid transparent;
   text-decoration: none;
+  cursor: pointer;
+  appearance: none;
   transform-origin: center;
   box-shadow:
     0 0 0 8px rgba(196, 79, 168, 0.12),
