@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { urlFor } from '@/sanity/client'
-import { resolveBackground, type BackgroundImage } from '@/lib/background'
+import { resolveBackground, type BackgroundImage, type Gradient } from '@/lib/background'
 import { resolveHref } from '@/lib/resolveHref'
 import styles from './styles.module.scss'
 import { resolveBorder, type Border } from '@/lib/border'
@@ -25,7 +25,7 @@ type Props = {
     tagline?: string
     pillars?: Pillar[]
     backgroundColor?: string
-    backgroundGradient?: { type?: string; from?: string; to?: string; angle?: number; position?: string } | null
+    backgroundGradient?: Gradient
     eyebrowColor?: string
     eyebrowFontSize?: number
     headlineColor?: string

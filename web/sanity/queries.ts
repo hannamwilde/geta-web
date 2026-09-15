@@ -1,12 +1,12 @@
 import { groq } from 'next-sanity'
 
-const SECTIONS = `
-  sections[] {
+const BLOCKS = `
+  blocks[] {
     _type, _key,
     eyebrow, headline, subheadline, tagline, intro, body,
     quote, author, companyRole,
     alignment, textAlignment, contentLayout,
-    backgroundColor, backgroundGradient { type, from, to, angle, position }, textColor, iconColor, iconBackgroundColor,
+    backgroundColor, backgroundGradient { type, from, to, angle, start, position }, textColor, iconColor, iconBackgroundColor,
     eyebrowStyle, eyebrowColor, eyebrowFontSize,
     headlineColor, headlineFontSize,
     paddingTop, paddingBottom, borderRadius, itemTextColor,
@@ -14,7 +14,7 @@ const SECTIONS = `
     visualType, icon, statValue, statLabel,
     backgroundImage { asset, alt, crop, hotspot },
     backgroundVideo { asset->{ url, mimeType } },
-    overlayColor, overlayOpacity, overlayGradient { type, from, to, angle, position },
+    overlayColor, overlayOpacity, overlayGradient { type, from, to, angle, start, position },
     sideImage { asset, alt, crop, hotspot },
     sideImagePosition,
     photo { asset, alt, crop, hotspot },
@@ -74,7 +74,7 @@ export const homePageQuery = groq`
   *[_id == "homePage"][0] {
     _id,
     seo { title, description, noIndex, ogImage { asset, alt, crop, hotspot } },
-    ${SECTIONS}
+    ${BLOCKS}
   }
 `
 
@@ -82,7 +82,7 @@ export const pageBySlugQuery = groq`
   *[_type == "page" && slug.current == $slug][0] {
     _id, title, slug, navTheme,
     seo { title, description, noIndex, ogImage { asset, alt, crop, hotspot } },
-    ${SECTIONS}
+    ${BLOCKS}
   }
 `
 

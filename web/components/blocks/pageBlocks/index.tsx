@@ -19,7 +19,7 @@ import MozaikBlock from "@/components/blocks/mozaikBlock";
 
 type Props = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  sections: any[];
+  blocks: any[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   cases?: any[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,10 +36,11 @@ function renderBlock(
   pastEvents: any[],
 ) {
   switch (block._type) {
-    case "heroSection":
+    case "heroBlock":
       return <HeroBlock key={block._key} block={block} />;
     case "GridList":
       return <GridListBlock key={block._key} block={block} />;
+    // Legacy _type — drop once rename-sections-to-blocks has been applied.
     case "textSection":
     case "textBlock":
       return <TextBlock key={block._key} block={block} />;
@@ -57,21 +58,21 @@ function renderBlock(
       return <BannerBlock key={block._key} block={block} />;
     case "imageSliderBlock":
       return <ImageSliderBlock key={block._key} block={block} />;
-    case "trustBarSection":
+    case "trustBarBlock":
       return <TrustBarBlock key={block._key} block={block} />;
-    case "contactBannerSection":
+    case "contactBannerBlock":
       return <ContactBannerBlock key={block._key} block={block} />;
-    case "growingListSection":
+    case "growingListBlock":
       return <GrowingListBlock key={block._key} block={block} />;
-    case "casesSection":
+    case "casesBlock":
       return <CasesBlock key={block._key} block={block} cases={cases} />;
-    case "mozaikSection":
+    case "mozaikBlock":
       return <MozaikBlock key={block._key} block={block} />;
-    case "mozaikServicesSection":
+    case "mozaikServicesBlock":
       return <MozaikServicesBlock key={block._key} block={block} />;
     case "mozaikPropsHeading":
       return <MozaikPropsHeadingBlock key={block._key} block={block} />;
-    case "eventsSection":
+    case "eventsBlock":
       return (
         <EventsBlock
           key={block._key}
@@ -85,15 +86,15 @@ function renderBlock(
   }
 }
 
-export default function PageSections({
-  sections,
+export default function PageBlocks({
+  blocks,
   cases = [],
   upcomingEvents = [],
   pastEvents = [],
 }: Props) {
   return (
     <>
-      {sections.map((block) =>
+      {blocks.map((block) =>
         renderBlock(block, cases, upcomingEvents, pastEvents),
       )}
     </>

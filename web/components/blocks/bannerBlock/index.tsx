@@ -4,7 +4,7 @@ import Icon from "@/components/ui/icon";
 import BackgroundMedia, {
   type BackgroundVideo,
 } from "@/components/ui/backgroundMedia";
-import type { Gradient } from "@/lib/background";
+import { gradientCss, type Gradient } from "@/lib/background";
 import BannerBlockCTAs from "./components/bannerBlockCtas";
 import styles from "./styles.module.scss";
 import { resolveBorder, type Border } from "@/lib/border";
@@ -25,13 +25,7 @@ type Props = {
     ctaPrimary?: CTA;
     ctaSecondary?: CTA;
     backgroundColor?: string;
-    backgroundGradient?: {
-      type?: string;
-      from?: string;
-      to?: string;
-      angle?: number;
-      position?: string;
-    } | null;
+    backgroundGradient?: Gradient;
     paddingTop?: number;
     paddingBottom?: number;
     headlineColor?: string;
@@ -63,12 +57,9 @@ type Props = {
 
 export default function BannerBlock({ block }: Props) {
   const s: Record<string, string> = {};
-  if (block.backgroundGradient?.from && block.backgroundGradient?.to) {
-    const g = block.backgroundGradient;
-    s.background =
-      g.type === "radial"
-        ? `radial-gradient(circle at ${g.position ?? "center"}, ${g.from}, ${g.to})`
-        : `linear-gradient(${g.angle ?? 135}deg, ${g.from}, ${g.to})`;
+  const gradient = gradientCss(block.backgroundGradient);
+  if (gradient) {
+    s.background = gradient;
   } else if (block.backgroundColor) {
     s.backgroundColor = block.backgroundColor;
   }

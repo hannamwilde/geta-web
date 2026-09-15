@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { urlFor } from '@/sanity/client'
-import { resolveBackground, type BackgroundImage } from '@/lib/background'
+import { resolveBackground, type BackgroundImage, type Gradient } from '@/lib/background'
 import styles from './styles.module.scss'
 import { resolveBorder, type Border } from '@/lib/border'
 
@@ -14,7 +14,7 @@ type Props = {
     paddingTop?: number
     paddingBottom?: number
     backgroundColor?: string
-    backgroundGradient?: { type?: string; from?: string; to?: string; angle?: number; position?: string } | null
+    backgroundGradient?: Gradient
     textColor?: string
     backgroundImage?: BackgroundImage
     sideImage?: { asset: unknown; alt?: string }

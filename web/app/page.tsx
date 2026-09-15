@@ -4,7 +4,7 @@ import { buildMetadata } from '@/lib/seo'
 
 export const revalidate = 30
 import { homePageQuery, casesQuery } from '@/sanity/queries'
-import PageSections from '@/components/blocks/pageSections'
+import PageBlocks from '@/components/blocks/pageBlocks'
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await client.fetch(homePageQuery)
@@ -30,7 +30,7 @@ export default async function HomePage() {
 
   return (
     <main>
-      <PageSections sections={page.sections ?? []} cases={cases ?? []} />
+      <PageBlocks blocks={page.blocks ?? []} cases={cases ?? []} />
     </main>
   )
 }

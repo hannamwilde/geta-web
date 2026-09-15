@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { urlFor } from "@/sanity/client";
 import { fetchTranslations } from "@/lib/translations/server";
-import { resolveBackground } from "@/lib/background";
+import { resolveBackground, type Gradient } from "@/lib/background";
 import ContactBannerBlockCta from "./components/contactBannerBlockCta";
 import styles from "./styles.module.scss";
 import { resolveBorder, type Border } from "@/lib/border";
@@ -14,13 +14,7 @@ type Props = {
     cta?: { label?: string; href?: string };
     backgroundImage?: { asset: unknown; alt?: string };
     backgroundColor?: string;
-    backgroundGradient?: {
-      type?: string;
-      from?: string;
-      to?: string;
-      angle?: number;
-      position?: string;
-    } | null;
+    backgroundGradient?: Gradient;
     headlineColor?: string;
     textColor?: string;
     buttonBackgroundColor?: string;

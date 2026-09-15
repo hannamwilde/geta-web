@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { urlFor } from "@/sanity/client";
 import { normalizeHref } from "@/lib/href";
-import { resolveBackground, type BackgroundImage } from "@/lib/background";
+import { resolveBackground, type BackgroundImage, type Gradient } from "@/lib/background";
 import { resolveHref } from "@/lib/resolveHref";
 import Icon from "@/components/ui/icon";
 import styles from "./styles.module.scss";
@@ -26,13 +26,7 @@ type Props = {
     title?: string;
     links?: LinkItem[];
     backgroundColor?: string;
-    backgroundGradient?: {
-      type?: string;
-      from?: string;
-      to?: string;
-      angle?: number;
-      position?: string;
-    } | null;
+    backgroundGradient?: Gradient;
     textColor?: string;
     buttonBackgroundColor?: string;
     buttonTextColor?: string;

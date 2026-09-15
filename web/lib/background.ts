@@ -6,6 +6,8 @@ export type Gradient = {
   from?: string
   to?: string
   angle?: number
+  /** Percent along the axis where the `from` color stops being solid. */
+  start?: number
   position?: string
 } | null | undefined
 
@@ -18,9 +20,15 @@ export type BackgroundImage = {
 /** The CSS for an editor-defined gradient, or null when both stops aren't set. */
 export function gradientCss(gradient?: Gradient): string | null {
   if (!gradient?.from || !gradient?.to) return null
-  return gradient.type === 'radial'
-    ? `radial-gradient(circle at ${gradient.position ?? 'center'}, ${gradient.from}, ${gradient.to})`
-    : `linear-gradient(${gradient.angle ?? 135}deg, ${gradient.from}, ${gradient.to})`
+  if (gradient.type === 'radial') {
+    return `radial-gradient(circle at ${gradient.position ?? 'center'}, ${gradient.from}, ${gradient.to})`
+  }
+  // A start stop holds `from` solid until that point, so the fade covers only the rest.
+  const from =
+    typeof gradient.start === 'number'
+      ? `${gradient.from} ${Math.min(Math.max(gradient.start, 0), 100)}%`
+      : gradient.from
+  return `linear-gradient(${gradient.angle ?? 135}deg, ${from}, ${gradient.to})`
 }
 
 /** Keeps the hotspot in frame once `cover` starts cropping. */

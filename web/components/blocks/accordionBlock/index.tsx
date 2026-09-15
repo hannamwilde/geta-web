@@ -1,17 +1,9 @@
-import { resolveBackground, type BackgroundImage } from "@/lib/background";
+import { resolveBackground, type BackgroundImage, type Gradient } from "@/lib/background";
 import AccordionBlockList, {
   type AccordionItem,
 } from "./components/accordionBlockList";
 import styles from "./styles.module.scss";
 import { resolveBorder, type Border } from "@/lib/border";
-
-type Gradient = {
-  type?: string;
-  from?: string;
-  to?: string;
-  angle?: number;
-  position?: string;
-} | null;
 
 type Props = {
   block: {

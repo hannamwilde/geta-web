@@ -1,5 +1,5 @@
 import Icon from '@/components/ui/icon'
-import { resolveBackground, type BackgroundImage } from '@/lib/background'
+import { resolveBackground, type BackgroundImage, type Gradient } from '@/lib/background'
 import styles from './styles.module.scss'
 import { resolveBorder, type Border } from '@/lib/border'
 
@@ -9,8 +9,6 @@ type Item = {
   body?: string
   icon?: string
 }
-
-type Gradient = { type?: string; from?: string; to?: string; angle?: number; position?: string } | null
 
 type Props = {
   block: {

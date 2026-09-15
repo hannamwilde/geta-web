@@ -5,7 +5,7 @@ import { buildMetadata } from '@/lib/seo'
 
 export const revalidate = 30
 import { pageBySlugQuery, allPageSlugsQuery, casesQuery, upcomingEventsQuery, pastEventsQuery } from '@/sanity/queries'
-import PageSections from '@/components/blocks/pageSections'
+import PageBlocks from '@/components/blocks/pageBlocks'
 import NavThemeSetter from '@/components/layout/navThemeSetter'
 
 type Props = { params: Promise<{ slug: string[] }> }
@@ -38,7 +38,7 @@ export default async function Page({ params }: Props) {
 
   if (!page) notFound()
 
-  const hasEvents = (page.sections ?? []).some((s: { _type: string }) => s._type === 'eventsSection')
+  const hasEvents = (page.blocks ?? []).some((s: { _type: string }) => s._type === 'eventsBlock')
 
   const [cases, upcomingEvents, pastEvents] = await Promise.all([
     client.fetch(casesQuery),
@@ -49,8 +49,8 @@ export default async function Page({ params }: Props) {
   return (
     <main>
       <NavThemeSetter theme={page.navTheme === 'purple' ? 'purple' : 'default'} />
-      <PageSections
-        sections={page.sections ?? []}
+      <PageBlocks
+        blocks={page.blocks ?? []}
         cases={cases ?? []}
         upcomingEvents={upcomingEvents ?? []}
         pastEvents={pastEvents ?? []}

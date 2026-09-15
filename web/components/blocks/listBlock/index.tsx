@@ -3,7 +3,7 @@ import { urlFor } from "@/sanity/client";
 import { normalizeHref } from "@/lib/href";
 import { resolveHref } from "@/lib/resolveHref";
 import Icon from "@/components/ui/icon";
-import { resolveBackground, type BackgroundImage } from "@/lib/background";
+import { resolveBackground, type BackgroundImage, type Gradient } from "@/lib/background";
 import styles from "./styles.module.scss";
 import { resolveBorder, type Border } from "@/lib/border";
 
@@ -43,7 +43,7 @@ type Props = {
     subheadlineFontSize?: number;
     subheadlineDivider?: boolean;
     backgroundColor?: string;
-    backgroundGradient?: { type?: string; from?: string; to?: string; angle?: number; position?: string } | null;
+    backgroundGradient?: Gradient;
     borderRadius?: number;
     itemStyle?: string;
     items?: Item[];
