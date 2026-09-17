@@ -71,7 +71,7 @@
 
   .headline {
     font-weight: 700;
-    font-size: var(--fs-h1);
+    font-size: var(--hero-headline-size, var(--fs-h1));
     line-height: 0.98;
     letter-spacing: -0.04em;
     color: var(--hero-headline, var(--paper, #fff));
@@ -91,7 +91,7 @@
 
   .sub {
     margin-top: var(--sp-lg);
-    font-size: var(--fs-subtitle);
+    font-size: var(--hero-sub-size, var(--fs-subtitle));
     line-height: 1.6;
     color: var(--hero-text, rgba(255, 255, 255, 0.78));
     max-width: 600px;

@@ -16,8 +16,10 @@ type Props = {
     eyebrowColor?: string
     eyebrowFontSize?: number
     headline?: string
+    headlineFontSize?: number
     tagline?: string
     subheadline?: string
+    subheadlineFontSize?: number
     markImage?: { asset: unknown }
     markWidth?: number
     backgroundImage?: { asset: unknown; alt?: string }
@@ -76,7 +78,9 @@ export default function HeroBlock({ block }: Props) {
   if (block.markWidth) s['--hero-mark-w'] = block.markWidth + 'px'
   if (block.eyebrowColor) s['--hero-eyebrow-color'] = block.eyebrowColor
   if (block.eyebrowFontSize) s['--hero-eyebrow-size'] = block.eyebrowFontSize + 'px'
+  if (block.headlineFontSize) s['--hero-headline-size'] = block.headlineFontSize + 'px'
   if (block.headlineColor) s['--hero-headline'] = block.headlineColor
+  if (block.subheadlineFontSize) s['--hero-sub-size'] = block.subheadlineFontSize + 'px'
   if (block.textColor) s['--hero-text'] = block.textColor
   if (block.paddingTop != null) s.paddingTop = block.paddingTop + 'px'
   if (block.paddingBottom != null) s.paddingBottom = block.paddingBottom + 'px'
