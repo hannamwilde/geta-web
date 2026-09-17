@@ -86,6 +86,9 @@
 
       &:hover { color: var(--cream); }
     }
+
+    // Label with no URL set in Sanity — same type, not clickable
+    .colText { font-size: clamp(15px, 1.3vw, 18px); color: rgba(244,239,229,0.82); }
   }
 }
 

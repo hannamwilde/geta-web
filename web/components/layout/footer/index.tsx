@@ -104,9 +104,13 @@ export default async function Footer({ data }: Props) {
                   <ul>
                     {(col.links || []).map((link, i) => (
                       <li key={link._key || i}>
-                        <a href={normalizeHref(link.href)} {...(link.external ? { target: '_blank', rel: 'noreferrer' } : {})}>
-                          {link.label}
-                        </a>
+                        {link.href?.trim() ? (
+                          <a href={normalizeHref(link.href)} {...(link.external ? { target: '_blank', rel: 'noreferrer' } : {})}>
+                            {link.label}
+                          </a>
+                        ) : (
+                          <span className={styles.colText}>{link.label}</span>
+                        )}
                       </li>
                     ))}
                   </ul>
