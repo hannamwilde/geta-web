@@ -15,13 +15,16 @@
 }
 
 .container {
-  max-width: var(--container);
+  max-width: var(--tb-max-w, var(--container));
   margin: 0 auto;
   padding: 0 clamp(var(--sp-md), 4vw, var(--sp-xl));
 }
 
 .containerFull {
   width: 100%;
+  // Full width unless a max width caps it, in which case it centres
+  max-width: var(--tb-max-w, none);
+  margin: 0 auto;
   padding: 0 clamp(var(--sp-md), 4vw, var(--sp-xl));
 }
 
@@ -35,6 +38,12 @@
   font-size: var(--fs-body);
   line-height: 1.7;
   max-width: 680px;
+}
+
+.textCol {
+  background: var(--tb-content-bg, transparent);
+  border-radius: var(--tb-content-radius, 0);
+  padding: var(--tb-content-pad, 0);
 }
 
 .split {

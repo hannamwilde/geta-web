@@ -28,6 +28,10 @@ type Props = {
     backgroundGradient?: Gradient;
     paddingTop?: number;
     paddingBottom?: number;
+    maxWidth?: number;
+    contentBackgroundColor?: string;
+    contentBorderRadius?: number;
+    contentPadding?: number;
     headlineColor?: string;
     taglineColor?: string;
     textColor?: string;
@@ -44,6 +48,7 @@ type Props = {
     overlayGradient?: Gradient;
     overlayOpacity?: number;
     visualType?: string;
+    visualPosition?: string;
     photo?: { asset: unknown; alt?: string };
     icon?: string;
     statValue?: string;
@@ -65,6 +70,13 @@ export default function BannerBlock({ block }: Props) {
   }
   if (block.paddingTop != null) s.paddingTop = block.paddingTop + "px";
   if (block.paddingBottom != null) s.paddingBottom = block.paddingBottom + "px";
+  if (block.maxWidth != null) s["--bb-max-w"] = block.maxWidth + "px";
+  if (block.contentBackgroundColor)
+    s["--bb-content-bg"] = block.contentBackgroundColor;
+  if (block.contentBorderRadius != null)
+    s["--bb-content-radius"] = block.contentBorderRadius + "px";
+  if (block.contentPadding != null)
+    s["--bb-content-pad"] = block.contentPadding + "px";
   if (block.borderRadius != null) {
     s["--r-lg"] = block.borderRadius + "px";
     s["--r-xl"] = block.borderRadius + "px";
@@ -125,8 +137,11 @@ export default function BannerBlock({ block }: Props) {
         overlayOpacity={block.overlayOpacity}
       />
       <div className="container">
-        <div className={showVisual ? styles.detailGrid : ""}>
-          <div className={`${styles.content} bb-content`}>
+        <div
+          className={showVisual ? styles.detailGrid : ""}
+          data-visual-pos={showVisual ? block.visualPosition || "right" : undefined}
+        >
+          <div className="bb-content">
             <div className={`${styles.contentText} bb-content-text`}>
               {block.eyebrow && (
                 <div

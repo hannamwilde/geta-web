@@ -13,6 +13,10 @@ type Props = {
     contentLayout?: string
     paddingTop?: number
     paddingBottom?: number
+    maxWidth?: number
+    contentBackgroundColor?: string
+    contentBorderRadius?: number
+    contentPadding?: number
     backgroundColor?: string
     backgroundGradient?: Gradient
     textColor?: string
@@ -28,6 +32,10 @@ export default function TextBlock({ block }: Props) {
   if (block.textColor) sectionStyle.color = block.textColor
   if (block.paddingTop != null) sectionStyle.paddingTop = block.paddingTop + 'px'
   if (block.paddingBottom != null) sectionStyle.paddingBottom = block.paddingBottom + 'px'
+  if (block.maxWidth != null) { (sectionStyle as Record<string, string>)['--tb-max-w'] = block.maxWidth + 'px' }
+  if (block.contentBackgroundColor) { (sectionStyle as Record<string, string>)['--tb-content-bg'] = block.contentBackgroundColor }
+  if (block.contentBorderRadius != null) { (sectionStyle as Record<string, string>)['--tb-content-radius'] = block.contentBorderRadius + 'px' }
+  if (block.contentPadding != null) { (sectionStyle as Record<string, string>)['--tb-content-pad'] = block.contentPadding + 'px' }
   if (block.borderRadius != null) { (sectionStyle as Record<string, string>)['--r-lg'] = block.borderRadius + 'px' }
 
   const isFull = block.contentLayout === 'full'
@@ -56,10 +64,10 @@ export default function TextBlock({ block }: Props) {
             </div>
           </div>
         ) : (
-          <>
+          <div className={styles.textCol}>
             {block.headline && <h2 className={styles.headline}>{block.headline}</h2>}
             {block.body && <p className={styles.body}>{block.body}</p>}
-          </>
+          </div>
         )}
       </div>
     </section>

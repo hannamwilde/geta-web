@@ -9,6 +9,8 @@
   > :global(.container) {
     position: relative;
     z-index: 1;
+    // .container already centres itself, so capping it is enough
+    max-width: var(--bb-max-w, var(--container));
   }
 }
 
@@ -88,8 +90,20 @@
   gap: clamp(var(--sp-md), 4vw, var(--sp-2xl));
   align-items: center;
 
+  &[data-visual-pos="left"] {
+    grid-template-columns: 0.6fr 1.4fr;
+
+    .mark {
+      order: -1;
+    }
+  }
+
   @media (max-width: 880px) {
     grid-template-columns: 1fr;
+
+    &[data-visual-pos="left"] {
+      grid-template-columns: 1fr;
+    }
   }
 }
 
@@ -147,6 +161,11 @@
   }
 }
 
+:global(.banner-block .bb-content) {
+  background: var(--bb-content-bg, transparent);
+  border-radius: var(--bb-content-radius, 0);
+  padding: var(--bb-content-pad, 0);
+}
 :global(.banner-block[data-layout="inline"] .bb-content) {
   display: flex;
   align-items: center;
