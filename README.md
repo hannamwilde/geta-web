@@ -175,13 +175,11 @@ Pages are identified by their slug (e.g. `losningar/mozaik` → `/losningar/moza
 | `textBlock`           | Text Block                  | Rich text / prose                            |
 | `listBlock`           | List Block                  | Grid of cards — icon, image or text items    |
 | `gridListBlock`¹      | Grid list                   | Grid list                                    |
-| `bulletListBlock`     | Bullet List Block           | Bullet list                                  |
 | `growingListBlock`    | Growing list                | List that expands on scroll                  |
 | `linkBlock`           | Link Block                  | Grid of links                                |
 | `quoteBlock`          | Quote Block                 | Pull quote                                   |
 | `accordionBlock`      | Accordion Block             | Expandable Q&A / detail list                 |
 | `bannerBlock`         | Banner                      | Flexible CTA banner with full colour control |
-| `contactBannerBlock`  | Contact Banner              | Contact CTA strip                            |
 | `imageSliderBlock`    | Image slider                | Full-bleed image carousel with copy and CTA  |
 | `casesBlock`          | Cases                       | Case study carousel                          |
 | `eventsBlock`         | Events                      | Upcoming and past events                     |

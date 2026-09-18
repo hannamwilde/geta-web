@@ -4,7 +4,6 @@ import GridListBlock from "@/components/blocks/gridListBlock";
 import TextBlock from "@/components/blocks/textBlock";
 import QuoteBlock from "@/components/blocks/quoteBlock";
 import AccordionBlock from "@/components/blocks/accordionBlock";
-import BulletListBlock from "@/components/blocks/bulletListBlock";
 import ListBlock from "@/components/blocks/listBlock";
 import LinkBlock from "@/components/blocks/linkBlock";
 import BannerBlock from "@/components/blocks/bannerBlock";
@@ -12,7 +11,6 @@ import ImageSliderBlock from "@/components/blocks/imageSliderBlock";
 import MozaikServicesBlock from "@/components/blocks/mozaikServicesBlock";
 import MozaikPropsHeadingBlock from "@/components/blocks/mozaikPropsHeadingBlock";
 import TrustBarBlock from "@/components/blocks/trustBarBlock";
-import ContactBannerBlock from "@/components/blocks/contactBannerBlock";
 import GrowingListBlock from "@/components/blocks/growingListBlock";
 import CasesBlock from "@/components/blocks/casesBlock";
 import MozaikBlock from "@/components/blocks/mozaikBlock";
@@ -48,8 +46,6 @@ function renderBlock(
       return <QuoteBlock key={block._key} block={block} />;
     case "accordionBlock":
       return <AccordionBlock key={block._key} block={block} />;
-    case "bulletListBlock":
-      return <BulletListBlock key={block._key} block={block} />;
     case "listBlock":
       return <ListBlock key={block._key} block={block} />;
     case "linkBlock":
@@ -60,8 +56,6 @@ function renderBlock(
       return <ImageSliderBlock key={block._key} block={block} />;
     case "trustBarBlock":
       return <TrustBarBlock key={block._key} block={block} />;
-    case "contactBannerBlock":
-      return <ContactBannerBlock key={block._key} block={block} />;
     case "growingListBlock":
       return <GrowingListBlock key={block._key} block={block} />;
     case "casesBlock":
