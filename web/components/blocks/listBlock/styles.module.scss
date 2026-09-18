@@ -106,6 +106,19 @@
       margin: calc(var(--item-pad) * -1) calc(var(--item-pad) * -1)
         calc(var(--item-pad) - var(--sp-xs)); // gap below matches the padding
       border-radius: var(--item-radius) var(--item-radius) 0 0;
+
+      // Editor-picked height — ratios mirror IMAGE_HEIGHTS in index.tsx
+      &[data-height="short"] {
+        aspect-ratio: 4 / 1;
+      }
+
+      &[data-height="tall"] {
+        aspect-ratio: 2 / 1;
+      }
+
+      &[data-height="xtall"] {
+        aspect-ratio: 3 / 2;
+      }
     }
 
     img {

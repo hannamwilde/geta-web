@@ -23,6 +23,7 @@ type Item = {
   icon?: string;
   visualType?: string;
   imageSize?: string;
+  imageHeight?: string;
   image?: { asset: unknown; alt?: string };
   width?: number;
   titleFontSize?: number;
@@ -31,6 +32,16 @@ type Item = {
   iconBackgroundColor?: string;
   textColor?: string;
 };
+
+// Large-image heights. Ratios must match the aspect-ratio per data-height in
+// styles.module.scss — the fetch is cropped to the same shape, so the hotspot holds.
+const IMAGE_HEIGHTS: Record<string, { width: number; height: number }> = {
+  short: { width: 800, height: 200 }, // 4 / 1
+  medium: { width: 800, height: 267 }, // 3 / 1
+  tall: { width: 800, height: 400 }, // 2 / 1
+  xtall: { width: 800, height: 533 }, // 3 / 2
+};
+const SMALL_IMAGE = { width: 80, height: 80 };
 
 type Props = {
   block: {
@@ -125,12 +136,18 @@ export default async function ListBlock({ block }: Props) {
               item.visualType === "image"
                 ? withPlaceholder(item.image, site)
                 : null;
+            const isSmallImage = item.imageSize === "small";
+            const imageHeight =
+              item.imageHeight && item.imageHeight in IMAGE_HEIGHTS
+                ? item.imageHeight
+                : "medium";
+            const imageDims = isSmallImage
+              ? SMALL_IMAGE
+              : IMAGE_HEIGHTS[imageHeight];
             const itemImageUrl = itemImage
               ? resolvedImageUrl(
                   itemImage,
-                  item.imageSize === "small"
-                    ? { height: 80 }
-                    : { width: 800, height: 360 },
+                  isSmallImage ? { height: 80 } : imageDims,
                 )
               : null;
 
@@ -158,12 +175,13 @@ export default async function ListBlock({ block }: Props) {
                   <span
                     className={styles.itemImage}
                     data-size={item.imageSize || "large"}
+                    data-height={imageHeight}
                   >
                     <Image
                       src={itemImageUrl}
                       alt={itemImage?.alt || ""}
-                      width={item.imageSize === "small" ? 80 : 800}
-                      height={item.imageSize === "small" ? 80 : 360}
+                      width={imageDims.width}
+                      height={imageDims.height}
                       sizes="(max-width: 860px) 100vw, 33vw"
                     />
                   </span>

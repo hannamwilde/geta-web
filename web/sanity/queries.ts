@@ -43,7 +43,7 @@ const BLOCKS = `
     },
     items[]{
       _key, title, body, href, linkType, pageRef->{ slug }, linkLabel, icon, piece,
-      visualType, imageSize,
+      visualType, imageSize, imageHeight,
       image { asset, alt, crop, hotspot },
       width, titleFontSize,
       backgroundColor, hoverBackgroundColor, iconBackgroundColor, textColor
