@@ -15,7 +15,7 @@
     z-index: 2;
     display: grid;
     place-items: center;
-    width: clamp(44px, 4.4vw, 60px);
+    width: var(--slider-arrow-size, clamp(44px, 4.4vw, 60px));
     aspect-ratio: 1;
     border-radius: var(--r-pill);
     background: rgba(255, 255, 255, 0.92);
@@ -29,11 +29,11 @@
     }
 
     &.prev {
-      left: clamp(8px, 1.6vw, 28px);
+      left: var(--slider-arrow-inset, clamp(8px, 1.6vw, 28px));
     }
 
     &.next {
-      right: clamp(8px, 1.6vw, 28px);
+      right: var(--slider-arrow-inset, clamp(8px, 1.6vw, 28px));
     }
 
     @media (max-width: 760px) {

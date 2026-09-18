@@ -2,6 +2,11 @@
   position: relative;
   background: var(--block-bg);
   color: var(--block-text);
+
+  // Shared with the arrows in imageSliderBlockViewport.
+  --slider-arrow-inset: clamp(8px, 1.6vw, 28px);
+  --slider-arrow-size: clamp(44px, 4.4vw, 60px);
+  --slider-gutter: clamp(var(--sp-md), 4vw, var(--sp-xl));
 }
 
 .slide {
@@ -42,7 +47,21 @@
   width: 100%;
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 clamp(var(--sp-md), 4vw, var(--sp-xl));
+  padding: 0 var(--slider-gutter);
+}
+
+// Keep the copy clear of the arrows, minus whatever room the space outside the
+// container already gives them.
+@media (min-width: 761px) {
+  .slider[data-arrows] .container {
+    padding-inline: max(
+      var(--slider-gutter),
+      calc(
+        var(--slider-arrow-inset) + var(--slider-arrow-size) + var(--sp-sm) -
+          max(0px, calc((100vw - var(--container)) / 2))
+      )
+    );
+  }
 }
 
 .copy {

@@ -66,6 +66,7 @@ export default async function ImageSliderBlock({ block }: Props) {
       className={styles.slider}
       style={{ ...(s as React.CSSProperties), ...resolveBorder(block.border) }}
       data-align={block.alignment || "left"}
+      data-arrows={block.showArrows !== false && slides.length > 1 ? "" : undefined}
       data-text-align={block.textAlignment || block.alignment || "left"}
     >
       <ImageSliderBlockViewport
