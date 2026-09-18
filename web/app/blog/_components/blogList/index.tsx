@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { urlFor } from "@/sanity/client";
 import { fetchTranslations } from "@/lib/translations/server";
+import {
+  fetchSiteSettings,
+  withPlaceholder,
+  resolvedImageUrl,
+} from "@/lib/seo";
 import type { Translations } from "@/lib/translations";
 import styles from "./styles.module.scss";
 
@@ -103,7 +107,10 @@ export default async function BlogList({
   page: number;
   totalPages: number;
 }) {
-  const { blogList: t } = await fetchTranslations();
+  const [{ blogList: t }, site] = await Promise.all([
+    fetchTranslations(),
+    fetchSiteSettings(),
+  ]);
 
   return (
     <div className={styles.page}>
@@ -122,8 +129,9 @@ export default async function BlogList({
             <>
               <div className={styles.grid}>
                 {posts.map((post) => {
-                  const imgUrl = post.coverImage?.asset
-                    ? urlFor(post.coverImage).width(800).height(500).url()
+                  const image = withPlaceholder(post.coverImage, site);
+                  const imgUrl = image
+                    ? resolvedImageUrl(image, { width: 800, height: 500 })
                     : null;
                   return (
                     <Link
@@ -135,7 +143,7 @@ export default async function BlogList({
                         <div className={styles.cardImage}>
                           <Image
                             src={imgUrl}
-                            alt={post.coverImage?.alt || post.title}
+                            alt={image?.alt || post.title}
                             width={800}
                             height={500}
                             sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw"

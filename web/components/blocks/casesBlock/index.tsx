@@ -1,6 +1,11 @@
 import Image from "next/image";
-import { urlFor } from "@/sanity/client";
 import { fetchTranslations } from "@/lib/translations/server";
+import {
+  fetchSiteSettings,
+  withPlaceholder,
+  resolvedImageUrl,
+  type SiteSettings,
+} from "@/lib/seo";
 import { resolveBackground, type BackgroundImage, type Gradient } from "@/lib/background";
 import CasesBlockCTA from "./components/casesBlockCta";
 import styles from "./styles.module.scss";
@@ -38,9 +43,18 @@ type Props = {
   cases: CaseItem[];
 };
 
-function CaseCard({ item, index }: { item: CaseItem; index: number }) {
-  const imgUrl = item.coverImage?.asset
-    ? urlFor(item.coverImage).width(600).height(480).url()
+function CaseCard({
+  item,
+  index,
+  site,
+}: {
+  item: CaseItem;
+  index: number;
+  site: SiteSettings;
+}) {
+  const image = withPlaceholder(item.coverImage, site);
+  const imgUrl = image
+    ? resolvedImageUrl(image, { width: 600, height: 480 })
     : null;
 
   return (
@@ -52,7 +66,7 @@ function CaseCard({ item, index }: { item: CaseItem; index: number }) {
         {imgUrl ? (
           <Image
             src={imgUrl}
-            alt={item.coverImage?.alt || item.client}
+            alt={image?.alt || item.client}
             width={600}
             height={480}
             sizes="(max-width: 940px) 100vw, 33vw"
@@ -102,7 +116,10 @@ function CaseCard({ item, index }: { item: CaseItem; index: number }) {
 }
 
 export default async function CasesBlock({ block, cases }: Props) {
-  const t = await fetchTranslations();
+  const [t, site] = await Promise.all([
+    fetchTranslations(),
+    fetchSiteSettings(),
+  ]);
   if (!cases || cases.length === 0) return null;
 
   const bg = resolveBackground(block.backgroundColor, block.backgroundGradient, block.backgroundImage);
@@ -145,7 +162,7 @@ export default async function CasesBlock({ block, cases }: Props) {
         )}
         <div className={styles.grid}>
           {cases.map((c, i) => (
-            <CaseCard key={c._id} item={c} index={i} />
+            <CaseCard key={c._id} item={c} index={i} site={site} />
           ))}
         </div>
         <div className={styles.cta}>

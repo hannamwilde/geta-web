@@ -1,9 +1,13 @@
 import Image from "next/image";
-import { urlFor } from "@/sanity/client";
 import { normalizeHref } from "@/lib/href";
 import { resolveHref } from "@/lib/resolveHref";
 import Icon from "@/components/ui/icon";
 import { resolveBackground, type BackgroundImage, type Gradient } from "@/lib/background";
+import {
+  fetchSiteSettings,
+  withPlaceholder,
+  resolvedImageUrl,
+} from "@/lib/seo";
 import styles from "./styles.module.scss";
 import { resolveBorder, type Border } from "@/lib/border";
 
@@ -50,7 +54,9 @@ type Props = {
   };
 };
 
-export default function ListBlock({ block }: Props) {
+export default async function ListBlock({ block }: Props) {
+  const site = await fetchSiteSettings();
+
   const sectionStyle: React.CSSProperties = {
     ...resolveBackground(block.backgroundColor, block.backgroundGradient, block.backgroundImage),
     ...resolveBorder(block.border),
@@ -113,12 +119,20 @@ export default function ListBlock({ block }: Props) {
         )}
         <div className={styles.grid}>
           {(block.items || []).map((item, i) => {
-            const itemImageUrl =
-              item.visualType === "image" && item.image?.asset
-                ? item.imageSize === "small"
-                  ? urlFor(item.image).height(80).url()
-                  : urlFor(item.image).width(800).height(360).url()
+            // Picking "image" as the visual and uploading none falls back to
+            // the Site settings placeholder.
+            const itemImage =
+              item.visualType === "image"
+                ? withPlaceholder(item.image, site)
                 : null;
+            const itemImageUrl = itemImage
+              ? resolvedImageUrl(
+                  itemImage,
+                  item.imageSize === "small"
+                    ? { height: 80 }
+                    : { width: 800, height: 360 },
+                )
+              : null;
 
             const resolved = resolveHref(item.linkType, item.href, item.pageRef);
             const itemHref = resolved ? normalizeHref(resolved) : "";
@@ -147,7 +161,7 @@ export default function ListBlock({ block }: Props) {
                   >
                     <Image
                       src={itemImageUrl}
-                      alt={item.image?.alt || ""}
+                      alt={itemImage?.alt || ""}
                       width={item.imageSize === "small" ? 80 : 800}
                       height={item.imageSize === "small" ? 80 : 360}
                       sizes="(max-width: 860px) 100vw, 33vw"

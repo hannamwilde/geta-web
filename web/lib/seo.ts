@@ -1,10 +1,10 @@
 import { cache } from "react";
 import type { Metadata } from "next";
-import { client, urlFor } from "@/sanity/client";
+import { client, urlFor, urlForExact } from "@/sanity/client";
 import { siteSettingsQuery } from "@/sanity/queries";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type SanityImage = { asset?: any; alt?: string };
+export type SanityImage = { asset?: any; alt?: string };
 
 export type SiteSettings = {
   siteName: string;
@@ -12,6 +12,8 @@ export type SiteSettings = {
   defaultTitle: string;
   titleTemplate: string;
   description: string;
+  favicon?: SanityImage | null;
+  placeholderImage?: SanityImage | null;
   ogImage?: SanityImage | null;
   twitterSite?: string;
   noIndex: boolean;
@@ -25,6 +27,8 @@ const DEFAULTS: SiteSettings = {
   titleTemplate: "%s | Geta Digital",
   description:
     "Geta Digital är en nordisk e-handelskonsult specialiserad på strategi, design och teknisk utveckling för e-handel.",
+  favicon: null,
+  placeholderImage: null,
   ogImage: null,
   twitterSite: "@getadigital",
   noIndex: false,
@@ -43,11 +47,81 @@ export const fetchSiteSettings = cache(async (): Promise<SiteSettings> => {
     defaultTitle: data.defaultTitle || siteName,
     titleTemplate: data.titleTemplate || `%s | ${siteName}`,
     description: data.description || DEFAULTS.description,
+    favicon: data.favicon ?? null,
+    placeholderImage: data.placeholderImage ?? null,
     ogImage: data.ogImage ?? null,
     twitterSite: data.twitterSite || DEFAULTS.twitterSite,
     noIndex: data.noIndex ?? DEFAULTS.noIndex,
   };
 });
+
+/** Icon in `public/`, used until an editor uploads one to Site settings. */
+const FALLBACK_FAVICON = "/favicon.ico";
+
+/**
+ * Browser and home-screen icons from the Site settings favicon.
+ *
+ * SVG uploads pass through untouched — the Sanity CDN doesn't resize them —
+ * so the sizes only take effect for raster uploads.
+ */
+export function buildIcons(site: SiteSettings): Metadata["icons"] {
+  if (!site.favicon?.asset) return { icon: FALLBACK_FAVICON };
+
+  const icon = (size: number) =>
+    urlForExact(site.favicon).width(size).height(size).url();
+
+  return {
+    icon: [
+      { url: icon(32), sizes: "32x32" },
+      { url: icon(192), sizes: "192x192" },
+    ],
+    apple: [{ url: icon(180), sizes: "180x180" }],
+  };
+}
+
+export type ResolvedImage = {
+  image: SanityImage;
+  alt?: string;
+  /** True when the Site settings placeholder stood in for missing content. */
+  isPlaceholder: boolean;
+};
+
+/**
+ * The content's own image, or the Site settings placeholder when it has none.
+ * Null only when neither exists — callers size the result themselves, since
+ * every card crops differently.
+ */
+export function withPlaceholder(
+  image: SanityImage | null | undefined,
+  site: SiteSettings,
+): ResolvedImage | null {
+  if (image?.asset) return { image, alt: image.alt, isPlaceholder: false };
+  const placeholder = site.placeholderImage;
+  return placeholder?.asset
+    ? { image: placeholder, alt: placeholder.alt, isPlaceholder: true }
+    : null;
+}
+
+/**
+ * Sizes a resolved image to a card's box.
+ *
+ * Content images are cropped to fill it, as before. The placeholder is
+ * letterboxed into it instead: one graphic has to sit in every card's box,
+ * from 5:4 to 20:9, and cropping it to each cuts the middle out of it. The
+ * padding is fully transparent, so the card's own background shows through.
+ */
+export function resolvedImageUrl(
+  resolved: ResolvedImage,
+  size: { width?: number; height?: number },
+): string {
+  let builder = urlFor(resolved.image);
+  if (resolved.isPlaceholder) {
+    builder = builder.ignoreImageParams().fit("fill").bg("00000000");
+  }
+  if (size.width) builder = builder.width(size.width);
+  if (size.height) builder = builder.height(size.height);
+  return builder.url();
+}
 
 /** `sv_SE` → `sv`, for the <html lang> attribute. */
 export function htmlLang(locale: string): string {

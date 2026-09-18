@@ -194,6 +194,8 @@ export const contactRecipientQuery = groq`
 export const siteSettingsQuery = groq`
   *[_id == "siteSettings"][0] {
     siteName, locale, defaultTitle, titleTemplate, description,
+    favicon { asset },
+    placeholderImage { asset, alt, crop, hotspot },
     ogImage { asset, alt, crop, hotspot },
     twitterSite, noIndex
   }

@@ -1,9 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { urlFor } from "@/sanity/client";
 import styles from "./styles.module.scss";
 import { resolveBorder, type Border } from "@/lib/border";
 import { fetchTranslations } from "@/lib/translations/server";
+import {
+  fetchSiteSettings,
+  withPlaceholder,
+  resolvedImageUrl,
+  type SiteSettings,
+} from "@/lib/seo";
 
 type EventItem = {
   _id: string;
@@ -138,13 +143,16 @@ function UpcomingCard({
   item,
   registerLabel,
   readMoreLabel,
+  site,
 }: {
   item: EventItem;
   registerLabel: string;
   readMoreLabel: string;
+  site: SiteSettings;
 }) {
-  const imgUrl = item.image?.asset
-    ? urlFor(item.image).width(900).height(600).url()
+  const image = withPlaceholder(item.image, site);
+  const imgUrl = image
+    ? resolvedImageUrl(image, { width: 900, height: 600 })
     : null;
 
   return (
@@ -155,7 +163,7 @@ function UpcomingCard({
         <div className={styles.cardImageWrap}>
           <Image
             src={imgUrl}
-            alt={item.image?.alt || item.title}
+            alt={image?.alt || item.title}
             width={900}
             height={600}
             sizes="(max-width: 860px) 100vw, 40vw"
@@ -207,9 +215,10 @@ function UpcomingCard({
   );
 }
 
-function PastCard({ item }: { item: EventItem }) {
-  const imgUrl = item.image?.asset
-    ? urlFor(item.image).width(600).height(400).url()
+function PastCard({ item, site }: { item: EventItem; site: SiteSettings }) {
+  const image = withPlaceholder(item.image, site);
+  const imgUrl = image
+    ? resolvedImageUrl(image, { width: 600, height: 400 })
     : null;
 
   const inner = (
@@ -224,7 +233,7 @@ function PastCard({ item }: { item: EventItem }) {
         >
           <Image
             src={imgUrl}
-            alt={item.image?.alt || item.title}
+            alt={image?.alt || item.title}
             width={600}
             height={400}
             sizes="(max-width: 860px) 100vw, 33vw"
@@ -263,12 +272,14 @@ function EventSection({
   items,
   registerLabel,
   readMoreLabel,
+  site,
 }: {
   title: string;
   sub?: string;
   items: EventItem[];
   registerLabel: string;
   readMoreLabel: string;
+  site: SiteSettings;
 }) {
   if (items.length === 0) return null;
   return (
@@ -285,6 +296,7 @@ function EventSection({
               item={item}
               registerLabel={registerLabel}
               readMoreLabel={readMoreLabel}
+              site={site}
             />
           ))}
         </div>
@@ -297,10 +309,12 @@ function PastSection({
   title,
   sub,
   items,
+  site,
 }: {
   title: string;
   sub?: string;
   items: EventItem[];
+  site: SiteSettings;
 }) {
   if (items.length === 0) return null;
   return (
@@ -312,7 +326,7 @@ function PastSection({
         </div>
         <div className={styles.pastGrid}>
           {items.map((item) => (
-            <PastCard key={item._id} item={item} />
+            <PastCard key={item._id} item={item} site={site} />
           ))}
         </div>
       </div>
@@ -321,7 +335,10 @@ function PastSection({
 }
 
 export default async function EventsBlock({ block, upcoming, past }: Props) {
-  const t = await fetchTranslations();
+  const [t, site] = await Promise.all([
+    fetchTranslations(),
+    fetchSiteSettings(),
+  ]);
   const upcomingEvents = upcoming.filter((e) => e.eventType !== "webinar");
   const upcomingWebinars = upcoming.filter((e) => e.eventType === "webinar");
   const pastEvents = past.filter((e) => e.eventType !== "webinar");
@@ -347,19 +364,26 @@ export default async function EventsBlock({ block, upcoming, past }: Props) {
         items={upcomingEvents}
         registerLabel={registerLabel}
         readMoreLabel={t.general.readMore}
+        site={site}
       />
       <EventSection
         title={block.upcomingWebinarLabel || ""}
         items={upcomingWebinars}
         registerLabel={registerLabel}
         readMoreLabel={t.general.readMore}
+        site={site}
       />
       <PastSection
         title={block.pastLabel || ""}
         sub={block.pastSub}
         items={pastEvents}
+        site={site}
       />
-      <PastSection title={block.pastWebinarLabel || ""} items={pastWebinars} />
+      <PastSection
+        title={block.pastWebinarLabel || ""}
+        items={pastWebinars}
+        site={site}
+      />
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { client } from "@/sanity/client";
 import { navQuery, footerQuery, modalsQuery } from "@/sanity/queries";
 import { fetchTranslations } from "@/lib/translations/server";
 import { SITE_URL } from "@/lib/siteUrl";
-import { fetchSiteSettings, htmlLang } from "@/lib/seo";
+import { fetchSiteSettings, htmlLang, buildIcons } from "@/lib/seo";
 import Nav from "@/components/layout/nav";
 import Footer, { type FooterData } from "@/components/layout/footer";
 import type { NavData } from "@/components/layout/nav";
@@ -30,6 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL(SITE_URL),
     title: { default: site.defaultTitle, template: site.titleTemplate },
     description: site.description,
+    icons: buildIcons(site),
     ...(site.noIndex && { robots: { index: false, follow: false } }),
     openGraph: {
       siteName: site.siteName,
