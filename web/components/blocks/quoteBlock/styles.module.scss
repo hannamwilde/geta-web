@@ -1,4 +1,6 @@
 .section {
+  background: var(--block-bg);
+  color: var(--block-text);
   padding: clamp(var(--sp-xl), 7vw, var(--sp-3xl)) 0;
 }
 

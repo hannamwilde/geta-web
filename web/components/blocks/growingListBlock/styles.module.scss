@@ -1,6 +1,6 @@
 .section {
   position: relative;
-  background: var(--forest);
+  background: var(--block-bg);
   padding: clamp(var(--sp-2xl), 8vw, var(--sp-4xl)) 0 clamp(var(--sp-2xl), 6vw, var(--sp-3xl));
 }
 
@@ -36,7 +36,7 @@
     font-size: var(--fs-h2);
     line-height: 1.05;
     letter-spacing: -0.03em;
-    color: var(--paper);
+    color: var(--block-text);
     margin: 0 0 clamp(var(--sp-xl), 5vw, var(--sp-2xl));
 
     .grad {

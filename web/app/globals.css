@@ -25,6 +25,12 @@
   --blue-soft: #cce8e9;
   --lime: #c9f24a;
   --line: rgba(21, 21, 21, 0.1);
+
+  /* Default block scheme. Blocks read these so the palette is retuned in one
+     place; a background or text colour set in Sanity still wins, since those
+     land as inline styles on the section. */
+  --block-bg: var(--forest);
+  --block-text: var(--cream);
   --line-strong: rgba(21, 21, 21, 0.18);
   --line-on-dark: rgba(255, 255, 255, 0.14);
   --r-sm: 8px;

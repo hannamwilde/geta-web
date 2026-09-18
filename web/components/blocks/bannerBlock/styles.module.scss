@@ -1,7 +1,7 @@
 .hero {
   position: relative;
-  background: var(--forest);
-  color: var(--paper);
+  background: var(--block-bg);
+  color: var(--block-text);
   padding-top: var(--sp-4xl);
   padding-bottom: clamp(var(--sp-2xl), 7vw, var(--sp-3xl));
   overflow: hidden;

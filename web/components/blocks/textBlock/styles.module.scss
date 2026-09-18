@@ -1,4 +1,6 @@
 .section {
+  background: var(--block-bg);
+  color: var(--block-text);
   padding: var(--sp-3xl) 0;
 
   &[data-align="center"] {

@@ -2,8 +2,8 @@
   position: relative;
   padding-top: var(--sp-4xl);
   padding-bottom: clamp(var(--sp-2xl), 7vw, var(--sp-3xl));
-  background: var(--forest);
-  color: var(--paper);
+  background: var(--block-bg);
+  color: var(--block-text);
   overflow: hidden;
 
   &[data-has-media="true"] {

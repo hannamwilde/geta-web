@@ -127,7 +127,9 @@ export default function ListBlock({ block }: Props) {
             const cardStyle: React.CSSProperties = {
               ...(item.textColor ? { color: item.textColor } : {}),
               gridColumn: `span ${item.width || 4}`,
-              "--item-bg": item.backgroundColor || "#ffffff",
+              ...(item.backgroundColor
+                ? { "--item-bg": item.backgroundColor }
+                : {}),
               ...(item.hoverBackgroundColor && hasLink
                 ? { "--item-hover-bg": item.hoverBackgroundColor }
                 : {}),
