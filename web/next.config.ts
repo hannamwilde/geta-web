@@ -43,6 +43,11 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // The repo root and studio-geta-web each carry their own package-lock, so
+  // Next's root detection walks up and guesses the monorepo root. This app is
+  // self-contained, so pin it here — otherwise module resolution and file
+  // tracing are scoped to the wrong directory.
+  turbopack: { root: __dirname },
   images: {
     // Sanity's CDN does the resizing; see lib/sanityImageLoader.ts.
     loader: "custom",
