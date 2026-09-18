@@ -1,47 +1,98 @@
 .section {
   background: var(--block-bg);
   color: var(--block-text);
-  padding: clamp(var(--sp-xl), 7vw, var(--sp-3xl)) 0;
+  padding: var(--sp-3xl) 0;
 }
 
 .container {
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 clamp(var(--sp-md), 4vw, var(--sp-xl));
+  display: grid;
+  gap: clamp(var(--sp-lg), 3vw, var(--sp-2xl));
+  align-items: center;
+
+  // Intro : image : quote. Each column drops out of the template when its
+  // content is missing, so the remaining ones keep their proportions.
+  grid-template-columns: minmax(0, 820px);
+
+  .section[data-has-intro] & {
+    grid-template-columns: 1.7fr 1fr;
+  }
+  .section[data-has-image] & {
+    grid-template-columns: 1fr 1fr;
+  }
+  .section[data-has-intro][data-has-image] & {
+    grid-template-columns: 1.7fr 1fr 1fr;
+  }
+
+  @media (max-width: 900px) {
+    &,
+    .section[data-has-intro] &,
+    .section[data-has-image] &,
+    .section[data-has-intro][data-has-image] & {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+}
+
+.intro {
+  .title {
+    font-size: var(--fs-h2);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--sp-sm);
+  }
+
+  .body {
+    font-size: var(--fs-subtitle);
+    line-height: 1.7;
+    margin: 0;
+    opacity: 0.85;
+  }
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 20 / 21;
+  border-radius: var(--r-md);
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 900px) {
+    max-width: 380px;
+  }
 }
 
 .figure {
   margin: 0;
-  max-width: 820px;
-
-  .section[data-align="center"] & {
-    margin-inline: auto;
-    text-align: center;
-  }
-
-  .section[data-align="right"] & {
-    margin-left: auto;
-    margin-right: 0;
-    text-align: right;
-  }
 
   .quote {
-    font-size: clamp(1.25rem, 2.5vw, 1.875rem);
-    font-weight: 600;
-    line-height: 1.45;
-    letter-spacing: -0.02em;
-    margin: 0 0 clamp(var(--sp-md), 3vw, var(--sp-lg));
-    font-style: normal;
+    font-size: var(--fs-subtitle);
+    font-style: italic;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--sp-md);
   }
 
   .attribution {
     display: flex;
     flex-flow: column;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    opacity: 0.7;
+    font-size: var(--fs-body);
+    line-height: 1.5;
 
-    .author { font-weight: 700; }
-    .role { font-style: italic; }
+    .author {
+      font-weight: 700;
+    }
+    .role {
+      opacity: 0.7;
+    }
   }
 }

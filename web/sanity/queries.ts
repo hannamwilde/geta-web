@@ -4,7 +4,8 @@ const BLOCKS = `
   blocks[] {
     _type, _key,
     eyebrow, headline, subheadline, tagline, intro, body,
-    quote, author, companyRole,
+    quote, author, role, companyRole,
+    image { asset, alt, crop, hotspot },
     alignment, textAlignment, contentLayout,
     backgroundColor, backgroundGradient { type, from, to, angle, start, position }, textColor, iconColor, iconBackgroundColor,
     eyebrowStyle, eyebrowColor, eyebrowFontSize,

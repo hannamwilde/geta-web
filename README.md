@@ -177,7 +177,7 @@ Pages are identified by their slug (e.g. `losningar/mozaik` → `/losningar/moza
 | `gridListBlock`¹      | Grid list                   | Grid list                                    |
 | `growingListBlock`    | Growing list                | List that expands on scroll                  |
 | `linkBlock`           | Link Block                  | Grid of links                                |
-| `quoteBlock`          | Quote Block                 | Pull quote                                   |
+| `quoteBlock`          | Quote Block                 | Customer case — intro, portrait, pull quote  |
 | `accordionBlock`      | Accordion Block             | Expandable Q&A / detail list                 |
 | `bannerBlock`         | Banner                      | Flexible CTA banner with full colour control |
 | `imageSliderBlock`    | Image slider                | Full-bleed image carousel with copy and CTA  |
