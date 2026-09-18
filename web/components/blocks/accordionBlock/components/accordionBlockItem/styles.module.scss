@@ -1,5 +1,5 @@
 .item {
-  border: 1px solid var(--acc-item-border, rgba(255, 255, 255, 0.14));
+  border: 1px solid var(--acc-item-border, var(--line-on-dark));
   border-radius: var(--acc-radius, var(--r-lg));
   background: var(--acc-item-bg, transparent);
   transition:
@@ -7,8 +7,8 @@
     background-color 0.25s ease;
 
   &[data-open="true"] {
-    border-color: var(--acc-item-open-border, #e0b49a);
-    background: var(--acc-item-open-bg, rgba(255, 255, 255, 0.04));
+    border-color: var(--acc-item-open-border, var(--blue));
+    background: var(--acc-item-open-bg, color-mix(in srgb, var(--block-text) 4%, transparent));
   }
 }
 
@@ -31,7 +31,7 @@
   font: inherit;
 
   &:focus-visible {
-    outline: 2px solid var(--acc-item-open-border, #e0b49a);
+    outline: 2px solid var(--acc-item-open-border, var(--blue));
     outline-offset: 3px;
     border-radius: var(--acc-radius, var(--r-lg));
   }
@@ -46,8 +46,8 @@
     justify-content: center;
     font-size: 15px;
     font-weight: 600;
-    background: var(--acc-number-bg, #a32a22);
-    color: var(--acc-number-color, #fff);
+    background: var(--acc-number-bg, var(--blue));
+    color: var(--acc-number-color, var(--forest));
   }
 
   .question {
@@ -55,14 +55,14 @@
     font-size: var(--acc-question-size, var(--fs-h4));
     font-weight: 700;
     letter-spacing: -0.015em;
-    color: var(--acc-question-color, #fff);
+    color: var(--acc-question-color, var(--block-text));
     text-wrap: balance;
   }
 
   .toggle {
     flex-shrink: 0;
     display: flex;
-    color: var(--acc-toggle-color, #fff);
+    color: var(--acc-toggle-color, var(--block-text));
     transition: transform 0.25s ease;
   }
 }
@@ -106,7 +106,7 @@
 .answer {
   font-size: var(--acc-answer-size, 16px);
   line-height: 1.65;
-  color: var(--acc-answer-color, rgba(255, 255, 255, 0.72));
+  color: var(--acc-answer-color, color-mix(in srgb, var(--block-text) 72%, transparent));
   margin: 0 0 clamp(var(--sp-sm), 2vw, var(--sp-md));
   max-width: 68ch;
   white-space: pre-line;
@@ -123,7 +123,7 @@
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
-  color: var(--acc-link-color, #e0b49a);
+  color: var(--acc-link-color, var(--blue));
   text-decoration: none;
 
   svg {

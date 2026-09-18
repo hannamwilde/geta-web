@@ -21,7 +21,7 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin-bottom: var(--sp-xs);
-    color: rgba(255, 255, 255, 0.6);
+    color: color-mix(in srgb, var(--block-text) 60%, transparent);
   }
 
   .headline {
@@ -29,7 +29,7 @@
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1.05;
-    color: #fff;
+    color: var(--block-text);
     margin: 0;
     text-wrap: balance;
   }
@@ -37,7 +37,7 @@
   .intro {
     font-size: var(--fs-subtitle);
     line-height: 1.55;
-    color: rgba(255, 255, 255, 0.62);
+    color: color-mix(in srgb, var(--block-text) 62%, transparent);
     margin: var(--sp-md) 0 0;
     max-width: 52ch;
   }
