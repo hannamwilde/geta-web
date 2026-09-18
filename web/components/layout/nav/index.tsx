@@ -172,7 +172,7 @@ export default function Nav({ data, t }: Props) {
         <div className={`${styles.bar} hide-mobile`} ref={barRef}>
           <a href="/" className={styles.logo} aria-label={t.homeLink}>
             <Image
-              src="/assets/geta-logo-white.png"
+              src="/assets/geta-logo-white.webp"
               alt="Geta"
               width={512}
               height={157}
@@ -257,7 +257,7 @@ export default function Nav({ data, t }: Props) {
         <div className={`${styles.mobileBar} show-mobile`}>
           <a href="/" className={styles.logo} aria-label={t.homeLink}>
             <Image
-              src="/assets/geta-logo-white.png"
+              src="/assets/geta-logo-white.webp"
               alt="Geta"
               width={512}
               height={157}

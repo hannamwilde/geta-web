@@ -17,7 +17,9 @@ const csp = [
   `media-src 'self' ${SANITY_CDN}`,
   `connect-src 'self' ${SANITY_CDN}`,
   `frame-src ${GOOGLE_CALENDAR}`,
-  "upgrade-insecure-requests",
+  // Browsers ignore this one in a report-only policy and log an error for it,
+  // so it only ships once the policy is actually enforced.
+  ...(ENFORCE_CSP ? ["upgrade-insecure-requests"] : []),
 ].join("; ");
 
 const securityHeaders = [

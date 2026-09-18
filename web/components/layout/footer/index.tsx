@@ -60,7 +60,7 @@ export default async function Footer({ data }: Props) {
         <div className={styles.top}>
           <div className={styles.identity}>
             <a href="/" className={styles.wordmarkLink} aria-label={a11y.homeLink}>
-              <Image src="/assets/geta-logo-white.png" alt="Geta" width={512} height={157} style={{ height: 44, width: 'auto', display: 'block' }} />
+              <Image src="/assets/geta-logo-white.webp" alt="Geta" width={512} height={157} style={{ height: 44, width: 'auto', display: 'block' }} />
             </a>
             <p className={styles.tagline}>{tagline}</p>
           </div>

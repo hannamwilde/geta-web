@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { urlFor } from "@/sanity/client";
+import { assetDimensions } from "@/lib/imageDimensions";
 import Icon from "@/components/ui/icon";
 import styles from "./styles.module.scss";
 import { resolveBorder, type Border } from "@/lib/border";
@@ -108,6 +109,32 @@ type Node = {
 const spreadAxis = (center: number, i: number, n: number, step: number) =>
   center + (i - (n - 1) / 2) * step;
 
+// Intrinsic size of the local fallbacks, so the declared ratio stays right even
+// when an editor hasn't uploaded a brand mark.
+const MARK_FALLBACK = { width: 416, height: 440 };
+const WORD_FALLBACK = { width: 480, height: 119 };
+
+// These marks render small and at a size CSS fixes, not one that tracks the
+// viewport. Without `sizes` next/image assumes 100vw and pulls a ~750px file to
+// paint a ~130px logo. Hub values allow for the diagram's 1.3x intro zoom.
+const WORD_SIZES = "(max-width: 980px) 110px, 168px";
+const HUB_NAME_SIZES = "160px";
+const MARK_SIZES = "72px";
+
+/**
+ * Intrinsic width/height for an <Image>, scaled to the height we actually ask
+ * the CDN for. Declaring a ratio that doesn't match the delivered file is what
+ * makes the browser reserve the wrong box and report a broken aspect ratio.
+ */
+const sizeAt = (
+  asset: unknown,
+  height: number,
+  fallback: { width: number; height: number },
+) => {
+  const d = assetDimensions(asset) ?? fallback;
+  return { width: Math.round(height * (d.width / d.height)), height };
+};
+
 export default function MozaikBlock({ block }: Props) {
   const { open } = useContactModal();
   const trackRef = useRef<HTMLDivElement>(null);
@@ -127,6 +154,10 @@ export default function MozaikBlock({ block }: Props) {
   const photoSrc = block.backgroundImage?.asset
     ? urlFor(block.backgroundImage).width(1800).url()
     : null;
+
+  const markSize = sizeAt(block.markImage?.asset, 160, MARK_FALLBACK);
+  const wordSize = sizeAt(block.wordImage?.asset, 80, WORD_FALLBACK);
+  const hubNameSize = sizeAt(block.hubNameImage?.asset, 80, WORD_FALLBACK);
 
   useEffect(() => {
     let ticking = false;
@@ -317,8 +348,8 @@ export default function MozaikBlock({ block }: Props) {
                       className={styles.word}
                       src={wordSrc}
                       alt={part}
-                      width={240}
-                      height={80}
+                      sizes={WORD_SIZES}
+                      {...wordSize}
                     />
                   ) : (
                     <Fragment key={i}>{part}</Fragment>
@@ -421,15 +452,15 @@ export default function MozaikBlock({ block }: Props) {
                       src={markSrc}
                       alt=""
                       aria-hidden
-                      width={116}
-                      height={116}
+                      sizes={MARK_SIZES}
+                      {...markSize}
                     />
                     <Image
                       className={styles.hubName}
                       src={hubNameSrc}
                       alt="Mozaik"
-                      width={264}
-                      height={88}
+                      sizes={HUB_NAME_SIZES}
+                      {...hubNameSize}
                     />
                   </div>
                 </div>

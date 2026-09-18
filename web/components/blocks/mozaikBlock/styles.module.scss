@@ -1,7 +1,10 @@
 .mz {
   position: relative;
   --mz-ink: #0C0912;
-  --mz-main: #A87897;
+  // The design's #A87897 gives white text only 3.62:1. Darkened to clear WCAG
+  // AA (4.61:1). CTA only — the bottom arm keeps #A87897, where it sits on the
+  // dark stage and darkening it would push its small mobile label below AA.
+  --mz-main: #976685;
   --mz-glass: rgba(127, 233, 224, 0.5);
 
   // Background bloom palette — the same hues as GROUP_COLOR in index.tsx, but
@@ -355,8 +358,8 @@
   appearance: none;
   transform-origin: center;
   box-shadow:
-    0 0 0 8px rgba(168, 120, 151, 0.12),
-    0 18px 44px -14px rgba(168, 120, 151, 0.75);
+    0 0 0 8px rgba(151, 102, 133, 0.12),
+    0 18px 44px -14px rgba(151, 102, 133, 0.75);
   transition: filter 0.25s ease, box-shadow 0.35s ease;
   will-change: transform, opacity;
 
