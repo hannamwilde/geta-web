@@ -1,0 +1,32 @@
+/**
+ * Studio overrides.
+ *
+ * Sanity UI paints popovers and dialogs on the same surface colour as the pane
+ * behind them, so the insert menu and the block editor read as part of the
+ * page — and clicking what looks like empty space dismisses them. These rules
+ * lift both onto their own surface and dim what's behind.
+ *
+ * light-dark() picks the right value per scheme: Sanity UI sets color-scheme
+ * on every Card, so it resolves correctly inside the Studio.
+ */
+
+/* Insert menu ("Add item...") and every other popover menu */
+[data-ui='Popover'] {
+  background-color: light-dark(#ffffff, #23252f) !important;
+  box-shadow:
+    0 0 0 1px light-dark(rgba(0, 0, 0, 0.16), rgba(165, 170, 195, 0.5)),
+    0 20px 50px light-dark(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.65)) !important;
+}
+
+/* Rows carry the pane colour, which would patch over the lifted surface */
+[data-ui='Popover'] [data-ui='Menu'],
+[data-ui='Popover'] [data-ui='MenuItem']:not(:hover):not([data-selected]) {
+  background-color: transparent !important;
+}
+
+/* Block editor. Sanity's own scrim is the pane colour at 50%, so it's
+   invisible — swap it for a neutral dim that reads in both schemes. */
+[data-ui='Dialog'],
+[data-ui='Layer']:has(> [data-ui='DialogCard']) {
+  background-color: rgba(0, 0, 0, 0.55) !important;
+}
