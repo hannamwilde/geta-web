@@ -22,12 +22,13 @@ The Geta Digital marketing website. Built with Next.js 16 (App Router, React 19)
 
 Copy `web/.env.example` to `web/.env.local` and fill it in:
 
-| Variable               | Purpose                                                            |
-| ---------------------- | ------------------------------------------------------------------ |
-| `NEXT_PUBLIC_SITE_URL` | Public base URL — canonical URLs, sitemap, og:image                |
-| `SANITY_API_TOKEN`     | Sanity read token                                                  |
-| `SENDGRID_API_KEY`     | Contact form delivery (`app/api/contact/route.ts`)                 |
-| `CONTACT_FROM_EMAIL`   | Verified SendGrid sender. The _recipient_ lives in Sanity → Modals |
+| Variable                        | Purpose                                                            |
+| ------------------------------- | ------------------------------------------------------------------ |
+| `NEXT_PUBLIC_SITE_URL`          | Public base URL — canonical URLs, sitemap, og:image                |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID` | Optional. Defaults to the production project in `sanity/client.ts` |
+| `NEXT_PUBLIC_SANITY_DATASET`    | Optional. Defaults to `production`                                 |
+| `SENDGRID_API_KEY`              | Contact form delivery (`app/api/contact/route.ts`)                 |
+| `CONTACT_FROM_EMAIL`            | Verified SendGrid sender. The _recipient_ lives in Sanity → Modals |
 
 ### Run locally
 
